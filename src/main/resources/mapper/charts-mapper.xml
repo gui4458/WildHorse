@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="chartsMapper">
+    <resultMap id="dailyTemp" type="com.green.WildHorse.charts.vo.TempVO">
+        <id column="MESUR_DY" property="mesurDy"/>
+        <result column="MAX_TEMP" property="maxTemp"/>
+        <result column="MIN_TEMP" property="minTemp"/>
+    </resultMap>
+    <select id="selectDailyTemp" resultMap="dailyTemp">
+        SELECT DATE_FORMAT(MESUR_DY ,'%m-%d')MESUR_DY
+            ,MAX_TEMP
+            ,MIN_TEMP
+        FROM DAILY_TEMPS
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
