@@ -1,6 +1,7 @@
 package com.green.WildHorse.charts.controller;
 
 import com.green.WildHorse.charts.service.ChartsService;
+import com.green.WildHorse.charts.vo.EfhVO;
 import com.green.WildHorse.charts.vo.TempVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,6 @@ public class ChartsController {
 
     @GetMapping("/main")
     private String chartMain() {
-
         return "content/main/main";
     }
 
@@ -29,5 +29,17 @@ public class ChartsController {
     private List<TempVO> getTemp() {
         List<TempVO> tempsList = chartsService.selectDailyTemp();
         return tempsList;
+    }
+
+    @GetMapping("/efh")
+    private String efh() {
+        return "content/main/efh";
+    }
+    @ResponseBody
+    @PostMapping("/efh")
+    private List<EfhVO> getEfh(){
+        List<EfhVO> efhList = chartsService.selectEfh();
+        System.out.println(efhList);
+        return efhList;
     }
 }

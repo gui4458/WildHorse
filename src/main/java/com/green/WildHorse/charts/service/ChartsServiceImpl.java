@@ -1,5 +1,6 @@
 package com.green.WildHorse.charts.service;
 
+import com.green.WildHorse.charts.vo.EfhVO;
 import com.green.WildHorse.charts.vo.TempVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,5 +16,10 @@ public class ChartsServiceImpl implements ChartsService{
     @Override
     public List<TempVO> selectDailyTemp() {
         return sqlSession.selectList("chartsMapper.selectDailyTemp");
+    }
+
+    @Override
+    public List<EfhVO> selectEfh() {
+        return sqlSession.selectList("chartsMapper.selectEfh");
     }
 }

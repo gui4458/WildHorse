@@ -3,7 +3,6 @@
 var tempLabels = []
 var tempMax = []
 var tempMin = []
-let bestTemp = 0
 fetch('/charts/main', { //요청경로
     method: 'POST',
     cache: 'no-cache',
