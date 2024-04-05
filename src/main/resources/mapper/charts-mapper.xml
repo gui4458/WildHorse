@@ -19,6 +19,13 @@
         <result column="TEMPER" property="temper"/>
     </resultMap>
 
+    <resultMap id="efh" type="com.green.WildHorse.charts.vo.EfhVO">
+        <id column="EFH_NUM" property="efhNum"/>
+        <result column="EFH_DATE" property="efhDate"/>
+        <result column="EFH_DATA" property="efhData"/>
+        <result column="EFH_DEG" property="efhDeg"/>
+    </resultMap>
+
     <select id="selectDailyTemp" resultMap="dailyTemp">
         SELECT DATE_FORMAT(MESUR_DY ,'%d')MESUR_DY
             ,MAX_TEMP
@@ -36,6 +43,15 @@
         FROM discomfort_index
         GROUP BY MESURDY, DI_LEVEL;
     </select>
+
+    <select id="selectEfh" resultMap="efh">
+        SELECT DATE_FORMAT(efh_date ,'%m-%d')efh_date
+            ,efh_data
+            ,efh_deg
+            ,efh_num
+        FROM efh
+    </select>
+
 </mapper>
 
 
