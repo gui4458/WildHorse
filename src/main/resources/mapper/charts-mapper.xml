@@ -8,11 +8,33 @@
         <result column="MAX_TEMP" property="maxTemp"/>
         <result column="MIN_TEMP" property="minTemp"/>
     </resultMap>
+
+    <resultMap id="di" type="com.green.WildHorse.charts.vo.DiVO">
+        <id column="NO" property="no"/>
+        <result column="MESURDY" property="mesurDy"/>
+        <result column="TYPE" property="type"/>
+        <result column="DI_LEVEL" property="diLevel"/>
+        <result column="DI" property="di"/>
+        <result column="REH" property="reh"/>
+        <result column="TEMPER" property="temper"/>
+    </resultMap>
+
     <select id="selectDailyTemp" resultMap="dailyTemp">
         SELECT DATE_FORMAT(MESUR_DY ,'%m-%d')MESUR_DY
             ,MAX_TEMP
             ,MIN_TEMP
         FROM DAILY_TEMPS
+    </select>
+
+    <select id="selectDi" resultMap="di">
+        SELECT NO
+        , MESURDY
+        , DI_LEVEl
+        , ROUND(AVG(DI), 2) DI
+        , ROUND(AVG(REH),2) REH
+        , ROUND(AVG(TEMPER),2) TEMPER
+        FROM discomfort_index
+        GROUP BY MESURDY, DI_LEVEL;
     </select>
 </mapper>
 
