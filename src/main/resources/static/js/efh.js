@@ -28,24 +28,94 @@ fetch('/charts/efh', { //요청경로
 
         const mixedChart = new Chart(document.getElementById("efhChart"), {
             data: {
-                datasets: [{
-                    type: 'bar',
-                    label: 'EFH Deg',
-                    data: efhDegs
-                }, {
-                    type: 'line',
-                    label: 'EFH Percent',
-                    data: efhDatas,
-                }],
+                datasets: [
+                    {
+                        type: 'line',
+                        label: 'EFH Percent',
+                        data: efhDatas,
+                        fill: false,
+                        borderColor: 'rgb(54, 162, 235)'
+                    }
+                ],
                 labels: efhDates
             },
             options: {
                 title: {
                     display: true,
                     text: '실효습도'
-                } 
+                },
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    ]
+                },
+                plugins: {
+                    annotation: {
+                        annotations: [
+                            {
+                                type: 'line',
+                                mode: 'horizontal',
+                                scaleID: 'y-axis-0',
+                                value: 50,
+                                yMin: 50,
+                                yMax: 50,
+                                borderColor: 'rgba(255, 165, 0, 0.6)',
+                                borderWidth: 2,
+                                label: {
+                                    enabled: true,
+                                    content: 'Under 50 Warning'
+                                }
+                            },
+                            {
+                                type: 'line',
+                                mode: 'horizontal',
+                                scaleID: 'y-axis-0',
+                                value: 35,
+                                yMin: 35,
+                                yMax: 35, // Adjust the y-value as needed
+                                borderColor: 'rgba(255, 76, 71, 0.6)',
+                                borderWidth: 2,
+                                label: {
+                                    enabled: true,
+                                    content: 'Under 35 Caution'
+                                }
+                            }
+                            ,
+                            {
+                                type: 'label',
+                                xValue: 5,
+                                yValue: 42,
+                                backgroundColor: 'rgba(255, 165, 0, 0.6)',
+                                content: ['Under 50 조심단계'],
+                                font: {
+                                    size: 18
+                                }
+                                
+                            }
+                            ,
+                            {
+                                type: 'label',
+                                xValue: 5,
+                                yValue: 22,
+                                backgroundColor: 'rgba(255, 76, 71, 0.6)',
+                                content: ['Under 50 경고단계'],
+                                font: {
+                                    size: 18
+                                }
+                                
+                            }
+                        ]
+                    }
+                }
             }
         });
+        
+        
         
 
     })
