@@ -20,7 +20,7 @@
     </resultMap>
 
     <select id="selectDailyTemp" resultMap="dailyTemp">
-        SELECT DATE_FORMAT(MESUR_DY ,'%m-%d')MESUR_DY
+        SELECT DATE_FORMAT(MESUR_DY ,'%d')MESUR_DY
             ,MAX_TEMP
             ,MIN_TEMP
         FROM DAILY_TEMPS
