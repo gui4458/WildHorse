@@ -1,11 +1,8 @@
 package com.green.WildHorse.charts.controller;
 
 import com.green.WildHorse.charts.service.ChartsService;
-<<<<<<< HEAD
 import com.green.WildHorse.charts.vo.DiVO;
-=======
 import com.green.WildHorse.charts.vo.EfhVO;
->>>>>>> wss-dev
 import com.green.WildHorse.charts.vo.TempVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
@@ -38,6 +35,18 @@ public class ChartsController {
         return tempsList;
     }
 
+    @GetMapping("/efh")
+    public String efh(){
+        return "content/efh";
+    }
+
+    @ResponseBody
+    @PostMapping("/efh")
+    public List<EfhVO> efhList(){
+        List<EfhVO> efhList = chartsService.selectEfh();
+        return efhList;
+
+    }
 
     @GetMapping("/test")
     public String test(){
