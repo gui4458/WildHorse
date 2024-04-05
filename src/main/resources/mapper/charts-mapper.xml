@@ -18,12 +18,12 @@
         <result column="REH" property="reh"/>
         <result column="TEMPER" property="temper"/>
     </resultMap>
+
     <resultMap id="efh" type="com.green.WildHorse.charts.vo.EfhVO">
         <id column="EFH_NUM" property="efhNum"/>
         <result column="EFH_DATE" property="efhDate"/>
         <result column="EFH_DATA" property="efhData"/>
         <result column="EFH_DEG" property="efhDeg"/>
-
     </resultMap>
 
     <select id="selectDailyTemp" resultMap="dailyTemp">

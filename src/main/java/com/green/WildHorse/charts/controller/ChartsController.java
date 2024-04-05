@@ -37,7 +37,7 @@ public class ChartsController {
 
     @GetMapping("/efh")
     public String efh(){
-        return "content/efh";
+        return "content/main/efh";
     }
 
     @ResponseBody
