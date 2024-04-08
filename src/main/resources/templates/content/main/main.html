@@ -2,11 +2,11 @@
 
 <head>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        table tr td {
-            border: 1px solid black
-        }
-    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <th:block layout:fragment="content_css">
+        <!-- html 파일이 열릴때 같이 실행되는 css -->
+        <link rel="stylesheet" href="/css/content/main/main.css">
+    </th:block>
 </head>
 
 <body>
@@ -39,20 +39,63 @@
         </tr>
         <tr>
             <td>
-                <canvas id="bar-chart-grouped" width="500px" height="300px"></canvas>
             </td>
             <td>
-                <canvas id="mixed-chart" width="500px" height="300px"></canvas>
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <canvas id="bubble-chart" width="500px" height="300px"></canvas>
             </td>
             
         </tr>
     </table>
+    <!-- 슬라이드연습 -->
+    <!-- ////////////////////////////////////////////////////////////////////////////////////// -->
     <div>
+        <body>
+            <div id="wrap">
+                <header id="header">
+                    <h1 class="logo"></h1>
+                    <nav class="nav"></nav>
+                </header>
+                <!-- //header -->
+        
+                <article id="slider">
+                    <div class="sliderWrap">
+                        <div class="slider s1">
+                            <canvas id="bubble-chart" width="500px" height="300px"></canvas>
+
+                        </div>
+                        <div class="slider s2">
+                            <canvas id="mixed-chart" width="500px" height="300px"></canvas>
+
+                        </div>
+                        <div class="slider s3">
+                            <canvas id="bar-chart-grouped" width="500px" height="300px"></canvas>
+
+                        </div>
+                    </div>
+                </article>
+
+                <!-- //slider -->
+        
+                <main id="contents">
+                    <section class="content1"></section>
+                    <section class="content2"></section>
+                    <section class="content3"></section>
+                </main>
+                <!-- //contents -->
+        
+                <footer id="footer">
+                    <div class="footer1"></div>
+                    <div class="footer2"></div>
+                    <div class="footer3"></div>
+                </footer>
+                <!-- //footer -->
+            </div>
+            <!-- //wrap -->
+        </body>
+
     </div>
 
 </body>

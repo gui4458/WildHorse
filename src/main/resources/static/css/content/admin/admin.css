@@ -1,0 +1,69 @@
+/* slider */
+.chart-sliderWrap {
+    position: relative;
+}
+.chart-sliderWrap > div {
+    display: none;
+}
+.chart-sliderWrap > div:first-child {
+    display: block;
+}
+.chart-sliderWrap .chart-slider {
+    position: absolute;
+    left: 0;
+    top: 0;
+    
+}
+.chart-sliderWrap .chart-slider img {
+    vertical-align: top;
+}
+.chart-sliderWrap .chart-slider span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0,0,0,0.4);
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.chart-sliderWrap > div {
+    display: block;
+}
+
+
+
+
+
+
+/* slider */
+.img-sliderWrap {
+    position: relative;
+}
+.img-sliderWrap > div {
+    display: none;
+}
+.img-sliderWrap > div:first-child {
+    display: block;
+}
+.img-sliderWrap .img-slider {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.img-sliderWrap .img-slider img {
+    vertical-align: top;
+}
+.img-sliderWrap .img-slider span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0,0,0,0.4);
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.img-sliderWrap > div {
+    display: block;
+}
