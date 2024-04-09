@@ -26,6 +26,13 @@
         <result column="EFH_DEG" property="efhDeg"/>
     </resultMap>
 
+    <resultMap id="reh" type="com.green.WildHorse.charts.vo.TempRegAvgVO">
+        <id column="TR_NUM" property="trNum"/>
+        <result column="TR_DATE" property="trDate"/>
+        <result column="TEMP_AVG" property="tempAvg"/>
+        <result column="REH_AVG" property="rehAvg"/>
+    </resultMap>
+
     <select id="selectDailyTemp" resultMap="dailyTemp">
         SELECT DATE_FORMAT(MESUR_DY ,'%Y-%m-%d')MESUR_DY
             ,MAX_TEMP
@@ -50,6 +57,14 @@
             ,efh_deg
             ,efh_num
         FROM efh
+    </select>
+
+    <select id="selectReh" resultMap="reh">
+        SELECT TR_NUM
+        ,DATE_FORMAT(TR_DATE ,'%Y-%m-%d')TR_DATE
+        ,TEMP_AVG
+        ,REH_AVG
+        FROM TEMP_REH_AVG
     </select>
 
 </mapper>
