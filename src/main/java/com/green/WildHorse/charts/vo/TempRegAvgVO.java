@@ -1,4 +1,4 @@
-package com.green.WildHorse.travg.vo;
+package com.green.WildHorse.charts.vo;
 
 import lombok.Data;
 

@@ -5,6 +5,7 @@ import com.green.WildHorse.charts.vo.DiVO;
 
 import com.green.WildHorse.charts.vo.EfhVO;
 
+import com.green.WildHorse.charts.vo.TempRegAvgVO;
 import com.green.WildHorse.charts.vo.TempVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,10 @@ public class ChartsServiceImpl implements ChartsService {
     @Override
     public List<EfhVO> selectEfh() {
         return sqlSession.selectList("chartsMapper.selectEfh");
+    }
+
+    @Override
+    public List<TempRegAvgVO> selectReg() {
+        return sqlSession.selectList("chartsMapper.selectReh");
     }
 }

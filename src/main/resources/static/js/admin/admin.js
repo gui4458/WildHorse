@@ -13,7 +13,7 @@ window.onload = function () {
     setInterval(() => { // 4초에 한번씩 실행
         let chartNextIndex = (chartCurrentIndex + 1) % chartSliders.length; // 1 2 0 1 2 무한반복
 
-        chartSliders.forEach(img => img.style.transition = "all 1s"); //이미지 애니메이션 추가
+        chartSliders.forEach(chart => chart.style.transition = "all 15s"); //이미지 애니메이션 추가
         // 현재 보이는 차트를 숨김
         chartSliders[chartCurrentIndex].style.display = "none";
         // 다음 차트를 보이도록 함
@@ -54,9 +54,11 @@ window.onload = function () {
 //차트
 
 var tempLabels = []
-var tempMax = []
-var tempMin = []
-let bestTemp = 0
+var tempAvg = []
+var rehAvg = []
+let rehBest = 0
+
+let tempBest = 0
 fetch('/charts/main', { //요청경로
     method: 'POST',
     cache: 'no-cache',
@@ -73,28 +75,27 @@ fetch('/charts/main', { //요청경로
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-        data.forEach(e => {
-            tempLabels.push(e.mesurDy)
-            tempMax.push(e.maxTemp)
-            tempMin.push(e.minTemp)
-            if (bestTemp < e.maxTemp) {
-                bestTemp = e.maxTemp
+        console.log(data.regList)
+        data.regList.forEach(e => {
+            tempLabels.push(e.trDate)
+            tempAvg.push(e.tempAvg)
+            rehAvg.push(e.rehAvg)
+            if (rehBest < e.rehAvg) {
+                rehBest = e.rehAvg
+            }
+            if(tempBest < e.tempAvg){
+                tempBest = e.tempAvg
             }
         });
         // 라인차트
-        new Chart(document.getElementById("line-chart"), {
+        new Chart(document.getElementById("temp-line-chart"), {
             type: 'line',
             data: {
                 labels: tempLabels,
                 datasets: [{
-                    data: tempMax,
-                    label: "최고기온",
+                    data: tempAvg,
+                    label: "평균온도",
                     borderColor: "#c45850",
-                    fill: false
-                }, {
-                    data: tempMin,
-                    label: "최저기온",
-                    borderColor: "#3e95cd",
                     fill: false
                 }
                 ]
@@ -108,7 +109,35 @@ fetch('/charts/main', { //요청경로
                     y: {
 
                         min: 0,
-                        max: bestTemp + 5
+                        max: tempBest + 5
+                        //fontSize : 14
+
+                    }
+                }
+            }
+        });
+        new Chart(document.getElementById("reh-line-chart"), {
+            type: 'line',
+            data: {
+                labels: tempLabels,
+                datasets: [{
+                    data: rehAvg,
+                    label: "평균습도",
+                    borderColor: "#3e95cd",
+                    fill: false
+                }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'World population per region (in millions)'
+                },
+                scales: {
+                    y: {
+
+                        min: 50,
+                        max: rehBest + 5
                         //fontSize : 14
 
                     }
@@ -122,14 +151,14 @@ fetch('/charts/main', { //요청경로
                 labels: tempLabels,
                 datasets: [
                     {
-                        label: "최고기온",
+                        label: "평균온도",
                         backgroundColor: "#c45850",
-                        data: tempMax
+                        data: tempAvg
                     },
                     {
-                        label: "최저기온",
+                        label: "평균습도",
                         backgroundColor: "#3e95cd",
-                        data: tempMin
+                        data: rehAvg
 
                     }
                 ]
@@ -144,7 +173,7 @@ fetch('/charts/main', { //요청경로
                     y: {
 
                         min: 0,
-                        max: bestTemp + 5
+                        max: rehBest + 5
                         //fontSize : 14
 
                     }
@@ -232,92 +261,7 @@ function infoChange() {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
-            console.log(searchDate.value)
-            data.forEach(e => {
-
-                if (e.mesurDy == searchDate.value) {
-
-                    tempLabels.push(e.mesurDy)
-
-                    tempMax.push(e.maxTemp)
-                    tempMin.push(e.minTemp)
-                    if (bestTemp < e.maxTemp) {
-                        bestTemp = e.maxTemp
-                    }
-                }
-
-            });
-            // 라인차트
-            new Chart(document.getElementById("line-chart"), {
-                type: 'line',
-                data: {
-                    labels: tempLabels,
-                    datasets: [{
-                        data: tempMax,
-                        label: "최고기온",
-                        borderColor: "#c45850",
-                        fill: false
-                    }, {
-                        data: tempMin,
-                        label: "최저기온",
-                        borderColor: "#3e95cd",
-                        fill: false
-                    }
-                    ]
-                },
-                options: {
-
-                    title: {
-                        display: true,
-                        text: 'World population per region (in millions)'
-                    },
-                    scales: {
-                        y: {
-
-                            min: 0,
-                            max: bestTemp + 5
-                            //fontSize : 14
-
-                        }
-                    }
-                }
-            });
-
-            new Chart(document.getElementById("bar-chart"), {
-                type: 'bar',
-                data: {
-                    labels: tempLabels,
-                    datasets: [
-                        {
-                            label: "최고기온",
-                            backgroundColor: "#c45850",
-                            data: tempMax
-                        },
-                        {
-                            label: "최저기온",
-                            backgroundColor: "#3e95cd",
-                            data: tempMin
-
-                        }
-                    ]
-                },
-                options: {
-                    legend: { display: true },
-                    title: {
-                        display: true,
-                        text: 'Predicted world population (millions) in 2050'
-                    },
-                    scales: {
-                        y: {
-
-                            min: 0,
-                            max: bestTemp + 5
-                            //fontSize : 14
-
-                        }
-                    }
-                }
-            });
+        
         })
         //fetch 통신 실패 시 실행 영역
         .catch(err => {
