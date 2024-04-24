@@ -12,6 +12,7 @@
     <resultMap id="di" type="com.green.WildHorse.charts.vo.DiVO">
         <id column="NO" property="no"/>
         <result column="MESURDY" property="mesurDy"/>
+        <result column="MESURTIME" property="mesurTime"/>
         <result column="TYPE" property="type"/>
         <result column="DI_LEVEL" property="diLevel"/>
         <result column="DI" property="di"/>
@@ -65,6 +66,17 @@
         ,TEMP_AVG
         ,REH_AVG
         FROM TEMP_REH_AVG
+    </select>
+
+    <select id="selectTime" resultMap="di">
+        SELECT
+        REH
+        ,TEMPER
+        ,(MESURTIME/100) MESURTIME
+        ,DATE_FORMAT(MESURDY,'%Y-%m-%d')MESURDY
+        FROM discomfort_index
+        WHERE MESURTIME % 100= 0
+        AND MESURDY= 20211201
     </select>
 
 </mapper>

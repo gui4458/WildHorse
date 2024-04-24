@@ -6,6 +6,7 @@ import lombok.Data;
 public class DiVO {
     private int no;
     private String mesurDy;
+    private String mesurTime;
     private String type;
     private String diLevel;
     private double di;

@@ -29,6 +29,11 @@ public class ChartsServiceImpl implements ChartsService {
     }
 
     @Override
+    public List<DiVO> selectTime() {
+        return sqlSession.selectList("chartsMapper.selectTime");
+    }
+
+    @Override
     public List<EfhVO> selectEfh() {
         return sqlSession.selectList("chartsMapper.selectEfh");
     }

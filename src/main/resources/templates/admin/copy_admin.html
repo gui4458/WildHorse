@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!-- layout:decorate => 이 파일은 fragment 폴더 안의 layout.html과 함께 열리는 파일 -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/layout}">
+
+
+<th:block layout:fragment="contentFragment">
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div
+      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Dashboard</h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
+          <svg class="bi">
+            <use xlink:href="#calendar3" />
+          </svg>
+          This week
+        </button>
+        <input id="search-date" type="date" onchange="infoChange(this)">
+      </div>
+    </div>
+    <div>
+      요약정보 구역
+      <div class="g-3 mb-3 row">
+
+        <!-- 불쾌지수 -->
+                <div class="col-xxl-3 col-md-6">
+                  <div class="h-md-100 card">
+                    <div class="pb-0 card-header">
+                      <h6 class="mb-0 mt-2 mb-2">
+                        DI_LEVEL
+                        <span>
+        
+                          
+                        </span>
+                      </h6>
+                    </div>
+                    <div class=" justify-content-between align-items-end card-body">
+                      <div class="row">
+                        <div class="card-body col-6">
+                  
+                          <p class="card-text" style="text-align: center;">
+                          <span style="font-size: 60px; text-align: center; color: #FFC94A;">
+                            <i class="bi bi-emoji-grin"></i>
+                          </span>
+                          </p>
+                          
+                      </div>
+                      <div class="col-6"  style="vertical-align: middle;">
+                      <div>
+                        43.17
+                      </div>
+                      <div>
+                        낮음
+                      </div>
+                      </div>
+                
+                      </div>
+                      <!-- <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
+                        style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
+                        <div
+                          style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
+                          
+                        </div>
+                        <div class="">
+                        </div>
+                      </div> -->
+        
+                    </div>
+                  </div>
+                </div>
+
+
+
+        <div class="col-xxl-3 col-md-6">
+          <div class="h-md-100 card">
+            <div class="pb-0 card-header">
+              <h6 class="mb-0 mt-2">
+                Weekly Sales
+                <span>
+
+                </span>
+              </h6>
+            </div>
+            <div class="d-flex justify-content-between align-items-end card-body">
+              <div>
+                <h2 class="mb-1 text-700 fw-normal lh-1">
+                  $47K
+                </h2>
+                <div class="me-2 fs-11 badge badge-subtle-success rounded-pill">
+                  +3.5%
+                </div>
+              </div>
+              <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
+                style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
+                <div
+                  style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
+                  그래프
+                </div>
+                <div class="">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-3 col-md-6">
+          <div class="h-md-100 card">
+            <div class="pb-0 card-header">
+              <h6 class="mb-0 mt-2">
+                Weekly Sales
+                <span>
+
+                </span>
+              </h6>
+            </div>
+            <div class="d-flex justify-content-between align-items-end card-body">
+              <div>
+                <h2 class="mb-1 text-700 fw-normal lh-1">
+                  $47K
+                </h2>
+                <div class="me-2 fs-11 badge badge-subtle-success rounded-pill">
+                  +3.5%
+                </div>
+              </div>
+              <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
+                style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
+                <div
+                  style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
+                  그래프
+                </div>
+                <div class="">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-3 col-md-6">
+          <div class="h-md-100 card">
+            <div class="pb-0 card-header">
+              <h6 class="mb-0 mt-2">
+                Weekly Sales
+                <span>
+
+                </span>
+              </h6>
+            </div>
+            <div class="d-flex justify-content-between align-items-end card-body">
+              <div>
+                <h2 class="mb-1 text-700 fw-normal lh-1">
+                  $47K
+                </h2>
+                <div class="me-2 fs-11 badge badge-subtle-success rounded-pill">
+                  +3.5%
+                </div>
+              </div>
+              <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
+                style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
+                <div
+                  style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
+                  그래프
+                </div>
+                <div class="">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div>
+      <div class="g-3 mb-3 row">
+        <div class="col-xxl-6 col-md-6">
+          평균 온습도 차트 구역
+          <canvas id="temp-line-chart" width="250px" height="150px"></canvas>
+
+        </div>
+        <div class="col-xxl-6 col-md-6">
+          평균 온습도 차트 구역
+          <canvas id="reh-line-chart" width="250px" height="150px"></canvas>
+
+        </div>
+
+      </div>
+      <div class="g-3 mb-3 row">
+        <div class="col-xxl-12 col-md-12">
+          표 데이터 구역
+          <h2>Section title</h2>
+          <div class="table-responsive small">
+            <table class="table table-striped table-sm">
+              <thead>
+
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Header</th>
+                  <th scope="col">Header</th>
+                  <th scope="col">Header</th>
+                  <th scope="col">Header</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="reg,state : ${session.data.regList}">
+                  <td>[[${state.count}]]</td>
+                  <td>[[${reg.trDate}]]</td>
+                  <td>[[${reg.tempAvg}]]</td>
+                  <td>[[${reg.rehAvg}]]</td>
+                  <td>text</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="g-3 mb-3 row">
+      <div class="col-xxl-6 col-md-6">
+        차트 구역 1
+        <article id="chart-slider">
+          <div class="chart-sliderWrap">
+            <canvas class="chart-slider chart-s1" id="bar-chart" style="width: 100%; margin: 0 auto;"></canvas>
+            <canvas class="chart-slider chart-s2" id="pie-chart" style="width: 100%; margin: 0 auto;"></canvas>
+            <canvas class="chart-slider chart-s3" id="radar-chart" style="width: 100%; margin: 0 auto;"></canvas>
+          </div>
+        </article>
+
+      </div>
+      <div class="col-xxl-6 col-md-6">
+        차트 구역 2
+        <article id="img-slider">
+          <div class="img-sliderWrap">
+            <div class="img-slider img-s1">
+              <img src="https://webstoryboy.github.io/webstoryboy/w_webd/slider/slider01.jpg" alt="이미지 설명">
+            </div>
+            <div class="img-slider img-s2">
+              <img src="https://webstoryboy.github.io/webstoryboy/w_webd/slider/slider02.jpg" alt="이미지 설명">
+            </div>
+            <div class="img-slider img-s3">
+              <img src="https://webstoryboy.github.io/webstoryboy/w_webd/slider/slider03.jpg" alt="이미지 설명">
+            </div>
+          </div>
+        </article>
+      </div>
+
+    </div>
+    <div>
+
+
+    </div>
+
+
+  </main>
+</th:block>
+<th:block layout:fragment="content_js">
+  <script src="/js/admin/admin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</th:block>
+
+</html>
