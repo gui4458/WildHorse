@@ -52,12 +52,12 @@ public class ChartsController {
         Map<String,Object> data =new HashMap<String,Object>();
         List<TempRegAvgVO> regList = chartsService.selectReg();
         data.put("regList",regList);
-        session.setAttribute("data",data);
-
-
+        TempRegAvgVO avg = chartsService.mainReh(toDay.get("toDay"));
+        data.put("avg",avg);
         List<DiVO> timeList=chartsService.selectTime(toDay.get("toDay"));
         data.put("timeList",timeList);
         System.out.println(data.get("timeList"));
+        session.setAttribute("data",data);
         return data;
     }
 

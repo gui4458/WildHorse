@@ -372,8 +372,8 @@ function infoChange() {
             let rehCanvas = document.createElement('canvas');
             rehCanvas.id = 'reh-line-chart';
             document.getElementById('reh-line-container').appendChild(rehCanvas); // 새로운 캔버스 추가
-            
-            
+
+
             let oldTempLineChart = document.getElementById('temp-line-chart');
             if (oldTempLineChart) {
                 oldTempLineChart.parentNode.removeChild(oldTempLineChart);
@@ -381,6 +381,19 @@ function infoChange() {
             let canvas = document.createElement('canvas');
             canvas.id = 'temp-line-chart';
             document.getElementById('temp-line-container').appendChild(canvas); // 새로운 캔버스 추가
+
+            let avgTag = document.querySelector('.avg-tag')
+            let avgstr = `
+            <h2 class="mb-1 text-700 fw-normal lh-1">
+                    ${data.avg.tempAvg}
+                </h2>
+                <h2 class="mb-1 text-700 fw-normal lh-1">
+                    ${data.avg.rehAvg}
+                </h2>
+            `
+            avgTag.replaceChildren(avgTag.textContent = '');
+            avgTag.insertAdjacentHTML("afterbegin", avgstr)
+
 
             let rehLow = 0
             let temperLow = 0
