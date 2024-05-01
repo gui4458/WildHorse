@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/layout}">
 
 <head>
     <meta charset="UTF-8">
@@ -10,46 +11,41 @@
 
 </head>
 
-<body>
-    <table>
-        <tr>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">DI_LEVEL</h5>
-                
-                        <p class="card-text">
-                        <span style="font-size: 30px;  color: #FFC94A;"><i class="bi bi-emoji-grin"></i></span>1111
-                        </p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+<th:block layout:fragment="contentFragment">
+
+    <body>
+        <table>
+            <tr>
+                <td>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">DI_LEVEL</h5>
+
+                            <p class="card-text">
+                                <span style="font-size: 30px;  color: #FFC94A;"><i
+                                        class="bi bi-emoji-grin"></i></span>1111
+                            </p>
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
                     </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <canvas id="line-chart" width="500px" height="400px"></canvas>
-            </td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="line-chart" width="500px" height="400px"></canvas>
+                </td>
 
-        </tr>
-    </table>
-
+            </tr>
+        </table>
+    </body>
 
     
+</th:block>
 
 
-
-
-    <div>
-        
-    </div>
-
-
-
-
+<th:block layout:fragment="content_js">
     <script src="/js/hyeTest.js"></script>
-
-</body>
+</th:block>
 
 </html>

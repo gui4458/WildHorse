@@ -76,7 +76,7 @@
         ,DATE_FORMAT(MESURDY,'%Y-%m-%d')MESURDY
         FROM discomfort_index
         WHERE MESURTIME % 100= 0
-        AND MESURDY= 20211201
+        AND MESURDY= 20210820
     </select>
 
 </mapper>

@@ -32,6 +32,8 @@ public class Admin {
         data.put("timeList",timeList);
         System.out.println(data.get("timeList"));
         return "/admin/admin";
+
+
     }
 
 }
