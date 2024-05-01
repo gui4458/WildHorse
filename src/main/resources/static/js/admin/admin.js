@@ -129,8 +129,8 @@ fetch('/charts/main', { //요청경로
                 scales: {
                     y: {
 
-                        min: rehLow-1,
-                        max: rehBest+15
+                        min: rehLow-5,
+                        max: rehBest+5
                         //fontSize : 14
 
                     }
@@ -159,7 +159,7 @@ fetch('/charts/main', { //요청경로
                     y: {
 
                         min: temperLow-5,
-                        max: temperBest+10
+                        max: temperBest+5
                         //fontSize : 14
 
                     }
