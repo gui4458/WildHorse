@@ -30,6 +30,19 @@
 .chart-sliderWrap > div {
     display: block;
 }
+.allWrap{
+    width: 300px;
+    overflow: hidden;
+}
+
+.wrap{
+    width: 500%;
+    display: flex;
+}
+
+.s1{
+    width: 300px;
+}
 
 
 

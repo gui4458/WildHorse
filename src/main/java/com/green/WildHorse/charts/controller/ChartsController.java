@@ -25,11 +25,15 @@ public class ChartsController {
     private ChartsService chartsService;
 
     @GetMapping("/main")
-
-    public String chartMain() {
-
-
-        return "content/main/main";
+    public String chartMain(HttpSession session) {
+        Map<String,Object> data =new HashMap<String,Object>();
+        List<TempVO> tempsList = chartsService.selectDailyTemp();
+        List<TempRegAvgVO> regList = chartsService.selectReg();
+        data.put("tempsList",tempsList);
+        data.put("regList",regList);
+        session.setAttribute("data",data);
+        System.out.println(data);
+        return "content/main";
     }
 
     @ResponseBody
