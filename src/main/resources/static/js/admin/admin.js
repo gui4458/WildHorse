@@ -239,6 +239,8 @@ fetch('/charts/main', { //요청경로
         //         }
         //     }
         // });
+
+        
         // 바 차트
         new Chart(document.getElementById("bar-chart"), {
             type: 'bar',
