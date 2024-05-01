@@ -16,4 +16,5 @@ public interface ChartsService {
     List<EfhVO> selectEfh();
     List<TempRegAvgVO> selectReg();
     List<DiVO> selectDi();
+    List<DiVO> selectTime();
 }

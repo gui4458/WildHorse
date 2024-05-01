@@ -45,6 +45,10 @@ public class ChartsController {
         data.put("tempsList",tempsList);
         data.put("regList",regList);
         session.setAttribute("data",data);
+
+        List<DiVO> timeList=chartsService.selectTime();
+        data.put("timeList",timeList);
+        System.out.println(data.get("timeList"));
         return data;
     }
 
@@ -73,4 +77,11 @@ public class ChartsController {
        return diList;
 
     }
+    @GetMapping("/copyAdmin")
+    public String copyTest(){
+        return "admin/copy_admin";
+    }
+
+
+
 }

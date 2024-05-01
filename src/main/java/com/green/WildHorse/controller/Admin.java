@@ -1,6 +1,7 @@
 package com.green.WildHorse.controller;
 
 import com.green.WildHorse.charts.service.ChartsService;
+import com.green.WildHorse.charts.vo.DiVO;
 import com.green.WildHorse.charts.vo.TempRegAvgVO;
 import com.green.WildHorse.charts.vo.TempVO;
 import jakarta.annotation.Resource;
@@ -26,6 +27,10 @@ public class Admin {
         data.put("regList",regList);
         session.setAttribute("data",data);
         System.out.println(data);
+
+        List<DiVO> timeList=chartsService.selectTime();
+        data.put("timeList",timeList);
+        System.out.println(data.get("timeList"));
         return "/admin/admin";
     }
 
