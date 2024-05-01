@@ -39,6 +39,7 @@
             ,MAX_TEMP
             ,MIN_TEMP
         FROM DAILY_TEMPS
+        WHERE MESUR_DY = #{toDay}
     </select>
 
     <select id="selectDi" resultMap="di">
@@ -52,12 +53,13 @@
         GROUP BY MESURDY, DI_LEVEL;
     </select>
 
-    <select id="selectEfh" resultMap="efh">
-        SELECT DATE_FORMAT(efh_date ,'%m-%d')efh_date
+    <select id="mainEfh" resultMap="efh">
+        SELECT DATE_FORMAT(EFH_DATE ,'%Y-%m-%d')EFH_DATE
             ,efh_data
             ,efh_deg
             ,efh_num
         FROM efh
+        WHERE DATE_FORMAT(EFH_DATE ,'%Y-%m-%d') = #{toDay}
     </select>
 
     <select id="selectReh" resultMap="reh">
@@ -74,9 +76,19 @@
         ,TEMPER
         ,(MESURTIME/100) MESURTIME
         ,DATE_FORMAT(MESURDY,'%Y-%m-%d')MESURDY
+        ,DI
         FROM discomfort_index
         WHERE MESURTIME % 100= 0
-        AND MESURDY= 20210820
+        AND DATE_FORMAT(MESURDY,'%Y-%m-%d')= #{toDay}
+    </select>
+
+    <select id="mainReh" resultMap="reh">
+        SELECT TR_NUM
+        ,DATE_FORMAT(TR_DATE ,'%Y-%m-%d')TR_DATE
+        ,TEMP_AVG
+        ,REH_AVG
+        FROM TEMP_REH_AVG
+        WHERE DATE_FORMAT(TR_DATE ,'%Y-%m-%d') = #{toDay}
     </select>
 
 </mapper>

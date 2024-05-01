@@ -9,10 +9,7 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,30 +22,42 @@ public class ChartsController {
     private ChartsService chartsService;
 
     @GetMapping("/main")
-    public String chartMain(HttpSession session) {
-        Map<String,Object> data =new HashMap<String,Object>();
-        List<TempVO> tempsList = chartsService.selectDailyTemp();
+    public String chartMain(Model model) {
+        String toDay="2021-12-10";
+        model.addAttribute("toDay",toDay);
+
+        TempVO temps = chartsService.selectDailyTemp(toDay);
+        model.addAttribute("temps",temps);
+
         List<TempRegAvgVO> regList = chartsService.selectReg();
-        data.put("tempsList",tempsList);
-        data.put("regList",regList);
-        session.setAttribute("data",data);
-        System.out.println(data);
+        model.addAttribute("regList",regList);
+
+        List<DiVO> timeList=chartsService.selectTime(toDay);
+        model.addAttribute("timeList",timeList);
+
+        EfhVO efh = chartsService.mainEfh(toDay);
+        model.addAttribute("efh",efh);
+
+        TempRegAvgVO avg = chartsService.mainReh(toDay);
+        model.addAttribute("avg",avg);
+
         return "content/main";
     }
 
     @ResponseBody
     @PostMapping("/main")
-    public Map<String,Object> getTemp(HttpSession session) {
+    public Map<String,Object> getTemp(HttpSession session,@RequestBody Map<String,String> toDay) {
+        System.out.println("post 시작~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(toDay.get("toDay"));
         Map<String,Object> data =new HashMap<String,Object>();
-        List<TempVO> tempsList = chartsService.selectDailyTemp();
         List<TempRegAvgVO> regList = chartsService.selectReg();
-        data.put("tempsList",tempsList);
         data.put("regList",regList);
-        session.setAttribute("data",data);
-
-        List<DiVO> timeList=chartsService.selectTime();
+        TempRegAvgVO avg = chartsService.mainReh(toDay.get("toDay"));
+        data.put("avg",avg);
+        List<DiVO> timeList=chartsService.selectTime(toDay.get("toDay"));
         data.put("timeList",timeList);
         System.out.println(data.get("timeList"));
+        session.setAttribute("data",data);
         return data;
     }
 
@@ -59,9 +68,7 @@ public class ChartsController {
 
     @ResponseBody
     @PostMapping("/efh")
-    public List<EfhVO> efhList(){
-        List<EfhVO> efhList = chartsService.selectEfh();
-        return efhList;
+    public void efhList(){
 
     }
 
@@ -73,7 +80,7 @@ public class ChartsController {
     @ResponseBody
     @PostMapping("/test")
     public List<DiVO> hyeTest(){
-       List<DiVO> diList = chartsService.selectDi();
+       List<DiVO> diList = chartsService.selectDi("2021-12-20");
        return diList;
 
     }
