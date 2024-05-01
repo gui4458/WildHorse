@@ -45,7 +45,7 @@
                 <h2 class="mb-1 text-700 fw-normal lh-1">
                   [[${avg.rehAvg}]]
                 </h2>
-                
+
               </div>
               <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
                 style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
@@ -145,7 +145,7 @@
                 <h3 class="mb-1 text-700 fw-normal lh-1">
                   [[${temps.minTemp}]]
                 </h3>
-                
+
               </div>
               <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
                 style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
@@ -177,8 +177,16 @@
         </div>
 
       </div>
+
       <div class="g-3 mb-3 row">
-        <div class="col-xxl-12 col-md-12">
+        <div class="col-xxl-6 col-md-12" id="di-line-container">
+          <canvas id="di-line-chart" width="250px" height="150px"></canvas>
+
+        </div>
+
+          불쾌지수
+        </div>
+        <div class="col-xxl-6 col-md-12">
           표 데이터 구역
           <h2>Section title</h2>
           <div class="table-responsive small">
@@ -218,10 +226,12 @@
                   <td>[[${efh.efhDeg}]]</td>
                 </tr>
               </tbody>
-            
+
             </table>
           </div>
         </div>
+
+
       </div>
     </div>
     <div class="g-3 mb-3 row">

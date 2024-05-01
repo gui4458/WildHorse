@@ -58,6 +58,8 @@ var tempLabels = []
 var tempAvg = []
 // var rehAvg = []
 
+
+
 let rehLow = 0
 let temperLow = 0
 let rehBest = 0
@@ -65,6 +67,8 @@ let temperBest = 0
 let timeLabel = []
 let temperAvg = []
 let rehAvg = []
+let diList=[]
+
 
 
 let tempBest = 0
@@ -88,12 +92,15 @@ fetch('/charts/main', { //요청경로
         console.log(data.timeList);
         temperLow = data.timeList[0].temper
         rehLow = data.timeList[0].reh
+
+        
         //시간대별 온도 습도 조회
         console.log(data.timeList)
         data.timeList.forEach(e => {
             timeLabel.push(e.mesurTime)
             temperAvg.push(e.temper)
             rehAvg.push(e.reh)
+            diList.push(e.di)
 
             if (rehBest < e.reh) {
                 rehBest = e.reh
@@ -111,6 +118,7 @@ fetch('/charts/main', { //요청경로
 
         });
 
+        //습도 
         new Chart(document.getElementById("reh-line-chart"), {
             type: 'line',
             data: {
@@ -140,6 +148,7 @@ fetch('/charts/main', { //요청경로
             }
         });
 
+        //온도 
         new Chart(document.getElementById("temp-line-chart"), {
             type: 'line',
             data: {
@@ -162,6 +171,37 @@ fetch('/charts/main', { //요청경로
 
                         min: temperLow - 5,
                         max: temperBest + 5
+                        //fontSize : 14
+
+                    }
+                }
+            }
+        });
+
+
+        // 불쾌지수 라인차트
+        new Chart(document.getElementById("di-line-chart"), {
+            type: 'line',
+            data: {
+                labels: timeLabel,
+                datasets: [{
+                    data: diList,
+                    label: "불쾌지수",
+                    borderColor: "#3e95cd",
+                    fill: false
+                }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'World population per region (in millions)'
+                },
+                scales: {
+                    y: {
+
+                        // min: temperLow - 5,
+                        // max: temperBest + 5
                         //fontSize : 14
 
                     }
