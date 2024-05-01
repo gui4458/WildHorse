@@ -12,9 +12,10 @@ import java.util.List;
 
 public interface ChartsService {
 
-    List<TempVO> selectDailyTemp();
-    List<EfhVO> selectEfh();
+    TempVO selectDailyTemp(String toDay);
+    EfhVO mainEfh(String toDay);
+    TempRegAvgVO mainReh(String toDay);
     List<TempRegAvgVO> selectReg();
-    List<DiVO> selectDi();
-    List<DiVO> selectTime();
+    List<DiVO> selectDi(String toDay);
+    List<DiVO> selectTime(String toDay);
 }

@@ -19,23 +19,28 @@ public class ChartsServiceImpl implements ChartsService {
     private SqlSessionTemplate sqlSession;
 
     @Override
-    public List<TempVO> selectDailyTemp() {
-        return sqlSession.selectList("chartsMapper.selectDailyTemp");
+    public TempVO selectDailyTemp(String toDay) {
+        return sqlSession.selectOne("chartsMapper.selectDailyTemp",toDay);
     }
 
     @Override
-    public List<DiVO> selectDi() {
-        return sqlSession.selectList("chartsMapper.selectDi");
+    public List<DiVO> selectDi(String toDay) {
+        return sqlSession.selectList("chartsMapper.selectDi",toDay);
     }
 
     @Override
-    public List<DiVO> selectTime() {
-        return sqlSession.selectList("chartsMapper.selectTime");
+    public List<DiVO> selectTime(String toDay) {
+        return sqlSession.selectList("chartsMapper.selectTime",toDay);
     }
 
     @Override
-    public List<EfhVO> selectEfh() {
-        return sqlSession.selectList("chartsMapper.selectEfh");
+    public EfhVO mainEfh(String toDay) {
+        return sqlSession.selectOne("chartsMapper.mainEfh",toDay);
+    }
+
+    @Override
+    public TempRegAvgVO mainReh(String toDay) {
+        return sqlSession.selectOne("chartsMapper.mainReh",toDay);
     }
 
     @Override

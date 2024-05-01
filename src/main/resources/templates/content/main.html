@@ -20,7 +20,7 @@
           </svg>
           This week
         </button>
-        <input id="search-date" type="date" onchange="infoChange(this)">
+        <input id="search-date" type="date" onchange="infoChange(this)" th:value="${toDay}">
       </div>
     </div>
     <div>
@@ -162,13 +162,13 @@
 
     </div>
     <div>
-      <div class="g-3 mb-3 row">
-        <div class="col-xxl-6 col-md-6">
+      <div class="chart-big-tag g-3 mb-3 row">
+        <div class="col-xxl-6 col-md-6" id="temp-line-container">
           평균 온습도 차트 구역
           <canvas id="temp-line-chart" width="250px" height="150px"></canvas>
 
         </div>
-        <div class="col-xxl-6 col-md-6">
+        <div class="col-xxl-6 col-md-6" id="reh-line-container">
           평균 온습도 차트 구역
           <canvas id="reh-line-chart" width="250px" height="150px"></canvas>
 
@@ -184,22 +184,39 @@
               <thead>
 
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Header</th>
-                  <th scope="col">Header</th>
-                  <th scope="col">Header</th>
-                  <th scope="col">Header</th>
+                  <th scope="col">시간</th>
+                  <th scope="col">온도</th>
+                  <th scope="col">습도</th>
+                  <th scope="col">불쾌지수</th>
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="reg,state : ${session.data.regList}">
-                  <td>[[${state.count}]]</td>
-                  <td>[[${reg.trDate}]]</td>
-                  <td>[[${reg.tempAvg}]]</td>
-                  <td>[[${reg.rehAvg}]]</td>
-                  <td>text</td>
+                <tr th:each="time : ${timeList}">
+                  <td>[[${time.mesurTime}]]시</td>
+                  <td>[[${time.temper}]]</td>
+                  <td>[[${time.reh}]]</td>
+                  <td>[[${time.di}]]</td>
+                </tr>
+                <tr>
+                  <td>최고온도</td>
+                  <td>[[${temps.maxTemp}]]</td>
+                  <td>최저온도</td>
+                  <td>[[${temps.minTemp}]]</td>
+                </tr>
+                <tr>
+                  <td>평균 온도</td>
+                  <td>[[${avg.tempAvg}]]</td>
+                  <td>평균 습도</td>
+                  <td>[[${avg.rehAvg}]]</td>
+                </tr>
+                <tr>
+                  <td>화재위험성 수치</td>
+                  <td>[[${efh.efhData}]]</td>
+                  <td>화재위험성</td>
+                  <td>[[${efh.efhDeg}]]</td>
                 </tr>
               </tbody>
+            
             </table>
           </div>
         </div>

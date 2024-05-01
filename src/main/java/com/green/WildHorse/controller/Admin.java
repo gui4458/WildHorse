@@ -20,15 +20,14 @@ public class Admin {
 
     @GetMapping("/admin")
     public String front(HttpSession session){
+        String toDay="2021-12-20";
         Map<String,Object> data =new HashMap<String,Object>();
-        List<TempVO> tempsList = chartsService.selectDailyTemp();
         List<TempRegAvgVO> regList = chartsService.selectReg();
-        data.put("tempsList",tempsList);
         data.put("regList",regList);
         session.setAttribute("data",data);
         System.out.println(data);
 
-        List<DiVO> timeList=chartsService.selectTime();
+        List<DiVO> timeList=chartsService.selectTime(toDay);
         data.put("timeList",timeList);
         System.out.println(data.get("timeList"));
         return "/admin/admin";

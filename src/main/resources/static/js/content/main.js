@@ -1,3 +1,4 @@
+let searchDate = document.querySelector('#search-date').value;
 /////////////////////////////////////////////////
 //차트슬라이드
 window.onload = function () {
@@ -32,16 +33,16 @@ window.onload = function () {
     // 모든 차트를 초기에 숨김
     imgSlider.forEach(slider => slider.style.display = "none");
     // 첫 번째 차트만 보이도록 함
-    imgSlider[0].style.display = "block";
+    // imgSlider[0].style.display = "block";
 
     setInterval(() => { // 4초에 한번씩 실행
         let imgNextIndex = (imgCurrentIndex + 1) % imgSlider.length; // 1 2 0 1 2 무한반복
 
         imgSlider.forEach(img => img.style.transition = "all 5s"); //이미지 애니메이션 추가
         // 현재 보이는 차트를 숨김
-        imgSlider[imgCurrentIndex].style.display = "none";
+        // imgSlider[imgCurrentIndex].style.display = "none";
         // 다음 차트를 보이도록 함
-        imgSlider[imgNextIndex].style.display = "block";
+        // imgSlider[imgNextIndex].style.display = "block";
 
         imgCurrentIndex = imgNextIndex; // 다음 인덱스를 현재 인덱스로 업데이트
     }, 4000);
@@ -57,8 +58,8 @@ var tempLabels = []
 var tempAvg = []
 // var rehAvg = []
 
-let rehLow=0
-let temperLow=0
+let rehLow = 0
+let temperLow = 0
 let rehBest = 0
 let temperBest = 0
 let timeLabel = []
@@ -76,6 +77,7 @@ fetch('/charts/main', { //요청경로
     //컨트롤러로 전달할 데이터
     body: JSON.stringify({
         // 데이터명 : 데이터값
+        toDay: searchDate
     })
 })
     .then((response) => {
@@ -129,8 +131,8 @@ fetch('/charts/main', { //요청경로
                 scales: {
                     y: {
 
-                        min: rehLow-5,
-                        max: rehBest+5
+                        min: rehLow - 5,
+                        max: rehBest + 5
                         //fontSize : 14
 
                     }
@@ -158,8 +160,8 @@ fetch('/charts/main', { //요청경로
                 scales: {
                     y: {
 
-                        min: temperLow-5,
-                        max: temperBest+5
+                        min: temperLow - 5,
+                        max: temperBest + 5
                         //fontSize : 14
 
                     }
@@ -240,7 +242,7 @@ fetch('/charts/main', { //요청경로
         //     }
         // });
 
-        
+
         // 바 차트
         new Chart(document.getElementById("bar-chart"), {
             type: 'bar',
@@ -328,6 +330,8 @@ fetch('/charts/main', { //요청경로
                 }
             }
         });
+
+
     })
     //fetch 통신 실패 시 실행 영역
     .catch(err => {
@@ -340,8 +344,8 @@ fetch('/charts/main', { //요청경로
 
 
 /////////////////////////////////////////////////////////
-let searchDate = document.querySelector("#search-date")
 function infoChange() {
+    searchDate = document.querySelector('#search-date').value;
     fetch('/charts/main', { //요청경로
         method: 'POST',
         cache: 'no-cache',
@@ -351,6 +355,7 @@ function infoChange() {
         //컨트롤러로 전달할 데이터
         body: JSON.stringify({
             // 데이터명 : 데이터값
+            toDay: searchDate
         })
     })
         .then((response) => {
@@ -358,6 +363,117 @@ function infoChange() {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
+            //캔버스 삭제
+            let oldRehLineChart = document.getElementById('reh-line-chart');
+            if (oldRehLineChart) {
+                oldRehLineChart.parentNode.removeChild(oldRehLineChart);
+            }
+            // 새로운 차트 생성
+            let rehCanvas = document.createElement('canvas');
+            rehCanvas.id = 'reh-line-chart';
+            document.getElementById('reh-line-container').appendChild(rehCanvas); // 새로운 캔버스 추가
+            
+            
+            let oldTempLineChart = document.getElementById('temp-line-chart');
+            if (oldTempLineChart) {
+                oldTempLineChart.parentNode.removeChild(oldTempLineChart);
+            }
+            let canvas = document.createElement('canvas');
+            canvas.id = 'temp-line-chart';
+            document.getElementById('temp-line-container').appendChild(canvas); // 새로운 캔버스 추가
+
+            let rehLow = 0
+            let temperLow = 0
+            let rehBest = 0
+            let temperBest = 0
+            let timeLabel = []
+            let temperAvg = []
+            let rehAvg = []
+            let tempBest = 0
+
+            temperLow = data.timeList[0].temper
+            rehLow = data.timeList[0].reh
+            //시간대별 온도 습도 조회
+            console.log(data.timeList)
+            data.timeList.forEach(e => {
+                timeLabel.push(e.mesurTime)
+                temperAvg.push(e.temper)
+                rehAvg.push(e.reh)
+
+                if (rehBest < e.reh) {
+                    rehBest = e.reh
+                }
+                if (temperBest < e.temper) {
+                    temperBest = e.temper
+                }
+
+                if (rehLow > e.reh) {
+                    rehLow = e.reh
+                }
+                if (temperLow > e.temper) {
+                    temperLow = e.temper
+                }
+
+            });
+
+            new Chart(document.getElementById("reh-line-chart"), {
+                type: 'line',
+                data: {
+                    labels: timeLabel,
+                    datasets: [{
+                        data: rehAvg,
+                        label: "습도",
+                        borderColor: "#c45850",
+                        fill: false
+                    }
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'World population per region (in millions)'
+                    },
+                    scales: {
+                        y: {
+
+                            min: rehLow - 5,
+                            max: rehBest + 5
+                            //fontSize : 14
+
+                        }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById("temp-line-chart"), {
+                type: 'line',
+                data: {
+                    labels: timeLabel,
+                    datasets: [{
+                        data: temperAvg,
+                        label: "온도",
+                        borderColor: "#3e95cd",
+                        fill: false
+                    }
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'World population per region (in millions)'
+                    },
+                    scales: {
+                        y: {
+
+                            min: temperLow - 5,
+                            max: temperBest + 5
+                            //fontSize : 14
+
+                        }
+                    }
+                }
+            });
+
 
         })
         //fetch 통신 실패 시 실행 영역
