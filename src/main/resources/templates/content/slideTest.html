@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<style>
+    .allWrap {
+        width: 300px;
+        overflow: hidden;
+    }
+
+    .wrap {
+        width: 500%;
+        display: flex;
+    }
+
+    .s1 {
+        width: 300px;
+    }
+</style>
+<th:block th:fragment="doughnutFragment">
+    <div class="allWrap">
+        <div class="wrap">
+
+            <div class="layer small-layer s1">
+                <div>미세먼지등급비율</div>
+                <span>1111111111111111111111111111111111111111</span>
+            </div>
+
+            <div class="layer small-layer s1">
+                <div>초미세먼지등급비율</div>
+                <span>222222222222222222222222222222222222222</span>
+            </div>
+
+            <div class="layer small-layer s1">
+                <div>통합실내지수등급비율</div>
+                <span>333333333333333333333333333333333333333</span>
+            </div>
+
+            <div class="layer small-layer s1">
+                <div>소음등급비율</div>
+                <span>444444444444444444444444444444444444444</span>
+            </div>
+
+            <div class="layer small-layer s1">
+                <div>미세먼지등급비율</div>
+                <span>555555555555555555555555555555555555555</span>
+            </div>
+
+        </div>
+    </div>
+
+</th:block>
+
+<th:block>
+    <script src="js/content/slideTest.js"></script>
+</th:block>
+
+</html>

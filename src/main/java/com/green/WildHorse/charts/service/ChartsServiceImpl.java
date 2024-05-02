@@ -42,6 +42,11 @@ public class ChartsServiceImpl implements ChartsService {
     public String toDay() {
         return sqlSession.selectOne("chartsMapper.toDay");
     }
+    @Override
+    public DiVO selectPerDay(String toDay) {
+        return sqlSession.selectOne("chartsMapper.selectPerDay",toDay);
+
+    }
 
     @Override
     public EfhVO mainEfh(String toDay) {
