@@ -118,6 +118,7 @@ fetch('/charts/main', { //요청경로
 
         });
 
+        // 라인차트~~
         //습도 
         new Chart(document.getElementById("reh-line-chart"), {
             type: 'line',
