@@ -18,4 +18,5 @@ public interface ChartsService {
     List<TempRegAvgVO> selectReg();
     List<DiVO> selectDi(String toDay);
     List<DiVO> selectTime(String toDay);
+    DiVO selectPerDay(String toDay);
 }

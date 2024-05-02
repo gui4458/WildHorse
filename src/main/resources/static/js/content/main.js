@@ -59,7 +59,8 @@ var tempAvg = []
 // var rehAvg = []
 
 
-
+let diLow=0
+let diBest=0
 let rehLow = 0
 let temperLow = 0
 let rehBest = 0
@@ -92,6 +93,8 @@ fetch('/charts/main', { //요청경로
         console.log(data.timeList);
         temperLow = data.timeList[0].temper
         rehLow = data.timeList[0].reh
+        diLow=data.timeList[0].di
+
 
         
         //시간대별 온도 습도 조회
@@ -114,6 +117,13 @@ fetch('/charts/main', { //요청경로
             }
             if (temperLow > e.temper) {
                 temperLow = e.temper
+            }
+
+            if (diBest < e.di) {
+                diBest = e.di
+            }
+            if (diLow > e.di) {
+                diLow = e.di
             }
 
         });
@@ -201,9 +211,9 @@ fetch('/charts/main', { //요청경로
                 scales: {
                     y: {
 
-                        // min: temperLow - 5,
-                        // max: temperBest + 5
-                        //fontSize : 14
+                        min: diLow - 5,
+                        max: diBest + 5
+                        // fontSize : 14
 
                     }
                 }

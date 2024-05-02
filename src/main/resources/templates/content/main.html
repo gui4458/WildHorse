@@ -76,7 +76,7 @@
             <div class="d-flex justify-content-between align-items-end card-body">
               <div class="di-tag">
                 <h2 class="mb-1 text-700 fw-normal lh-1">
-                  $43.66K
+                  [[${diPerDay}]]
                 </h2>
                 <div class="me-2 fs-11 badge badge-subtle-success rounded-pill">
                   +3.5%
@@ -95,6 +95,7 @@
             </div>
           </div>
         </div>
+
         <div class="col-xxl-3 col-md-6">
           <div class="h-md-100 card">
             <div class="pb-0 card-header">
@@ -185,55 +186,56 @@
 
         </div>
 
-        
+      
+      
+      <div class="col-xxl-6 col-md-6">
+        <!-- 표 데이터 구역 -->
+        <h3>Section title</h3>
+        <div class="table-responsive small">
+          <table class="table table-striped table-sm">
+            <thead>
+
+              <tr>
+                <th scope="col">시간</th>
+                <th scope="col">온도</th>
+                <th scope="col">습도</th>
+                <th scope="col">불쾌지수</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="time : ${timeList}">
+                <td>[[${time.mesurTime}]]시</td>
+                <td>[[${time.temper}]]</td>
+                <td>[[${time.reh}]]</td>
+                <td>[[${time.di}]]</td>
+              </tr>
+              <tr>
+                <td>최고온도</td>
+                <td>[[${temps.maxTemp}]]</td>
+                <td>최저온도</td>
+                <td>[[${temps.minTemp}]]</td>
+              </tr>
+              <tr>
+                <td>평균 온도</td>
+                <td>[[${avg.tempAvg}]]</td>
+                <td>평균 습도</td>
+                <td>[[${avg.rehAvg}]]</td>
+              </tr>
+              <tr>
+                <td>화재위험성 수치</td>
+                <td>[[${efh.efhData}]]</td>
+                <td>화재위험성</td>
+                <td>[[${efh.efhDeg}]]</td>
+              </tr>
+            </tbody>
+
+          </table>
         </div>
-        <div class="col-xxl-6 col-md-6">
-          표 데이터 구역
-          <h2>Section title</h2>
-          <div class="table-responsive small">
-            <table class="table table-striped table-sm">
-              <thead>
-
-                <tr>
-                  <th scope="col">시간</th>
-                  <th scope="col">온도</th>
-                  <th scope="col">습도</th>
-                  <th scope="col">불쾌지수</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="time : ${timeList}">
-                  <td>[[${time.mesurTime}]]시</td>
-                  <td>[[${time.temper}]]</td>
-                  <td>[[${time.reh}]]</td>
-                  <td>[[${time.di}]]</td>
-                </tr>
-                <tr>
-                  <td>최고온도</td>
-                  <td>[[${temps.maxTemp}]]</td>
-                  <td>최저온도</td>
-                  <td>[[${temps.minTemp}]]</td>
-                </tr>
-                <tr>
-                  <td>평균 온도</td>
-                  <td>[[${avg.tempAvg}]]</td>
-                  <td>평균 습도</td>
-                  <td>[[${avg.rehAvg}]]</td>
-                </tr>
-                <tr>
-                  <td>화재위험성 수치</td>
-                  <td>[[${efh.efhData}]]</td>
-                  <td>화재위험성</td>
-                  <td>[[${efh.efhDeg}]]</td>
-                </tr>
-              </tbody>
-
-            </table>
-          </div>
-        </div>
-
-
       </div>
+    </div>
+
+
+    </div>
     </div>
     <div class="g-3 mb-3 row">
       <div class="col-xxl-6 col-md-6">

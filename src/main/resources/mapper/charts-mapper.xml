@@ -91,6 +91,17 @@
         WHERE DATE_FORMAT(TR_DATE ,'%Y-%m-%d') = #{toDay}
     </select>
 
+    <select id="selectPerDay" resultMap="di">
+        SELECT MESURDY
+        , DI_LEVEl
+        , TYPE
+        , ROUND(AVG(DI), 2) DI
+        FROM discomfort_index
+        WHERE MESURDY=#{toDay}
+        GROUP BY MESURDY,  DI_LEVEL, TYPE
+    </select>
+
+
 </mapper>
 
 
