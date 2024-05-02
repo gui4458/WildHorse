@@ -90,6 +90,17 @@
         FROM TEMP_REH_AVG
         WHERE DATE_FORMAT(TR_DATE ,'%Y-%m-%d') = #{toDay}
     </select>
+    <select id="toDay" resultType="String">
+        SELECT DATE_FORMAT(20211220,'%Y-%m-%d')
+    </select>
+    <select id="detailEfhList" resultMap="efh">
+        SELECT DATE_FORMAT(EFH_DATE ,'%Y-%m-%d')EFH_DATE
+            ,efh_data
+            ,efh_deg
+            ,efh_num
+        FROM efh
+        WHERE DATE_FORMAT(EFH_DATE ,'%Y-%m') = #{selectDay}
+    </select>
 
 </mapper>
 

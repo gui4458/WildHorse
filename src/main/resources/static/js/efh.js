@@ -19,13 +19,35 @@ fetch('/charts/efh', { //요청경로
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
+        let danger = 0;
+        let caution = 0;
+        let safety = 0;
         console.log(data)
         data.forEach(e => {
             efhDates.push(e.efhDate)
             efhDatas.push(e.efhData)
             efhDegs.push(e.efhDeg)
+            if(e.efhDeg == '위험'){
+                danger += 1;
+            }else if(e.efhDeg == '주의'){
+                caution += 1;
+            }else{
+                safety+= 1;
+            }
         });
-
+        let dangerStr =`
+        <div class="row">
+            <div class="col">
+                <div>위험 : 총${danger}일</div>
+                <div>주의 : 총${caution}일</div>
+                <div>안전 : 총${safety}일</div>
+            </div>
+        </div>
+        
+        `
+        const showDanger = document.querySelector('#show-danger');
+        showDanger.replaceChildren(showDanger.textContent='');
+        showDanger.insertAdjacentHTML('afterbegin',dangerStr)
         const mixedChart = new Chart(document.getElementById("efhChart"), {
             data: {
                 datasets: [
@@ -115,6 +137,23 @@ fetch('/charts/efh', { //요청경로
             }
         });
         
+        new Chart(document.getElementById("pie-chart"), {
+            type: 'pie',
+            data: {
+                labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+                datasets: [{
+                    label: "Population (millions)",
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                    data: [2478, 5267, 734, 784, 433]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Predicted world population (millions) in 2050'
+                }
+            }
+        });
         
         
 

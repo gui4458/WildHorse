@@ -23,7 +23,7 @@ public class ChartsController {
 
     @GetMapping("/main")
     public String chartMain(Model model) {
-        String toDay="2021-12-10";
+        String toDay=chartsService.toDay();
         model.addAttribute("toDay",toDay);
 
         TempVO temps = chartsService.selectDailyTemp(toDay);
@@ -62,14 +62,23 @@ public class ChartsController {
     }
 
     @GetMapping("/efh")
-    public String efh(){
+    public String efh(Model model){
+        String toDay= chartsService.toDay();
+        String selectDay = "2021-12";
+        EfhVO toDayEfh = chartsService.mainEfh(toDay);
+        model.addAttribute("toDayEfh",toDayEfh);
+        List<EfhVO> EfhList = chartsService.detailEfhList(selectDay);
+        model.addAttribute("EfhList",EfhList);
         return "content/efh";
     }
 
     @ResponseBody
     @PostMapping("/efh")
-    public void efhList(){
+    public List<EfhVO> efhList(){
+        String selectDay = "2021-12";
+        String toDay= chartsService.toDay();
 
+        return chartsService.detailEfhList(selectDay);
     }
 
     @GetMapping("/test")
