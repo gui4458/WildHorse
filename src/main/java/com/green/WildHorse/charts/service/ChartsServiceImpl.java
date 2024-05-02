@@ -43,8 +43,8 @@ public class ChartsServiceImpl implements ChartsService {
         return sqlSession.selectOne("chartsMapper.toDay");
     }
     @Override
-    public DiVO selectPerDay(String toDay) {
-        return sqlSession.selectOne("chartsMapper.selectPerDay",toDay);
+    public List<DiVO> selectPerDay(String toDay) {
+        return sqlSession.selectList("chartsMapper.selectPerDay",toDay);
 
     }
 
