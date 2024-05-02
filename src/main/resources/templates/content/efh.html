@@ -1,26 +1,72 @@
 <!DOCTYPE html>
 <!-- layout:decorate => 이 파일은 fragment 폴더 안의 layout.html과 함께 열리는 파일 -->
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-                layout:decorate="~{fragment/layout}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/layout}">
 
-    <th:block layout:fragment="contentFragment">
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<th:block layout:fragment="contentFragment">
+  <div class="row">
+    <div class="col">
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="row">
+          <div class="col">
+            <div class="text-end">
+              <input type="date">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xxl-6 col-md-6">
+            <div class="row">
+              <div class="col-xxl-6">
+                한달 총 위험도
+              </div>
+            </div>
+            <div class="row" style="width: 500px;">
+              <div id="show-danger" class="col-xxl-5">
+                
+              </div>
+              <div class="col-xxl-7">
+                <canvas class="chart-slider chart-s2" id="pie-chart" style="width: 50%; margin: 0 auto;"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-6 col-md-6">
+            <div class="row">
+              <div class="col">
+                오늘의 화재 위험도
+              </div>
+            </div>
+            <div class="row">
+              <div id="show-today-danger" class="col">
+                [[${toDayEfh.efhDeg}]]
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xxl-12 col-md-6">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <h1 class="h2">EFH차트</h1>
             </div>
             <canvas class="my-4 w-100" id="efhChart" width="900" height="380"></canvas>
-      
-            <h2>EFH Chart Sheet</h2>
- 
-  
-            </div> 
-          </main>
-    </th:block>
+          </div>
+        </div>
 
-    <th:block layout:fragment="content_js">
-      <script src="/js/efh.js"></script>
-    </th:block>
-    
+
+        <h2>EFH Chart Sheet</h2>
+
+
+    </div>
+    </main>
+  </div>
+
+  </div>
+
+</th:block>
+
+<th:block layout:fragment="content_js">
+  <script src="/js/efh.js"></script>
+</th:block>
+
 </html>

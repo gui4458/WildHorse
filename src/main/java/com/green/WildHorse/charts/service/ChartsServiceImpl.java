@@ -34,6 +34,21 @@ public class ChartsServiceImpl implements ChartsService {
     }
 
     @Override
+    public List<EfhVO> detailEfhList(String selectDay) {
+        return sqlSession.selectList("chartsMapper.detailEfhList",selectDay);
+    }
+
+    @Override
+    public String toDay() {
+        return sqlSession.selectOne("chartsMapper.toDay");
+    }
+    @Override
+    public DiVO selectPerDay(String toDay) {
+        return sqlSession.selectOne("chartsMapper.selectPerDay",toDay);
+
+    }
+
+    @Override
     public EfhVO mainEfh(String toDay) {
         return sqlSession.selectOne("chartsMapper.mainEfh",toDay);
     }
