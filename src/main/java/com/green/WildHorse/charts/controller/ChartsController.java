@@ -41,6 +41,9 @@ public class ChartsController {
         TempRegAvgVO avg = chartsService.mainReh(toDay);
         model.addAttribute("avg",avg);
 
+        List<DiVO> diPerDay= chartsService.selectPerDay(toDay);
+        model.addAttribute("diPerDay",diPerDay);
+        System.out.println(diPerDay);
         return "content/main";
     }
 

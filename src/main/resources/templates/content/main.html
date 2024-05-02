@@ -3,236 +3,295 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{fragment/layout}">
 
+<th:block layout:fragment="content_css">
+  <!-- html 파일이 열릴때 같이 실행되는 css -->
+  <link rel="stylesheet" href="/css/content/main/main.css">
+</th:block>
+
 
 <th:block layout:fragment="contentFragment">
-  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <div
-      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">Dashboard</h1>
-      <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group me-2">
-          <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-          <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-        </div>
-        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
-          <svg class="bi">
-            <use xlink:href="#calendar3" />
-          </svg>
-          This week
-        </button>
-        <input id="search-date" type="date" onchange="infoChange(this)" th:value="${toDay}">
-      </div>
-    </div>
-    <div>
-      요약정보 구역
-      <div class="g-3 mb-3 row">
-
-        <div class="col-xxl-3 col-md-6">
-          <div class="h-md-100 card">
-            <div class="pb-0 card-header">
-              <h6 class="mb-0 mt-2">
-                평균 온습도
-                <span>
-
-                </span>
-              </h6>
+  <div class="row">
+    <div class="col">
+      <main class="px-md-4">
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Dashboard</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+              <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
             </div>
-            <div class="d-flex justify-content-between align-items-end card-body">
-              <div class="avg-tag">
-                <h2 class="mb-1 text-700 fw-normal lh-1">
-                  [[${avg.tempAvg}]]
-                </h2>
-                <h2 class="mb-1 text-700 fw-normal lh-1">
-                  [[${avg.rehAvg}]]
-                </h2>
-
-              </div>
-              <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
-                style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
-                <div
-                  style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
-                  그래프
-                </div>
-                <div class="">
-                </div>
-              </div>
-
-            </div>
+            <button type="button"
+              class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
+              <svg class="bi">
+                <use xlink:href="#calendar3" />
+              </svg>
+              This week
+            </button>
+            <input id="search-date" type="date" onchange="infoChange(this)" th:value="${toDay}">
           </div>
         </div>
+        <div>
+          요약정보 구역
+          <div class="g-3 mb-3 row">
+
+            <div class="col-xxl-3 col-md-6">
+              <div class="h-md-100 card">
+                <div class="pb-0 card-header">
+                  <h6 class="mb-0 mt-2">
+                    평균 온습도
+                    <span>
+
+                    </span>
+                  </h6>
+                </div>
+                <div class="d-flex justify-content-between align-items-end card-body">
+                  <div class="avg-tag">
+
+                    <h3 class="mb-1 text-700 fw-normal lh-1">
+
+                      <div class="allWrap1">
+                        <div class="wrap1">
+                          <div class="layer small-layer s2">
+                            <div>
+                              평균온도 [[${avg.tempAvg}]] C °
+                            </div>
+                          </div>
+                          <div class="layer small-layer s2">
+                            <div>
+                              평균습도 [[${avg.rehAvg}]] %
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </h3>
+
+                  </div>
 
 
-
-        <div class="col-xxl-3 col-md-6">
-          <div class="h-md-100 card">
-            <div class="pb-0 card-header">
-              <h6 class="mb-0 mt-2">
-                불쾌지수
-                <span>
-
-                </span>
-              </h6>
+                </div>
+              </div>
             </div>
-            <div class="d-flex justify-content-between align-items-end card-body">
-              <div class="di-tag">
-                <h2 class="mb-1 text-700 fw-normal lh-1">
-                  $43.66K
-                </h2>
-                <div class="me-2 fs-11 badge badge-subtle-success rounded-pill">
-                  +3.5%
-                </div>
-              </div>
-              <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
-                style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
-                <div
-                  style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
-                  그래프
-                </div>
-                <div class="">
-                </div>
-              </div>
 
+
+
+            <div class="col-xxl-3 col-md-6">
+              <div class="h-md-100 card">
+                <div class="pb-0 card-header">
+                  <h6 class="mb-0 mt-2">
+                    불쾌지수
+                  </h6>
+                </div>
+
+
+                <div class="d-flex justify-content-between align-items-end card-body">
+                  <div class="di-tag">
+                    <h3 class="mb-1 text-700 fw-normal lh-1">
+
+                      <div class="allWrap">
+                        <div class="wrap">
+                          <div class="layer small-layer s1">
+                            <div>
+                              [[${diPerDay[0].type}]]
+                              [[${diPerDay[0].diLevel}]]
+                            </div>
+                          </div>
+                          <div class="layer small-layer s1">
+                            <div>
+                              [[${diPerDay[1].type}]]
+                              [[${diPerDay[1].diLevel}]]
+                            </div>
+                          </div>
+                          <div class="layer small-layer s1">
+                            <div>
+                              [[${diPerDay[2].type}]]
+                              [[${diPerDay[2].diLevel}]]
+                            </div>
+                          </div>
+                          <div class="layer small-layer s1">
+                            <div>
+                              [[${diPerDay[3].type}]]
+                              [[${diPerDay[3].diLevel}]]
+                            </div>
+                          </div>
+
+
+
+                        </div>
+
+                      </div>
+
+                    </h3>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+            <!--    ------------------------------------------------------------------------------------------------ -->
+            <div class="col-xxl-3 col-md-6">
+              <div class="h-md-100 card">
+                <div class="pb-0 card-header">
+                  <h6 class="mb-0 mt-2">
+                    실효습도
+                    <span>
+
+                    </span>
+                  </h6>
+                </div>
+                <div class="d-flex justify-content-between align-items-end card-body">
+                  <div>
+                    <h2 class="mb-1 text-700 fw-normal lh-1">
+                      [[${efh.efhData}]]
+                    </h2>
+                    <div class="me-2 fs-11 badge badge-subtle-success rounded-pill">
+                      +3.5%
+                    </div>
+                  </div>
+                  <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
+                    style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
+                    <div
+                      style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
+                      그래프
+                    </div>
+                    <div class="">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-3 col-md-6">
+              <div class="h-md-100 card">
+                <div class="pb-0 card-header">
+                  <h6 class="mb-0 mt-2">
+                    최저.최고기온
+                    <span>
+
+                    </span>
+                  </h6>
+                </div>
+                <div class="d-flex justify-content-between align-items-end card-body">
+                  <div class="temp-div">
+                    <h3 class="mb-1 text-700 fw-normal lh-1">
+
+                      <div class="allWrap2">
+                        <div class="wrap2">
+                          <div class="layer small-layer s3">
+                            <div>
+                              최고기온 [[${temps.maxTemp}]] C °
+                            </div>
+                          </div>
+                          <div class="layer small-layer s3">
+                            <div>
+                              최저기온 [[${temps.minTemp}]] C °
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+
+                    </h3>
+
+                  </div>
+
+
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
-        <div class="col-xxl-3 col-md-6">
-          <div class="h-md-100 card">
-            <div class="pb-0 card-header">
-              <h6 class="mb-0 mt-2">
-                실효습도
-                <span>
+        <div>
+          <div class="chart-big-tag g-3 mb-3 row">
+            <div class="col-xxl-6 col-md-6" id="temp-line-container">
+              평균 온습도 차트 구역
+              <canvas id="temp-line-chart" width="250px" height="150px"></canvas>
 
-                </span>
-              </h6>
             </div>
-            <div class="d-flex justify-content-between align-items-end card-body">
-              <div>
-                <h2 class="mb-1 text-700 fw-normal lh-1">
-                  [[${efh.efhData}]]
-                </h2>
-                <div class="me-2 fs-11 badge badge-subtle-success rounded-pill">
-                  +3.5%
-                </div>
-              </div>
-              <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
-                style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
-                <div
-                  style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
-                  그래프
-                </div>
-                <div class="">
-                </div>
-              </div>
+            <div class="col-xxl-6 col-md-6" id="reh-line-container">
+              평균 온습도 차트 구역
+              <canvas id="reh-line-chart" width="250px" height="150px"></canvas>
 
+            </div>
+
+          </div>
+
+          <div class="g-3 mb-3 row">
+            <div class="col-xxl-6 col-md-6" id="di-line-container">
+              불쾌지수 차트
+              <canvas id="di-line-chart" width="250px" height="150px"></canvas>
+
+            </div>
+
+
+
+            <div class="col-xxl-6 col-md-6">
+              <!-- 표 데이터 구역 -->
+              <h3>Section title</h3>
+              <div class="table-responsive small">
+                <table class="table table-striped table-sm text-center">
+                  <thead>
+                    <colgroup>
+                    <col width="25%">
+                    <col width="25%">
+                    <col width="25%">
+                    <col width="25%">
+                  
+                    </colgroup>
+
+                    <tr>
+                      <td >시간</td>
+                      <td >온도</td>
+                      <td >습도</td>
+                      <td >불쾌지수</td>
+                    </tr>
+                    <!-- <tr>
+                      <th scope="col">시간</th>
+                      <th scope="col">온도</th>
+                      <th scope="col">습도</th>
+                      <th scope="col">불쾌지수</th>
+                    </tr> -->
+                  </thead>
+                  <tbody>
+                    <tr th:each="time : ${timeList}">
+                      <td>[[${time.mesurTime}]]시</td>
+                      <td>[[${time.temper}]]</td>
+                      <td>[[${time.reh}]]</td>
+                      <td>[[${time.di}]]</td>
+                    </tr>
+                    <tr>
+                      <td>최고온도</td>
+                      <td>[[${temps.maxTemp}]]</td>
+                      <td>최저온도</td>
+                      <td>[[${temps.minTemp}]]</td>
+                    </tr>
+                    <tr>
+                      <td>평균 온도</td>
+                      <td>[[${avg.tempAvg}]]</td>
+                      <td>평균 습도</td>
+                      <td>[[${avg.rehAvg}]]</td>
+                    </tr>
+                    <tr>
+                      <td>화재위험성 수치</td>
+                      <td>[[${efh.efhData}]]</td>
+                      <td>화재위험성</td>
+                      <td>[[${efh.efhDeg}]]</td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-xxl-3 col-md-6">
-          <div class="h-md-100 card">
-            <div class="pb-0 card-header">
-              <h6 class="mb-0 mt-2">
-                최저.최고기온
-                <span>
 
-                </span>
-              </h6>
-            </div>
-            <div class="d-flex justify-content-between align-items-end card-body">
-              <div class="temp-div">
-                <h3 class="mb-1 text-700 fw-normal lh-1">
-                  [[${temps.maxTemp}]]
-                </h3>
-                <h3 class="mb-1 text-700 fw-normal lh-1">
-                  [[${temps.minTemp}]]
-                </h3>
-
-              </div>
-              <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
-                style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
-                <div
-                  style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
-                  그래프
-                </div>
-                <div class="">
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div>
-      <div class="chart-big-tag g-3 mb-3 row">
-        <div class="col-xxl-6 col-md-6" id="temp-line-container">
-          평균 온습도 차트 구역
-          <canvas id="temp-line-chart" width="250px" height="150px"></canvas>
 
         </div>
-        <div class="col-xxl-6 col-md-6" id="reh-line-container">
-          평균 온습도 차트 구역
-          <canvas id="reh-line-chart" width="250px" height="150px"></canvas>
-
-        </div>
-
-      </div>
-
-      <div class="g-3 mb-3 row">
-        <div class="col-xxl-6 col-md-12" id="di-line-container">
-          <canvas id="di-line-chart" width="250px" height="150px"></canvas>
-
-        </div>
-
-          불쾌지수
-        </div>
-        <div class="col-xxl-6 col-md-12">
-          표 데이터 구역
-          <h2>Section title</h2>
-          <div class="table-responsive small">
-            <table class="table table-striped table-sm">
-              <thead>
-
-                <tr>
-                  <th scope="col">시간</th>
-                  <th scope="col">온도</th>
-                  <th scope="col">습도</th>
-                  <th scope="col">불쾌지수</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="time : ${timeList}">
-                  <td>[[${time.mesurTime}]]시</td>
-                  <td>[[${time.temper}]]</td>
-                  <td>[[${time.reh}]]</td>
-                  <td>[[${time.di}]]</td>
-                </tr>
-                <tr>
-                  <td>최고온도</td>
-                  <td>[[${temps.maxTemp}]]</td>
-                  <td>최저온도</td>
-                  <td>[[${temps.minTemp}]]</td>
-                </tr>
-                <tr>
-                  <td>평균 온도</td>
-                  <td>[[${avg.tempAvg}]]</td>
-                  <td>평균 습도</td>
-                  <td>[[${avg.rehAvg}]]</td>
-                </tr>
-                <tr>
-                  <td>화재위험성 수치</td>
-                  <td>[[${efh.efhData}]]</td>
-                  <td>화재위험성</td>
-                  <td>[[${efh.efhDeg}]]</td>
-                </tr>
-              </tbody>
-
-            </table>
-          </div>
-        </div>
-
-
-      </div>
     </div>
     <div class="g-3 mb-3 row">
       <div class="col-xxl-6 col-md-6">
@@ -273,7 +332,10 @@
     </div>
 
 
-  </main>
+    </main>
+  </div>
+  </div>
+
 </th:block>
 <th:block layout:fragment="content_js">
   <script src="/js/content/main.js"></script>

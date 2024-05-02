@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<style>
+    .allWrap {
+        width: 300px;
+        overflow: hidden;
+    }
+
+    .wrap {
+        width: 500%;
+        display: flex;
+    }
+
+    .s1 {
+        width: 300px;
+    }
+</style>
+<th:block th:fragment="doughnutFragment">
+    <div class="allWrap">
+        <div class="wrap">
+
+            <div class="layer small-layer s1">
+                <div>미세먼지등급비율</div>
+                <span>1111111111111111111111111111111111111111</span>
+            </div>
+
+            <div class="layer small-layer s1">
+                <div>초미세먼지등급비율</div>
+                <span>222222222222222222222222222222222222222</span>
+            </div>
+
+            <div class="layer small-layer s1">
+                <div>통합실내지수등급비율</div>
+                <span>333333333333333333333333333333333333333</span>
+            </div>
+
+            <div class="layer small-layer s1">
+                <div>소음등급비율</div>
+                <span>444444444444444444444444444444444444444</span>
+            </div>
+
+            <div class="layer small-layer s1">
+                <div>미세먼지등급비율</div>
+                <span>555555555555555555555555555555555555555</span>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        // 슬라이드 //////////////////////////
+        let cnt = 0;
+
+        const wrap = document.querySelector(".wrap");
+        const s1 = document.querySelectorAll(".s1");
+
+        const sliderClone = wrap.firstElementChild.cloneNode(true); //복사
+        wrap.appendChild(sliderClone); //붙여넣기
+
+        let play = setInterval(() => {
+            cnt++
+
+            wrap.style.marginLeft = (-cnt * 100) + "%";
+            wrap.style.transition = "all 0.6s";
+
+            if (cnt == 4) {
+                setTimeout(() => {
+                    wrap.style.transition = "0s";
+                    wrap.style.marginLeft = "0";
+
+                    cnt = 0;
+                }, 700)
+            }
+
+        }, 2500)
+
+
+        wrap.addEventListener('mouseover', (event) => { clearInterval(play) })
+        wrap.addEventListener('mouseout', (event) => {
+            play = setInterval(() => {
+                cnt++
+                wrap.style.marginLeft = (-cnt * 100) + "%";
+                wrap.style.transition = "all 0.6s";
+
+                if (cnt == 4) {
+                    setTimeout(() => {
+                        wrap.style.transition = "0s";
+                        wrap.style.marginLeft = "0";
+
+                        cnt = 0;
+                    }, 700)
+                }
+
+            }, 2000)
+        })
+    </script>
+</th:block>
+
+</html>

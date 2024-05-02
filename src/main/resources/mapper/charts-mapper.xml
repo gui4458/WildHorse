@@ -102,6 +102,17 @@
         WHERE DATE_FORMAT(EFH_DATE ,'%Y-%m') = DATE_FORMAT(#{selectDay} ,'%Y-%m')
     </select>
 
+    <select id="selectPerDay" resultMap="di">
+        SELECT MESURDY
+        , DI_LEVEl
+        , TYPE
+        , ROUND(AVG(DI), 2) DI
+        FROM discomfort_index
+        GROUP BY MESURDY, TYPE
+        HAVING DATE_FORMAT(MESURDY,'%Y-%m-%d')=#{toDay}
+    </select>
+
+
 </mapper>
 
 

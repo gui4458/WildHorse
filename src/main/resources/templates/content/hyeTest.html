@@ -2,18 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{fragment/layout}">
 
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <!-- 부트스트랩 적용하지 않을 때 이 링크 필요 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-</head>
-
-<th:block layout:fragment="contentFragment">
-
-    <body>
+    <th:block layout:fragment="contentFragment">
         <table>
             <tr>
                 <td>
@@ -35,17 +24,12 @@
                 <td>
                     <canvas id="line-chart" width="500px" height="400px"></canvas>
                 </td>
-
             </tr>
         </table>
-    </body>
+    </th:block>
 
-    
-</th:block>
-
-
-<th:block layout:fragment="content_js">
-    <script src="/js/hyeTest.js"></script>
-</th:block>
+    <th:block layout:fragment="content_js">
+        <script src="/js/hyeTest.js"></script>
+    </th:block>
 
 </html>
