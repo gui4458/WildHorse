@@ -99,7 +99,7 @@
             ,efh_deg
             ,efh_num
         FROM efh
-        WHERE DATE_FORMAT(EFH_DATE ,'%Y-%m') = #{selectDay}
+        WHERE DATE_FORMAT(EFH_DATE ,'%Y-%m') = DATE_FORMAT(#{selectDay} ,'%Y-%m')
     </select>
 
 </mapper>

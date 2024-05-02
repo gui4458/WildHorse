@@ -1,72 +1,195 @@
 <!DOCTYPE html>
 <!-- layout:decorate => 이 파일은 fragment 폴더 안의 layout.html과 함께 열리는 파일 -->
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{fragment/layout}">
+    layout:decorate="~{fragment/layout}">
 
 <th:block layout:fragment="contentFragment">
-  <div class="row">
-    <div class="col">
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="row">
-          <div class="col">
-            <div class="text-end">
-              <input type="date">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xxl-6 col-md-6">
-            <div class="row">
-              <div class="col-xxl-6">
-                한달 총 위험도
-              </div>
-            </div>
-            <div class="row" style="width: 500px;">
-              <div id="show-danger" class="col-xxl-5">
-                
-              </div>
-              <div class="col-xxl-7">
-                <canvas class="chart-slider chart-s2" id="pie-chart" style="width: 50%; margin: 0 auto;"></canvas>
-              </div>
-            </div>
-          </div>
-          <div class="col-xxl-6 col-md-6">
-            <div class="row">
-              <div class="col">
-                오늘의 화재 위험도
-              </div>
-            </div>
-            <div class="row">
-              <div id="show-today-danger" class="col">
-                [[${toDayEfh.efhDeg}]]
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xxl-12 col-md-6">
-            <div
-              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-              <h1 class="h2">EFH차트</h1>
-            </div>
-            <canvas class="my-4 w-100" id="efhChart" width="900" height="380"></canvas>
-          </div>
-        </div>
+    <input type="hidden" id="d-day" th:value="${toDay}">
+    <div class="row">
+        <div class="col">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col text-end">
+                                <input type="date" th:value="${toDay}" onchange="selectDay(this)">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xxl-12 col-md-6">
+                                <div>
+                                    <h2>'실효습도'란?</h2>
+                                </div>
+                                <div>
+                                    화재 예방의 목적으로 수일 전부터의 상대습도에 경과 시간에 따른 가중치를 주어서 산출한 목재 등의 건조도를 나타내는 지수를 말합니다.
+                                </div>
+                                <div>
+                                    일반적으로 실효습도가 50% 이하가 되면 인화되기 쉽고
+                                </div>
+                                <div>
+                                    40% 이하에서는 불이 잘 꺼지지 않으며,
+
+                                </div>
+                                <div>
+                                    30% 이하일 경우에는 자연발생적으로 불이 일어날 가능성이 커지게 된다.
+
+                                </div>
+                                <div>
+                                    이와 관계하여 실효습도 35%이하가 2일 이상 지속될 것으로 예상될 때 건조주의보를,
+
+                                </div>
+                                <div>
+                                    실효습도 25% 이하가 2일 이상 지속될 것으로 예상될 때 건조경보가 발표되고 있다.
+
+                                </div>
+                            </div>
+                            <div>
+                                He = (1−r)×[H0dt + r H1dt + r2 H2dt+r3 H3dt + r4 H4dt ]r = 0.7
+                            </div>
+                            <div>
+                                * 실효습도(He) = (1−r)×[H0dt + r H1dt + r2 H2dt+r3 H3dt + r4H4dt]
+                            </div>
+                            <div>
+                                r = 0.7
+                            </div>
+                            <div>
+                            </div>
+                            <div>
+                                He : 실효습도
+                            </div>
+                            <div>
+                                H0d : 당일의 상대습도
+                            </div>
+                            <div>
+                                H1d : 1일 전의 상대습도
+                            </div>
+                            <div>
+                                H2d : 2일 전의 상대습도
+                            </div>
+                            <div>
+                                H3d : 3일 전의 상대습도
+                            </div>
+                            <div>
+                                H4d : 4일 전의 상대습도
+                            </div>
 
 
-        <h2>EFH Chart Sheet</h2>
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-xxl-6 col-md-6">
+                <div class="row">
+                    <div class="col">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6">
+                        한달의 화재 발생 시 위험도
+                    </div>
+                </div>
+                <div class="row" style="width: 500px;">
+                    <div id="show-danger" class="col-xxl-5">
+
+                    </div>
+                    <div class="col-xxl-7">
+                        <div id="danger-pie-container">
+                            <canvas class="chart-slider chart-s2" id="danger-pie-chart"
+                            style="width: 50%; margin: 0 auto;"></canvas>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-6 col-md-6">
+                <div class="row">
+                    <div class="col">
+                        오늘의 화재 발생시 위험도
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="show-today-danger" class="col">
+                        [[${toDayEfh.efhDeg}]]
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xxl-6 col-md-6">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">EFH차트</h1>
+                </div>
+                <div id="efh-line-container">
+                    <canvas class="my-4 w-100" id="efh-line-chart" width="100%" height=""></canvas>
+                </div>
+            </div>
+            <div class="col-xxl-6 col-md-6">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>일자</td>
+                                <td>실효습도</td>
+                                <td>위험도</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="efh : ${EfhList}">
+                                <td th:onclick="selectDayEfh([[${efh.efhDate}]])">
+                                    [[${efh.efhDate}]]
+                                </td>
+                                <td>
+                                    [[${efh.efhData}]]
+                                </td>
+                                <td>
+                                    [[${efh.efhDeg}]]
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <h2>EFH Chart Sheet</h2>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </div>
     </main>
-  </div>
+    </div>
 
-  </div>
+    </div>
 
 </th:block>
 
 <th:block layout:fragment="content_js">
-  <script src="/js/efh.js"></script>
+    <script src="/js/efh.js"></script>
 </th:block>
 
 </html>

@@ -64,21 +64,37 @@ public class ChartsController {
     @GetMapping("/efh")
     public String efh(Model model){
         String toDay= chartsService.toDay();
-        String selectDay = "2021-12";
         EfhVO toDayEfh = chartsService.mainEfh(toDay);
         model.addAttribute("toDayEfh",toDayEfh);
-        List<EfhVO> EfhList = chartsService.detailEfhList(selectDay);
+        List<EfhVO> EfhList = chartsService.detailEfhList(toDay);
         model.addAttribute("EfhList",EfhList);
+        model.addAttribute("toDay",toDay);
         return "content/efh";
     }
 
     @ResponseBody
     @PostMapping("/efh")
-    public List<EfhVO> efhList(){
-        String selectDay = "2021-12";
-        String toDay= chartsService.toDay();
+    public Map<String,Object> efhList(@RequestBody Map<String,Object> selectDay){
+        System.out.println("post실행~");
+        List<EfhVO> efhList = chartsService.detailEfhList((String)selectDay.get("selectDay"));
+        EfhVO toDayEfh = chartsService.mainEfh((String)selectDay.get("selectDay"));
+        Map<String,Object> efhData = new HashMap<String, Object>();
+        efhData.put("efhList",efhList);
+        efhData.put("toDayEfh",toDayEfh);
+        return efhData;
+    }
 
-        return chartsService.detailEfhList(selectDay);
+    @ResponseBody
+    @PostMapping("/selectChangeData")
+    public Map<String,Object> selectChangeData(@RequestBody Map<String,Object> efhData){
+        List<EfhVO> efhList = chartsService.detailEfhList((String) efhData.get("selectDay"));
+        EfhVO toDayEfh = chartsService.mainEfh((String) efhData.get("selectDay"));
+        efhData.put("efhList",efhList);
+        efhData.put("toDayEfh",toDayEfh);
+        System.out.println(efhData);
+        System.out.println(efhList);
+        System.out.println(toDayEfh);
+        return efhData;
     }
 
     @GetMapping("/test")
