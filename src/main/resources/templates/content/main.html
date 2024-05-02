@@ -3,6 +3,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{fragment/layout}">
 
+<th:block layout:fragment="content_css">
+  <!-- html 파일이 열릴때 같이 실행되는 css -->
+  <link rel="stylesheet" href="/css/content/main/main.css">
+</th:block>
+
 
 <th:block layout:fragment="contentFragment">
   <div class="row">
@@ -42,23 +47,29 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-end card-body">
                   <div class="avg-tag">
-                    <h2 class="mb-1 text-700 fw-normal lh-1">
-                      [[${avg.tempAvg}]]
-                    </h2>
-                    <h2 class="mb-1 text-700 fw-normal lh-1">
-                      [[${avg.rehAvg}]]
-                    </h2>
+
+                    <h3 class="mb-1 text-700 fw-normal lh-1">
+
+                      <div class="allWrap1">
+                        <div class="wrap1">
+                          <div class="layer small-layer s2">
+                            <div>
+                              평균온도 [[${avg.tempAvg}]]
+                            </div>
+                          </div>
+                          <div class="layer small-layer s2">
+                            <div>
+                              평균습도 [[${avg.rehAvg}]]
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </h3>
 
                   </div>
-                  <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
-                    style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
-                    <div
-                      style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
-                      그래프
-                    </div>
-                    <div class="">
-                    </div>
-                  </div>
+
 
                 </div>
               </div>
@@ -71,34 +82,56 @@
                 <div class="pb-0 card-header">
                   <h6 class="mb-0 mt-2">
                     불쾌지수
-                    <span>
-
-                    </span>
                   </h6>
                 </div>
+
+
                 <div class="d-flex justify-content-between align-items-end card-body">
                   <div class="di-tag">
-                    <h2 class="mb-1 text-700 fw-normal lh-1">
-                      [[${diPerDay}]]
-                    </h2>
-                    <div class="me-2 fs-11 badge badge-subtle-success rounded-pill">
-                      +3.5%
-                    </div>
-                  </div>
-                  <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
-                    style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
-                    <div
-                      style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
-                      그래프
-                    </div>
-                    <div class="">
-                    </div>
-                  </div>
+                    <h3 class="mb-1 text-700 fw-normal lh-1">
 
+                      <div class="allWrap">
+                        <div class="wrap">
+                          <div class="layer small-layer s1">
+                            <div>
+                              [[${diPerDay[0].type}]]
+                              [[${diPerDay[0].diLevel}]]
+                            </div>
+                          </div>
+                          <div class="layer small-layer s1">
+                            <div>
+                              [[${diPerDay[1].type}]]
+                              [[${diPerDay[1].diLevel}]]
+                            </div>
+                          </div>
+                          <div class="layer small-layer s1">
+                            <div>
+                              [[${diPerDay[2].type}]]
+                              [[${diPerDay[2].diLevel}]]
+                            </div>
+                          </div>
+                          <div class="layer small-layer s1">
+                            <div>
+                              [[${diPerDay[3].type}]]
+                              [[${diPerDay[3].diLevel}]]
+                            </div>
+                          </div>
+
+
+
+                        </div>
+
+                      </div>
+
+                    </h3>
+                  </div>
                 </div>
+
+
               </div>
             </div>
 
+            <!--    ------------------------------------------------------------------------------------------------ -->
             <div class="col-xxl-3 col-md-6">
               <div class="h-md-100 card">
                 <div class="pb-0 card-header">
@@ -144,22 +177,29 @@
                 <div class="d-flex justify-content-between align-items-end card-body">
                   <div class="temp-div">
                     <h3 class="mb-1 text-700 fw-normal lh-1">
-                      [[${temps.maxTemp}]]
-                    </h3>
-                    <h3 class="mb-1 text-700 fw-normal lh-1">
-                      [[${temps.minTemp}]]
+
+                      <div class="allWrap2">
+                        <div class="wrap2">
+                          <div class="layer small-layer s3">
+                            <div>
+                              최고기온 [[${temps.maxTemp}]]
+                            </div>
+                          </div>
+                          <div class="layer small-layer s3">
+                            <div>
+                              최저기온 [[${temps.minTemp}]]
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+
                     </h3>
 
                   </div>
-                  <div class="echarts-for-react " _echarts_instance_="ec_1712275954783" size-sensor-id="1"
-                    style="height: 60px; width: 8.5rem; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;">
-                    <div
-                      style="position: relative; width: 136px; height: 60px; padding: 0px; margin: 0px; border-width: 0px;">
-                      그래프
-                    </div>
-                    <div class="">
-                    </div>
-                  </div>
+
 
                 </div>
               </div>

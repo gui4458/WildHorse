@@ -10,7 +10,7 @@ wrap.appendChild(sliderClone); //붙여넣기
 let play = setInterval(() => {
     cnt++
 
-    wrap.style.marginLeft = (-cnt * 100) + "%";
+    wrap.style.marginLeft = (-cnt * 100) + "vw";
     wrap.style.transition = "all 0.6s";
 
     if (cnt == 4) {
@@ -29,7 +29,7 @@ wrap.addEventListener('mouseover', (event) => { clearInterval(play) })
 wrap.addEventListener('mouseout', (event) => {
     play = setInterval(() => {
         cnt++
-        wrap.style.marginLeft = (-cnt * 100) + "%";
+        wrap.style.marginLeft = (-cnt * 100) + "vw";
         wrap.style.transition = "all 0.6s";
 
         if (cnt == 4) {

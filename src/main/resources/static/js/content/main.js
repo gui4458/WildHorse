@@ -54,13 +54,166 @@ window.onload = function () {
 // ///////////////////////////////////////////////////////////////////////////
 //차트
 
+
+////////불쾌지수 슬라이더/////////////////////////
+// 슬라이드 //////////////////////////
+let cnt = 0;
+
+const wrap = document.querySelector(".wrap");
+const s1 = document.querySelectorAll(".s1");
+
+const sliderClone = wrap.firstElementChild.cloneNode(true); //복사
+wrap.appendChild(sliderClone); //붙여넣기
+
+let play = setInterval(() => {
+    cnt++
+
+    wrap.style.marginLeft = (-cnt * 100) + "%";
+    wrap.style.transition = "all 0.6s";
+
+    if (cnt == 4) {
+        setTimeout(() => {
+            wrap.style.transition = "0s";
+            wrap.style.marginLeft = "0";
+
+            cnt = 0;
+        }, 700)
+    }
+
+}, 2500)
+
+
+wrap.addEventListener('mouseover', (event) => { clearInterval(play) })
+wrap.addEventListener('mouseout', (event) => {
+    play = setInterval(() => {
+        cnt++
+        wrap.style.marginLeft = (-cnt * 100) + "%";
+        wrap.style.transition = "all 0.6s";
+
+        if (cnt == 4) {
+            setTimeout(() => {
+                wrap.style.transition = "0s";
+                wrap.style.marginLeft = "0";
+
+                cnt = 0;
+            }, 700)
+        }
+
+    }, 2000)
+})
+
+///////////////////////////////////////////////////////////////
+
+//////////평균 온습도///////////////////////////////////////////
+let cnt1 = 0;
+
+const wrap1 = document.querySelector(".wrap1");
+const s2 = document.querySelectorAll(".s2");
+
+const sliderClone1 = wrap1.firstElementChild.cloneNode(true); //복사
+wrap1.appendChild(sliderClone1); //붙여넣기
+
+let play1 = setInterval(() => {
+    cnt1++
+
+    wrap1.style.marginLeft = (-cnt1 * 100) + "%";
+    wrap1.style.transition = "all 0.6s";
+
+    if (cnt1 == 2) {
+        setTimeout(() => {
+            wrap1.style.transition = "0s";
+            wrap1.style.marginLeft = "0";
+
+            cnt1 = 0;
+        }, 700)
+    }
+
+}, 2500)
+
+
+wrap1.addEventListener('mouseover', (event) => { clearInterval(play1) })
+wrap1.addEventListener('mouseout', (event) => {
+    play1 = setInterval(() => {
+        cnt1++
+        wrap1.style.marginLeft = (-cnt1 * 100) + "%";
+        wrap1.style.transition = "all 0.6s";
+
+        if (cnt1 == 2) {
+            setTimeout(() => {
+                wrap1.style.transition = "0s";
+                wrap1.style.marginLeft = "0";
+
+                cnt1 = 0;
+            }, 700)
+        }
+
+    }, 2000)
+})
+
+///////////////////////////////////////////////////////////
+
+
+
+//////////최고 최저기온////////////////////////////////////
+let cnt2 = 0;
+
+const wrap2 = document.querySelector(".wrap2");
+const s3 = document.querySelectorAll(".s3");
+
+const sliderClone2 = wrap2.firstElementChild.cloneNode(true); //복사
+wrap2.appendChild(sliderClone2); //붙여넣기
+
+let play2 = setInterval(() => {
+    cnt2++
+
+    wrap2.style.marginLeft = (-cnt2 * 100) + "%";
+    wrap2.style.transition = "all 0.6s";
+
+    if (cnt2 == 2) {
+        setTimeout(() => {
+            wrap2.style.transition = "0s";
+            wrap2.style.marginLeft = "0";
+
+            cnt2 = 0;
+        }, 700)
+    }
+
+}, 2500)
+
+
+wrap2.addEventListener('mouseover', (event) => { clearInterval(play2) })
+wrap2.addEventListener('mouseout', (event) => {
+    play2 = setInterval(() => {
+        cnt2++
+        wrap2.style.marginLeft = (-cnt2 * 100) + "%";
+        wrap2.style.transition = "all 0.6s";
+
+        if (cnt2 == 2) {
+            setTimeout(() => {
+                wrap2.style.transition = "0s";
+                wrap2.style.marginLeft = "0";
+
+                cnt2 = 0;
+            }, 700)
+        }
+
+    }, 2000)
+})
+
+
+
+
+
+
+
+
 var tempLabels = []
 var tempAvg = []
 // var rehAvg = []
 
 
-let diLow=0
-let diBest=0
+let diLow = 0
+let diBest = 0
 let rehLow = 0
 let temperLow = 0
 let rehBest = 0
@@ -68,7 +221,7 @@ let temperBest = 0
 let timeLabel = []
 let temperAvg = []
 let rehAvg = []
-let diList=[]
+let diList = []
 
 
 
@@ -93,10 +246,10 @@ fetch('/charts/main', { //요청경로
         console.log(data.timeList);
         temperLow = data.timeList[0].temper
         rehLow = data.timeList[0].reh
-        diLow=data.timeList[0].di
+        diLow = data.timeList[0].di
 
 
-        
+
         //시간대별 온도 습도 조회
         console.log(data.timeList)
         data.timeList.forEach(e => {
@@ -224,74 +377,7 @@ fetch('/charts/main', { //요청경로
 
 
 
-        // data.regList.forEach(e => {
-        //     tempLabels.push(e.trDate)
-        //     tempAvg.push(e.tempAvg)
-        //     rehAvg.push(e.rehAvg)
-        //     if (rehBest < e.rehAvg) {
-        //         rehBest = e.rehAvg
-        //     }
-        //     if(tempBest < e.tempAvg){
-        //         tempBest = e.tempAvg
-        //     }
-        // });
-        // // 라인차트
-        // new Chart(document.getElementById("temp-line-chart"), {
-        //     type: 'line',
-        //     data: {
-        //         labels: tempLabels,
-        //         datasets: [{
-        //             data: tempAvg,
-        //             label: "평균온도",
-        //             borderColor: "#c45850",
-        //             fill: false
-        //         }
-        //         ]
-        //     },
-        //     options: {
-        //         title: {
-        //             display: true,
-        //             text: 'World population per region (in millions)'
-        //         },
-        //         scales: {
-        //             y: {
 
-        //                 min: 0,
-        //                 max: tempBest + 5
-        //                 //fontSize : 14
-
-        //             }
-        //         }
-        //     }
-        // });
-        // new Chart(document.getElementById("reh-line-chart"), {
-        //     type: 'line',
-        //     data: {
-        //         labels: tempLabels,
-        //         datasets: [{
-        //             data: rehAvg,
-        //             label: "평균습도",
-        //             borderColor: "#3e95cd",
-        //             fill: false
-        //         }
-        //         ]
-        //     },
-        //     options: {
-        //         title: {
-        //             display: true,
-        //             text: 'World population per region (in millions)'
-        //         },
-        //         scales: {
-        //             y: {
-
-        //                 min: 50,
-        //                 max: rehBest + 5
-        //                 //fontSize : 14
-
-        //             }
-        //         }
-        //     }
-        // });
 
 
         // 바 차트
