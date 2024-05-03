@@ -44,6 +44,9 @@ public class ChartsController {
         List<DiVO> diPerDay= chartsService.selectPerDay(toDay);
         model.addAttribute("diPerDay",diPerDay);
         System.out.println(diPerDay);
+
+        List<DiVO> selectTab= chartsService.selectTab(toDay);
+        model.addAttribute("selectTab",selectTab);
         return "content/main";
     }
 
@@ -59,6 +62,13 @@ public class ChartsController {
         List<DiVO> timeList=chartsService.selectTime((String) data.get("toDay"));
         data.put("timeList",timeList);
         System.out.println(data.get("timeList"));
+        List<DiVO> diPerDay= chartsService.selectPerDay(toDay.get("toDay"));
+        data.put("diPerDay",diPerDay);
+        TempVO temps = chartsService.selectDailyTemp(toDay.get("toDay"));
+        data.put("temps",temps);
+        EfhVO efh = chartsService.mainEfh(toDay.get("toDay"));
+        data.put("efh",efh);
+
         session.setAttribute("data",data);
         return data;
     }

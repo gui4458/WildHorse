@@ -49,6 +49,11 @@ public class ChartsServiceImpl implements ChartsService {
     }
 
     @Override
+    public List<DiVO> selectTab(String toDay) {
+        return sqlSession.selectList("chartsMapper.selectTab",toDay);
+    }
+
+    @Override
     public EfhVO mainEfh(String toDay) {
         return sqlSession.selectOne("chartsMapper.mainEfh",toDay);
     }
