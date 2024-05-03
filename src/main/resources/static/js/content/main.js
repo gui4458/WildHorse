@@ -59,8 +59,15 @@ window.onload = function () {
 
 //////////평균 온습도///////////////////////////////////////////
 
+let cnt1 = 0;
+let wrap1 = document.querySelector(".wrap1");
 
-function option() {
+let s2 = document.querySelectorAll(".s2");
+
+let sliderClone1 = wrap1.firstElementChild.cloneNode(true); //복사
+wrap1.appendChild(sliderClone1); //붙여넣기
+
+let play1 = setInterval(() => {
     cnt1++
     wrap1.style.marginLeft = (-cnt1 * 100) + "%"
     wrap1.style.transition = "all 0.6s";
@@ -72,25 +79,23 @@ function option() {
 
         }, 700)
     }
-}
-
-// 복사해서 사용할 코드
-let cnt1 = 0;
-let wrap1 = document.querySelector(".wrap1");
-let s2 = document.querySelectorAll(".s2");
-
-let sliderClone1 = wrap1.firstElementChild.cloneNode(true); //복사
-wrap1.appendChild(sliderClone1); //붙여넣기
-
-let play1 = setInterval(() => {
-    option();
 }, 2500)
 
 
 wrap1.addEventListener('mouseover', (event) => { clearInterval(play1) })
 wrap1.addEventListener('mouseout', (event) => {
     play1 = setInterval(() => {
-        option();
+        cnt1++
+        wrap1.style.marginLeft = (-cnt1 * 100) + "%"
+        wrap1.style.transition = "all 0.6s";
+        if (cnt1 == 2) {
+            setTimeout(() => {
+                wrap1.style.transition = "0s"
+                wrap1.style.marginLeft = "0"
+                cnt1 = 0;
+
+            }, 700)
+        }
 
     }, 2000)
 })
@@ -100,8 +105,16 @@ wrap1.addEventListener('mouseout', (event) => {
 
 
 //////////최고 최저기온////////////////////////////////////
+let cnt2 = 0;
+let wrap2 = document.querySelector(".wrap2");
 
-function option1() {
+
+let s3 = document.querySelectorAll(".s3");
+
+let sliderClone2 = wrap2.firstElementChild.cloneNode(true); //복사
+wrap2.appendChild(sliderClone2); //붙여넣기
+
+let play2 = setInterval(() => {
     cnt2++
 
     wrap2.style.marginLeft = (-cnt2 * 100) + "%";
@@ -115,33 +128,43 @@ function option1() {
             cnt2 = 0;
         }, 700)
     }
-
-}
-//복사할 코드
-let cnt2 = 0;
-let wrap2 = document.querySelector(".wrap2");
-
-let s3 = document.querySelectorAll(".s3");
-
-let sliderClone2 = wrap2.firstElementChild.cloneNode(true); //복사
-wrap2.appendChild(sliderClone2); //붙여넣기
-
-let play2 = setInterval(() => {
-    option1();
 }, 2500)
 
 
 wrap2.addEventListener('mouseover', (event) => { clearInterval(play2) })
 wrap2.addEventListener('mouseout', (event) => {
     play2 = setInterval(() => {
-        option1();
+        cnt2++
+
+        wrap2.style.marginLeft = (-cnt2 * 100) + "%";
+        wrap2.style.transition = "all 0.6s";
+
+        if (cnt2 == 2) {
+            setTimeout(() => {
+                wrap2.style.transition = "0s";
+                wrap2.style.marginLeft = "0";
+
+                cnt2 = 0;
+            }, 700)
+        }
 
     }, 2000)
 })
 
 ////////불쾌지수 슬라이더/////////////////////////
 
-function option2() {
+let cnt = 0;
+let wrap = document.querySelector(".wrap");
+
+
+//복사할 코드
+
+let s1 = document.querySelectorAll(".s1");
+
+let sliderClone = wrap.firstElementChild.cloneNode(true); //복사
+wrap.appendChild(sliderClone); //붙여넣기
+
+let play = setInterval(() => {
     cnt++
 
     wrap.style.marginLeft = (-cnt * 100) + "%";
@@ -156,27 +179,25 @@ function option2() {
         }, 700)
     }
 
-}
-
-//복사할 코드
-let cnt = 0;
-
-let wrap = document.querySelector(".wrap");
-let s1 = document.querySelectorAll(".s1");
-
-let sliderClone = wrap.firstElementChild.cloneNode(true); //복사
-wrap.appendChild(sliderClone); //붙여넣기
-
-let play = setInterval(() => {
-    option2();
-
 }, 2500)
 
 
-wrap.addEventListener('mouseover', (event) => { clearInterval(play)})
+wrap.addEventListener('mouseover', (event) => { clearInterval(play) })
 wrap.addEventListener('mouseout', (event) => {
     play = setInterval(() => {
-        option2();
+        cnt++
+
+        wrap.style.marginLeft = (-cnt * 100) + "%";
+        wrap.style.transition = "all 0.6s";
+
+        if (cnt == 4) {
+            setTimeout(() => {
+                wrap.style.transition = "0s";
+                wrap.style.marginLeft = "0";
+
+                cnt = 0;
+            }, 700)
+        }
 
     }, 2000)
 })
@@ -545,7 +566,7 @@ function infoChange() {
             //최고 최저기온
 
             let tempTag = document.querySelector('.temp-div')
-            let tempStr =`
+            let tempStr = `
                 <h3 class="mb-1 text-700 fw-normal lh-1">
 
                     <div class="allWrap2">
@@ -568,8 +589,8 @@ function infoChange() {
 
                 </h3>`
 
-                tempTag.replaceChildren(tempTag.textContent='');
-                tempTag.insertAdjacentHTML("afterbegin",tempStr);
+            tempTag.replaceChildren(tempTag.textContent = '');
+            tempTag.insertAdjacentHTML("afterbegin", tempStr);
 
 
 
@@ -773,31 +794,54 @@ function infoChange() {
 
 
 
-            //평균 온습도
+            //평균 온습도/////////////////////////////////
+
             let cnt1 = 0;
             let wrap1 = document.querySelector(".wrap1");
+
             let s2 = document.querySelectorAll(".s2");
 
             let sliderClone1 = wrap1.firstElementChild.cloneNode(true); //복사
             wrap1.appendChild(sliderClone1); //붙여넣기
 
             let play1 = setInterval(() => {
-                option();
+                cnt1++
+                wrap1.style.marginLeft = (-cnt1 * 100) + "%"
+                wrap1.style.transition = "all 0.6s";
+                if (cnt1 == 2) {
+                    setTimeout(() => {
+                        wrap1.style.transition = "0s"
+                        wrap1.style.marginLeft = "0"
+                        cnt1 = 0;
+
+                    }, 700)
+                }
             }, 2500)
 
 
             wrap1.addEventListener('mouseover', (event) => { clearInterval(play1) })
             wrap1.addEventListener('mouseout', (event) => {
                 play1 = setInterval(() => {
-                    option();
+                    cnt1++
+                    wrap1.style.marginLeft = (-cnt1 * 100) + "%"
+                    wrap1.style.transition = "all 0.6s";
+                    if (cnt1 == 2) {
+                        setTimeout(() => {
+                            wrap1.style.transition = "0s"
+                            wrap1.style.marginLeft = "0"
+                            cnt1 = 0;
+
+                        }, 700)
+                    }
 
                 }, 2000)
             })
-
-
+            //////////////////////////////////////////////////////////////////////////
             //최고 최저기온
+
             let cnt2 = 0;
             let wrap2 = document.querySelector(".wrap2");
+
 
             let s3 = document.querySelectorAll(".s3");
 
@@ -805,43 +849,90 @@ function infoChange() {
             wrap2.appendChild(sliderClone2); //붙여넣기
 
             let play2 = setInterval(() => {
-                option1();
+                cnt2++
+
+                wrap2.style.marginLeft = (-cnt2 * 100) + "%";
+                wrap2.style.transition = "all 0.6s";
+
+                if (cnt2 == 2) {
+                    setTimeout(() => {
+                        wrap2.style.transition = "0s";
+                        wrap2.style.marginLeft = "0";
+
+                        cnt2 = 0;
+                    }, 700)
+                }
             }, 2500)
 
 
             wrap2.addEventListener('mouseover', (event) => { clearInterval(play2) })
             wrap2.addEventListener('mouseout', (event) => {
                 play2 = setInterval(() => {
-                    option1();
+                    cnt2++
+
+                    wrap2.style.marginLeft = (-cnt2 * 100) + "%";
+                    wrap2.style.transition = "all 0.6s";
+
+                    if (cnt2 == 2) {
+                        setTimeout(() => {
+                            wrap2.style.transition = "0s";
+                            wrap2.style.marginLeft = "0";
+
+                            cnt2 = 0;
+                        }, 700)
+                    }
 
                 }, 2000)
             })
 
 
             //불쾌지수 
-            let cnt = 0;
 
+            let cnt = 0;
             let wrap = document.querySelector(".wrap");
+
             let s1 = document.querySelectorAll(".s1");
-            
+
             let sliderClone = wrap.firstElementChild.cloneNode(true); //복사
             wrap.appendChild(sliderClone); //붙여넣기
-            
+
             let play = setInterval(() => {
-                option2();
-            
+                cnt++
+
+                wrap.style.marginLeft = (-cnt * 100) + "%";
+                wrap.style.transition = "all 0.6s";
+
+                if (cnt == 4) {
+                    setTimeout(() => {
+                        wrap.style.transition = "0s";
+                        wrap.style.marginLeft = "0";
+
+                        cnt = 0;
+                    }, 700)
+                }
+
             }, 2500)
-            
-            
+
+
             wrap.addEventListener('mouseover', (event) => { clearInterval(play) })
             wrap.addEventListener('mouseout', (event) => {
                 play = setInterval(() => {
-                    option2();
-            
+                    cnt++
+
+                    wrap.style.marginLeft = (-cnt * 100) + "%";
+                    wrap.style.transition = "all 0.6s";
+
+                    if (cnt == 4) {
+                        setTimeout(() => {
+                            wrap.style.transition = "0s";
+                            wrap.style.marginLeft = "0";
+
+                            cnt = 0;
+                        }, 700)
+                    }
+
                 }, 2000)
             })
-
-
 
 
         })
