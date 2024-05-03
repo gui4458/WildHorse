@@ -77,6 +77,7 @@
         ,(MESURTIME/100) MESURTIME
         ,DATE_FORMAT(MESURDY,'%Y-%m-%d')MESURDY
         ,DI
+        ,type
         FROM discomfort_index
         WHERE MESURTIME % 100= 0
         AND DATE_FORMAT(MESURDY,'%Y-%m-%d')= #{toDay}
@@ -113,6 +114,19 @@
     </select>
 
 
+    <select id="selectTab" resultMap="di">
+        SELECT
+        TYPE
+        , MESURDY
+        , MESURTIME
+        , REH
+        , TEMPER
+        , ROUND(AVG(DI), 2) DI
+        FROM discomfort_index
+        GROUP BY TYPE, MESURDY
+        HAVING DATE_FORMAT(MESURDY,'%Y-%m-%d')=#{toDay}
+
+    </select>
 </mapper>
 
 

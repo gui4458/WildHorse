@@ -535,6 +535,15 @@ function infoChange() {
             document.getElementById('di-line-container').appendChild(diCanvas);
 
 
+
+            //테이블 다시 그려주기
+
+            let
+
+
+
+
+
             // /////////////////////////////////////////
             // 평균 온습도 
             let avgTag = document.querySelector('.avg-tag')
@@ -594,6 +603,16 @@ function infoChange() {
 
 
 
+            //실효습도
+            let efhTag = document.querySelector('.efh-tag');
+            let efhStr =`
+                <h2 class="mb-1 text-700 fw-normal lh-1">
+                    ${data.efh.efhData}
+                </h2>`
+
+
+            efhTag.replaceChildren(efhTag.textContent = '');
+            efhTag.insertAdjacentHTML("afterbegin", efhStr);
 
 
 

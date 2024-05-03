@@ -21,4 +21,5 @@ public interface ChartsService {
     List<EfhVO> detailEfhList(String selectDay);
     String toDay();
     List<DiVO> selectPerDay(String toDay);
+    List<DiVO> selectTab(String toDay);
 }
