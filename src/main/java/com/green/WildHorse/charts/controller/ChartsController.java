@@ -62,6 +62,8 @@ public class ChartsController {
         System.out.println(data.get("timeList"));
         List<DiVO> diPerDay= chartsService.selectPerDay(toDay.get("toDay"));
         data.put("diPerDay",diPerDay);
+        TempVO temps = chartsService.selectDailyTemp(toDay.get("toDay"));
+        data.put("temps",temps);
 
         session.setAttribute("data",data);
         return data;
