@@ -106,46 +106,36 @@ wrap.addEventListener('mouseout', (event) => {
 
 //////////평균 온습도///////////////////////////////////////////
 let cnt1 = 0;
+let wrap1 = document.querySelector(".wrap1");
 
-const wrap1 = document.querySelector(".wrap1");
-const s2 = document.querySelectorAll(".s2");
+function option() {
+    cnt1++
+    wrap1.style.marginLeft = (-cnt1 * 100) + "%"
+    wrap1.style.transition = "all 0.6s";
+    if (cnt1 == 2) {
+        setTimeout(() => {
+            wrap1.style.transition = "0s"
+            wrap1.style.marginLeft = "0"
+            cnt1 = 0;
 
-const sliderClone1 = wrap1.firstElementChild.cloneNode(true); //복사
+        }, 700)
+    }
+}
+
+let s2 = document.querySelectorAll(".s2");
+
+let sliderClone1 = wrap1.firstElementChild.cloneNode(true); //복사
 wrap1.appendChild(sliderClone1); //붙여넣기
 
 let play1 = setInterval(() => {
-    cnt1++
-
-    wrap1.style.marginLeft = (-cnt1 * 100) + "%";
-    wrap1.style.transition = "all 0.6s";
-
-    if (cnt1 == 2) {
-        setTimeout(() => {
-            wrap1.style.transition = "0s";
-            wrap1.style.marginLeft = "0";
-
-            cnt1 = 0;
-        }, 700)
-    }
-
+    option();
 }, 2500)
 
 
 wrap1.addEventListener('mouseover', (event) => { clearInterval(play1) })
 wrap1.addEventListener('mouseout', (event) => {
     play1 = setInterval(() => {
-        cnt1++
-        wrap1.style.marginLeft = (-cnt1 * 100) + "%";
-        wrap1.style.transition = "all 0.6s";
-
-        if (cnt1 == 2) {
-            setTimeout(() => {
-                wrap1.style.transition = "0s";
-                wrap1.style.marginLeft = "0";
-
-                cnt1 = 0;
-            }, 700)
-        }
+        option();
 
     }, 2000)
 })
@@ -519,17 +509,91 @@ function infoChange() {
             canvas.id = 'temp-line-chart';
             document.getElementById('temp-line-container').appendChild(canvas); // 새로운 캔버스 추가
 
+
+
+            // 불쾌지수 라인차트 지워주고 다시 그리기
+            let oldDiLineChart = document.getElementById('di-line-chart');
+            if (oldDiLineChart) {
+                oldDiLineChart.parentNode.removeChild(oldDiLineChart);
+            }
+            let diCanvas = document.createElement('canvas');
+            diCanvas.id = 'di-line-chart';
+            document.getElementById('di-line-container').appendChild(diCanvas);
+
+
+            // /////////////////////////////////////////
+            // 평균 온습도 
             let avgTag = document.querySelector('.avg-tag')
             let avgstr = `
-            <h2 class="mb-1 text-700 fw-normal lh-1">
-                    ${data.avg.tempAvg}
-                </h2>
-                <h2 class="mb-1 text-700 fw-normal lh-1">
-                    ${data.avg.rehAvg}
-                </h2>
-            `
+                <h3 class="mb-1 text-700 fw-normal lh-1">
+
+                    <div class="allWrap1">
+                        <div class="wrap1">
+                            <div class="layer small-layer s2">
+                                <div>
+                                    평균온도  ${data.avg.tempAvg} C °
+                                </div>
+                            </div>
+                            <div class="layer small-layer s2">
+                                <div>
+                                    평균습도 ${data.avg.rehAvg} %
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </h3>
+                `
             avgTag.replaceChildren(avgTag.textContent = '');
             avgTag.insertAdjacentHTML("afterbegin", avgstr)
+
+
+            //불쾌지수
+
+            let diTag = document.querySelector('.di-tag');
+            let diStr =`
+                <h3 class="mb-1 text-700 fw-normal lh-1">
+
+                    <div class="allWrap">
+                        <div class="wrap">
+                            <div class="layer small-layer s1">
+                                <div>
+                                    ${data.diPerDay[0].type}
+                                    ${data.diPerDay[0].diLevel}
+                                </div>
+                            </div>
+                            <div class="layer small-layer s1">
+                                <div>
+                                    ${data.diPerDay[1].type}
+                                    ${data.diPerDay[1].diLevel}
+                                </div>
+                            </div>
+                            <div class="layer small-layer s1">
+                                <div>
+                                    ${data.diPerDay[2].type}
+                                    ${data.diPerDay[2].diLevel}
+                                </div>
+                            </div>
+                            <div class="layer small-layer s1">
+                                <div>
+                                    ${data.diPerDay[3].type}
+                                    ${data.diPerDay[3].diLevel}
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                </h3>
+                `
+
+
+
+
 
 
             let rehLow = 0
@@ -541,14 +605,28 @@ function infoChange() {
             let rehAvg = []
             let tempBest = 0
 
+            let diLow = 0
+            let diBest = 0
+            let diList = []
+
+
+
+
+
             temperLow = data.timeList[0].temper
             rehLow = data.timeList[0].reh
+            diLow = data.timeList[0].di
+
+
             //시간대별 온도 습도 조회
             console.log(data.timeList)
             data.timeList.forEach(e => {
                 timeLabel.push(e.mesurTime)
                 temperAvg.push(e.temper)
                 rehAvg.push(e.reh)
+                diList.push(e.di)
+
+
 
                 if (rehBest < e.reh) {
                     rehBest = e.reh
@@ -562,6 +640,12 @@ function infoChange() {
                 }
                 if (temperLow > e.temper) {
                     temperLow = e.temper
+                }
+                if (diBest < e.di) {
+                    diBest = e.di
+                }
+                if (diLow > e.di) {
+                    diLow = e.di
                 }
 
             });
@@ -623,6 +707,57 @@ function infoChange() {
                     }
                 }
             });
+
+            // 불쾌지수 라인차트
+            new Chart(document.getElementById("di-line-chart"), {
+                type: 'line',
+                data: {
+                    labels: timeLabel,
+                    datasets: [{
+                        data: diList,
+                        label: "불쾌지수",
+                        borderColor: "#3e95cd",
+                        fill: false
+                    }
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'World population per region (in millions)'
+                    },
+                    scales: {
+                        y: {
+
+                            min: diLow - 5,
+                            max: diBest + 5
+                            // fontSize : 14
+
+                        }
+                    }
+                }
+            });
+
+
+
+
+            cnt1 = 0;
+
+
+            wrap1 = document.querySelector(".wrap1");
+            s2 = document.querySelectorAll(".s2");
+
+            sliderClone1 = wrap1.firstElementChild.cloneNode(true); //복사
+            wrap1.appendChild(sliderClone1); //붙여넣기
+
+
+            wrap1.addEventListener('mouseover', (event) => { clearInterval(play1) })
+            wrap1.addEventListener('mouseout', (event) => {
+                play1 = setInterval(() => {
+                    option()
+
+                }, 2000)
+            })
 
 
         })
