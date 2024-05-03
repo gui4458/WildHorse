@@ -62,11 +62,11 @@ public class ChartsController {
         List<DiVO> timeList=chartsService.selectTime((String) data.get("toDay"));
         data.put("timeList",timeList);
         System.out.println(data.get("timeList"));
-        List<DiVO> diPerDay= chartsService.selectPerDay(toDay.get("toDay"));
+        List<DiVO> diPerDay= chartsService.selectPerDay((String) data.get("toDay"));
         data.put("diPerDay",diPerDay);
-        TempVO temps = chartsService.selectDailyTemp(toDay.get("toDay"));
+        TempVO temps = chartsService.selectDailyTemp((String) data.get("toDay"));
         data.put("temps",temps);
-        EfhVO efh = chartsService.mainEfh(toDay.get("toDay"));
+        EfhVO efh = chartsService.mainEfh((String) data.get("toDay"));
         data.put("efh",efh);
 
         session.setAttribute("data",data);
