@@ -125,7 +125,7 @@
         FROM discomfort_index
         GROUP BY TYPE, MESURDY
         HAVING DATE_FORMAT(MESURDY,'%Y-%m-%d')=#{toDay}
-        ORDER BY mesurtime;
+        ORDER BY CAST(mesurtime AS TIME);
 
     </select>
 </mapper>

@@ -304,7 +304,7 @@
     
                     </thead>
                     <tbody>
-                      <tr th:each="time : ${timeList}" th:if="${time.type == '야간'}">
+                      <tr th:each="time : ${timeList}" th:if="${time.type == '오전'}">
                         <td>[[${time.mesurTime}]]시</td>
                         <td>[[${time.temper}]]</td>
                         <td>[[${time.reh}]]</td>
@@ -354,7 +354,7 @@
                     <tbody>
                       
                         
-                      <tr th:each="time : ${timeList}" th:if="${time.type == '오전'}">
+                      <tr th:each="time : ${timeList}" th:if="${time.type == '오후'}">
                             <td>[[${time.mesurTime}]]시</td>
                             <td>[[${time.temper}]]</td>
                             <td>[[${time.reh}]]</td>
@@ -407,7 +407,7 @@
                     <tbody>
                       
                         
-                      <tr th:each="time : ${timeList}" th:if="${time.type == '오후'}">
+                      <tr th:each="time : ${timeList}" th:if="${time.type == '야간'}">
                             <td>[[${time.mesurTime}]]시</td>
                             <td>[[${time.temper}]]</td>
                             <td>[[${time.reh}]]</td>
