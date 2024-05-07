@@ -65,7 +65,9 @@ public class ChartsController {
         data.put("temps",temps);
         EfhVO efh = chartsService.mainEfh((String) data.get("toDay"));
         data.put("efh",efh);
-
+        System.out.println("셀렉트탭ㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂ");
+        List<DiVO> selectTab= chartsService.selectTab((String) data.get("toDay"));
+        data.put("selectTab",selectTab);
         session.setAttribute("data",data);
         return data;
     }

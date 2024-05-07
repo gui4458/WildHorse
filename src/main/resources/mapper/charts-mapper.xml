@@ -82,7 +82,7 @@
         SELECT
         REH
         ,TEMPER
-        ,(MESURTIME/100) MESURTIME
+        ,LPAD((MESURTIME/100), 2, '0') AS MESURTIME
         ,DATE_FORMAT(MESURDY,'%Y-%m-%d')MESURDY
         ,DI
         ,type

@@ -296,6 +296,11 @@ fetch('/charts/main', { //요청경로
                     label: "습도",
                     borderColor: "#c45850",
                     fill: false
+                },{
+                    data: [data.avg.rehAvg],
+                    label: "평균습도",
+                    borderColor: "#c45850",
+                    fill: false
                 }
                 ]
             },
@@ -304,12 +309,19 @@ fetch('/charts/main', { //요청경로
                     display: true,
                     text: 'World population per region (in millions)'
                 },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '습도 차트',
+                        size: 38
+                    }
+                },
                 scales: {
+
                     y: {
 
                         min: rehLow - 5,
                         max: rehBest + 5
-                        //fontSize : 14
 
                     }
                 }
@@ -330,6 +342,7 @@ fetch('/charts/main', { //요청경로
                 ]
             },
             options: {
+
                 title: {
                     display: true,
                     text: 'World population per region (in millions)'
@@ -537,10 +550,128 @@ function infoChange() {
 
 
             //테이블 다시 그려주기
+            let tabTableTag = document.querySelector('.tab-table-all')
+            let tabStr = `
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        
+                `
+            data.selectTab.forEach((tap, i) => {
+                if (i == 0) {
+                    tabStr += `
+                                        <span>
+                                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-${i}" type="button" role="tab" aria-controls="nav-home" aria-selected="true" >${tap.type}</button>
+                                        </span>
+                    `
+                } else {
+                    tabStr += `
+                                        <span>
+                                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-${i}" type="button" role="tab" aria-controls="nav-home" aria-selected="true" >${tap.type}</button>
+                                        </span>
+                    `
 
-      
+                }
+            });
+            tabStr += `
+                                        
+                                
+                                    </div>
+                                </nav>
+                                <div class="tab-content" id="nav-tabContent"> 
+                    
+                    `
+            data.selectTab.forEach((tap, i) => {
+                if (i == 0) {
+                    tabStr += `
+                                    <div class="tab-pane fade show active" id="nav-${i}" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                        <table class="table table-striped table-sm text-center">
+                                            <thead>
+                                                <colgroup>
+                                                    <col width="25%">
+                                                    <col width="25%">
+                                                    <col width="25%">
+                                                    <col width="25%">
+                                
+                                                </colgroup>
+                        
+                                                <tr>
+                                                    <td>시간</td>
+                                                    <td>온도</td>
+                                                    <td>습도</td>
+                                                    <td>불쾌지수</td>
+                                                </tr>
+                        
+                                            </thead>
+                                            <tbody>
+                                `
+                } else {
+                    tabStr += `
+                                    <div class="tab-pane fade" id="nav-${i}" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                        <table class="table table-striped table-sm text-center">
+                                            <thead>
+                                                <colgroup>
+                                                    <col width="25%">
+                                                    <col width="25%">
+                                                    <col width="25%">
+                                                    <col width="25%">
+                                
+                                                </colgroup>
+                        
+                                                <tr>
+                                                    <td>시간</td>
+                                                    <td>온도</td>
+                                                    <td>습도</td>
+                                                    <td>불쾌지수</td>
+                                                </tr>
+                        
+                                            </thead>
+                                            <tbody>
+                                `
 
-
+                }
+                data.timeList.forEach(e => {
+                    if (e.type == tap.type) {
+                        tabStr += `
+                                                <tr>
+                                                    <td>${e.mesurTime}시</td>
+                                                    <td>${e.temper}</td>
+                                                    <td>${e.reh}</td>
+                                                    <td>${e.di}</td>
+                                                </tr>
+                            `
+                    }
+                })
+                tabStr += `             
+                                                <tr>
+                                                    <td>최고온도</td>
+                                                    <td>${data.temps.maxTemp}</td>
+                                                    <td>최저온도</td>
+                                                    <td>${data.temps.minTemp}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>평균 온도</td>
+                                                    <td>${data.avg.tempAvg}</td>
+                                                    <td>평균 습도</td>
+                                                    <td>${data.avg.rehAvg}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>화재위험성 수치</td>
+                                                    <td>${data.efh.efhData}</td>
+                                                    <td>화재위험성</td>
+                                                    <td>${data.efh.efhDeg}</td>
+                                                </tr>
+                                            </tbody>
+            
+                                        </table>
+                                    </div>
+                                
+                    `
+            });
+            tabStr += `
+                                </div>
+                    `
+            tabTableTag.replaceChildren(tabTableTag.textContent = '');
+            tabTableTag.insertAdjacentHTML("afterbegin", tabStr);
 
 
 
@@ -569,7 +700,7 @@ function infoChange() {
                 </h3>
                 `
             avgTag.replaceChildren(avgTag.textContent = '');
-            avgTag.insertAdjacentHTML("afterbegin", avgstr)
+            avgTag.insertAdjacentHTML("afterbegin", avgstr);
 
 
             //최고 최저기온
@@ -605,7 +736,7 @@ function infoChange() {
 
             //실효습도
             let efhTag = document.querySelector('.efh-tag');
-            let efhStr =`
+            let efhStr = `
                 <h2 class="mb-1 text-700 fw-normal lh-1">
                     ${data.efh.efhData}
                 </h2>`
