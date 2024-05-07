@@ -313,7 +313,7 @@ fetch('/charts/main', { //요청경로
                     title: {
                         display: true,
                         text: '습도 차트',
-                        size: 45
+                        font: 50
                     }
                 },
                 scales: {
