@@ -2,30 +2,100 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{fragment/layout}">
 
-    <th:block layout:fragment="contentFragment">
-        <table>
-            <tr>
-                <td>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">DI_LEVEL</h5>
+    <th:block layout:fragment="content_css">
+        <link rel="stylesheet" href="/css/content/hyeTest.css">
+    </th:block>
 
-                            <p class="card-text">
-                                <span style="font-size: 30px;  color: #FFC94A;"><i
-                                        class="bi bi-emoji-grin"></i></span>1111
-                            </p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
+    <th:block layout:fragment="contentFragment">
+        <div class="row pt-3 first-row">
+            <div class="col">
+                <div class="row">
+                    <div class="col-2">
+                        <select class="form-select" onchange="reDrawChart('detail-chart', this)">
+                            <option th:each="month : ${monthList}">[[${month}]]</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-3">
+                    <div class="col-8">
+                        <canvas id="detail-chart" width="100%"></canvas>
+                    </div>
+                    <div class="col-4">
+                        <div class="month-detail">
+                            월 상세 내역
                         </div>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <canvas id="line-chart" width="500px" height="400px"></canvas>
-                </td>
-            </tr>
-        </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row mt-4">
+                <div class="col-2">
+                    <select class="form-select"  onchange="reDrawChart('compare-chart1', this)">
+                        <option th:each="month : ${monthList}">[[${month}]]</option>
+                    </select>
+                </div>
+                <div class="offset-4 col-2">
+                    <select class="form-select"  onchange="reDrawChart('compare-chart2', this)">
+                        <option th:each="month : ${monthList}">[[${month}]]</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <canvas id="compare-chart1" width="95%"></canvas>
+                </div>
+                <div class="col">
+                    <canvas id="compare-chart2" width="95%"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row third-row">
+            <div class="col compare-detail">
+                <div class="row mb-2">
+                    <div class="col-5 text-end">
+                        <div class="row justify-content-end">
+                            <div class="left-bar-max-temper">1</div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-center">최고온도</div>
+                    <div class="col-5 text-start">
+                        <div class="row justify-content-start">
+                            <div class="right-bar-max-temper">1</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5 text-end">
+                        <div class="row justify-content-end">
+                            <div class="left-bar-min-temper">1</div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-center">최저온도</div>
+                    <div class="col-5 text-start">
+                        <div class="row justify-content-start">
+                            <div class="right-bar-min-temper">1</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5 text-end">
+                        <div class="row justify-content-end">
+                            <div class="left-bar-avg-temper">1</div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-center">평균온도</div>
+                    <div class="col-5 text-start">
+                        <div class="row justify-content-start">
+                            <div class="right-bar-avg-temper">1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
     </th:block>
 
     <th:block layout:fragment="content_js">

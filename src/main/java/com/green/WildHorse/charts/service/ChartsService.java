@@ -1,12 +1,7 @@
 package com.green.WildHorse.charts.service;
 
 
-import com.green.WildHorse.charts.vo.DiVO;
-
-import com.green.WildHorse.charts.vo.EfhVO;
-
-import com.green.WildHorse.charts.vo.TempRegAvgVO;
-import com.green.WildHorse.charts.vo.TempVO;
+import com.green.WildHorse.charts.vo.*;
 
 import java.util.List;
 
@@ -22,4 +17,8 @@ public interface ChartsService {
     String toDay();
     List<DiVO> selectPerDay(String toDay);
     List<DiVO> selectTab(String toDay);
+    //불쾌지수 페이지에서 한 달동안의 일일 평균 온도, 습도, di 조회를 위한 쿼리
+    List<TempRegDiAvgVO> getTempRegDiAvg(String month);
+    //비디에 저장된 년월 조회 (셀렉트 박스 사용 용도)
+    List<String> getMonthList();
 }
