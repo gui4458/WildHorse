@@ -78,7 +78,7 @@ public class ChartsController {
         EfhVO toDayEfh = chartsService.mainEfh(toDay);
         model.addAttribute("toDayEfh",toDayEfh);
         List<EfhVO> EfhList = chartsService.detailEfhList(toDay);
-        model.addAttribute("EfhList",EfhList);
+        model.addAttribute("efhList",EfhList);
         model.addAttribute("toDay",toDay);
         return "content/efh";
     }

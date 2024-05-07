@@ -103,7 +103,7 @@
         SELECT DATE_FORMAT(20211220,'%Y-%m-%d')
     </select>
     <select id="detailEfhList" resultMap="efh">
-        SELECT DATE_FORMAT(EFH_DATE ,'%Y-%m-%d')EFH_DATE
+        SELECT DATE_FORMAT(EFH_DATE ,'%m/%d')EFH_DATE
             ,efh_data
             ,efh_deg
             ,efh_num

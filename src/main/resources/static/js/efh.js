@@ -40,15 +40,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
             let dangerStr = `
-        <div class="row">
-            <div class="col">
-                <div>위험 : 총${danger}일</div>
-                <div>주의 : 총${caution}일</div>
-                <div>안전 : 총${safety}일</div>
-            </div>
-        </div>
-        
-        `
+                                <div class="row">
+                                    <div class="col">
+                                        <div>위험 : 총${danger}일</div>
+                                        <div>주의 : 총${caution}일</div>
+                                        <div>안전 : 총${safety}일</div>
+                                    </div>
+                                </div>
+                            `
             const showDanger = document.querySelector('#show-danger');
             showDanger.replaceChildren(showDanger.textContent = '');
             showDanger.insertAdjacentHTML('afterbegin', dangerStr)
@@ -193,28 +192,28 @@ function selectDayEfh(efhDate) {
         .then((data) => {//data -> controller에서 리턴되는 데이터!
             const todayDangerTag = document.querySelector('#show-today-danger')
             let toDayDangerStr = ''
-            if(data.toDayEfh.efhDeg=='안전'){
-                toDayDangerStr=`
-                ${data.toDayEfh.efhDeg}
-                <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
-                `
-            }else if(data.toDayEfh.efhDeg=='주의'){
-                toDayDangerStr=`
-                ${data.toDayEfh.efhDeg}
-                <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
-                `
-                
-            }else{
-                toDayDangerStr=`
-                ${data.toDayEfh.efhDeg}
-                <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
-                `
+            if (data.toDayEfh.efhDeg == '안전') {
+                toDayDangerStr = `
+                                ${data.toDayEfh.efhDeg}
+                                <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
+                                `
+            } else if (data.toDayEfh.efhDeg == '주의') {
+                toDayDangerStr = `
+                                ${data.toDayEfh.efhDeg}
+                                <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
+                                `
+
+            } else {
+                toDayDangerStr = `
+                                ${data.toDayEfh.efhDeg}
+                                <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
+                                `
             }
-            
-            todayDangerTag.replaceChildren(todayDangerTag.textContent='')
-            todayDangerTag.insertAdjacentHTML('afterbegin',toDayDangerStr)
-            
-        
+
+            todayDangerTag.replaceChildren(todayDangerTag.textContent = '')
+            todayDangerTag.insertAdjacentHTML('afterbegin', toDayDangerStr)
+
+
 
 
         })
@@ -286,28 +285,28 @@ function selectDay(toDay) {
 
             const todayDangerTag = document.querySelector('#show-today-danger')
             let toDayDangerStr = ''
-            if(data.toDayEfh.efhDeg=='안전'){
-                toDayDangerStr=`
-                ${data.toDayEfh.efhDeg}
-                <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
-                `
-            }else if(data.toDayEfh.efhDeg=='주의'){
-                toDayDangerStr=`
-                ${data.toDayEfh.efhDeg}
-                <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
-                `
-                
-            }else{
-                toDayDangerStr=`
-                ${data.toDayEfh.efhDeg}
-                <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
-                `
+            if (data.toDayEfh.efhDeg == '안전') {
+                toDayDangerStr = `
+                                ${data.toDayEfh.efhDeg}
+                                <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
+                                `
+            } else if (data.toDayEfh.efhDeg == '주의') {
+                toDayDangerStr = `
+                                ${data.toDayEfh.efhDeg}
+                                <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
+                                `
+
+            } else {
+                toDayDangerStr = `
+                                ${data.toDayEfh.efhDeg}
+                                <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
+                                `
             }
-            
-            todayDangerTag.replaceChildren(todayDangerTag.textContent='')
-            todayDangerTag.insertAdjacentHTML('afterbegin',toDayDangerStr)
-            
-            
+
+            todayDangerTag.replaceChildren(todayDangerTag.textContent = '')
+            todayDangerTag.insertAdjacentHTML('afterbegin', toDayDangerStr)
+
+
             data.efhList.forEach(e => {
                 efhDates.push(e.efhDate)
                 efhDatas.push(e.efhData)
@@ -332,22 +331,22 @@ function selectDay(toDay) {
                                     ${e.efhDeg}
                                 </td>
                             </tr>
-                `
+                            `
             });
             const efhTbody = document.querySelector('#efh-tbody');
             efhTbody.replaceChildren(efhTbody.textContent = '');
             efhTbody.insertAdjacentHTML('afterbegin', tbodyStr);
 
             let dangerStr = `
-            <div class="row">
-                <div class="col">
-                    <div>위험 : 총${danger}일</div>
-                    <div>주의 : 총${caution}일</div>
-                    <div>안전 : 총${safety}일</div>
-                </div>
-            </div>
-            
-            `
+                            <div class="row">
+                                <div class="col">
+                                    <div>위험 : 총${danger}일</div>
+                                    <div>주의 : 총${caution}일</div>
+                                    <div>안전 : 총${safety}일</div>
+                                </div>
+                            </div>
+                            
+                            `
             const showDanger = document.querySelector('#show-danger');
             showDanger.replaceChildren(showDanger.textContent = '');
             showDanger.insertAdjacentHTML('afterbegin', dangerStr);
@@ -356,7 +355,7 @@ function selectDay(toDay) {
                     datasets: [
                         {
                             type: 'line',
-                            label: 'EFH Percent',
+                            label: '실효습도',
                             data: efhDatas,
                             fill: false,
                             borderColor: 'rgb(54, 162, 235)'
@@ -466,29 +465,29 @@ function selectDay(toDay) {
 }
 
 
-function dangerChange(){
+function dangerChange() {
     let tbodyStr = ''
-            const todayDangerTag = document.querySelector('#show-today-danger')
-            
-            let toDayDangerStr = ''
-            if(data.toDayEfh.efhDeg=='안전'){
-                toDayDangerStr=`
-                ${data.toDayEfh.efhDeg}
-                <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
-                `
-            }else if(data.toDayEfh.efhDeg=='주의'){
-                toDayDangerStr=`
-                ${data.toDayEfh.efhDeg}
-                <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
-                `
-                
-            }else{
-                toDayDangerStr=`
-                ${data.toDayEfh.efhDeg}
-                <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
-                `
-            }
-            
-            todayDangerTag.replaceChildren(todayDangerTag.textContent='')
-            todayDangerTag.insertAdjacentHTML('afterbegin',toDayDangerStr)
+    const todayDangerTag = document.querySelector('#show-today-danger')
+
+    let toDayDangerStr = ''
+    if (data.toDayEfh.efhDeg == '안전') {
+        toDayDangerStr = `
+                        ${data.toDayEfh.efhDeg}
+                        <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
+                        `
+    } else if (data.toDayEfh.efhDeg == '주의') {
+        toDayDangerStr = `
+                        ${data.toDayEfh.efhDeg}
+                        <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
+                        `
+
+    } else {
+        toDayDangerStr = `
+                        ${data.toDayEfh.efhDeg}
+                        <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
+                        `
+    }
+
+    todayDangerTag.replaceChildren(todayDangerTag.textContent = '')
+    todayDangerTag.insertAdjacentHTML('afterbegin', toDayDangerStr)
 }
