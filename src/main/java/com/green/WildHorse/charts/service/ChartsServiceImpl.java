@@ -1,12 +1,8 @@
 package com.green.WildHorse.charts.service;
 
 
-import com.green.WildHorse.charts.vo.DiVO;
+import com.green.WildHorse.charts.vo.*;
 
-import com.green.WildHorse.charts.vo.EfhVO;
-
-import com.green.WildHorse.charts.vo.TempRegAvgVO;
-import com.green.WildHorse.charts.vo.TempVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +47,18 @@ public class ChartsServiceImpl implements ChartsService {
     @Override
     public List<DiVO> selectTab(String toDay) {
         return sqlSession.selectList("chartsMapper.selectTab",toDay);
+    }
+
+    //비디에 저장된 년월 조회 (셀렉트 박스 사용 용도)
+    @Override
+    public List<TempRegDiAvgVO> getTempRegDiAvg(String month) {
+        return sqlSession.selectList("chartsMapper.getTempRegDiAvg",month);
+    }
+
+    //비디에 저장된 년월 조회 (셀렉트 박스 사용 용도)
+    @Override
+    public List<String> getMonthList() {
+        return sqlSession.selectList("chartsMapper.getMonthList");
     }
 
     @Override

@@ -1,10 +1,7 @@
 package com.green.WildHorse.charts.controller;
 
 import com.green.WildHorse.charts.service.ChartsService;
-import com.green.WildHorse.charts.vo.DiVO;
-import com.green.WildHorse.charts.vo.EfhVO;
-import com.green.WildHorse.charts.vo.TempRegAvgVO;
-import com.green.WildHorse.charts.vo.TempVO;
+import com.green.WildHorse.charts.vo.*;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -111,17 +108,41 @@ public class ChartsController {
     }
 
     @GetMapping("/test")
-    public String test(){
+    public String test(Model model){
+        //샐랙트 박스에 뿌려줄 월 데이;터 조회
+        model.addAttribute("monthList", chartsService.getMonthList());
         return "content/hyeTest";
     }
 
     @ResponseBody
     @PostMapping("/test")
-    public List<DiVO> hyeTest(){
-       List<DiVO> diList = chartsService.selectDi("2021-12-20");
-       return diList;
+    public Map<String, Object> hyeTest(@RequestParam(name = "detailMonth", required = false, defaultValue = "202109") String detailMonth
+            , @RequestParam(name = "compareMonth1", required = false, defaultValue = "202109") String compareMonth1
+            , @RequestParam(name = "compareMonth2", required = false, defaultValue = "202109") String compareMonth2){
+        //월별 일일 평균 온도,습도,di 조회
+        //최초 조회 시 2021-09월 데이터 조회
+        List<TempRegDiAvgVO> tempRegDiAvgList1 = chartsService.getTempRegDiAvg(detailMonth);
 
+        List<TempRegDiAvgVO> tempRegDiAvgList2 = chartsService.getTempRegDiAvg(compareMonth1);
+        List<TempRegDiAvgVO> tempRegDiAvgList3 = chartsService.getTempRegDiAvg(compareMonth2);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("detailList", tempRegDiAvgList1);
+        result.put("compareList1", tempRegDiAvgList2);
+        result.put("compareList2", tempRegDiAvgList3);
+
+        return result;
     }
+
+    //샐랙트 박스에서 날짜 변경 시 실행
+    @ResponseBody
+    @PostMapping("/reTest")
+    public List<TempRegDiAvgVO> hyeTest(@RequestParam(name = "month") String month){
+
+        List<TempRegDiAvgVO> chartData = chartsService.getTempRegDiAvg(month.replace("-", ""));
+        return chartData;
+    }
+
     @GetMapping("/copyAdmin")
     public String copyTest(){
         return "admin/copy_admin";

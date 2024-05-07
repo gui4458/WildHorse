@@ -34,6 +34,14 @@
         <result column="REH_AVG" property="rehAvg"/>
     </resultMap>
 
+    <resultMap id="tempRegDiAvg" type="com.green.WildHorse.charts.vo.TempRegDiAvgVO">
+        <id column="NO" property="no"/>
+        <result column="MONTH" property="month"/>
+        <result column="TEMPER_AVG" property="temperAvg"/>
+        <result column="REH_AVG" property="rehAvg"/>
+        <result column="DI_AVG" property="diAvg"/>
+    </resultMap>
+
     <select id="selectDailyTemp" resultMap="dailyTemp">
         SELECT DATE_FORMAT(MESUR_DY ,'%Y-%m-%d')MESUR_DY
             ,MAX_TEMP
@@ -127,6 +135,24 @@
         HAVING DATE_FORMAT(MESURDY,'%Y-%m-%d')=#{toDay}
         ORDER BY mesurtime;
 
+    </select>
+
+    <!-- 비디에 저장된 년월 조회 (셀렉트 박스 사용 용도) -->
+    <select id="getMonthList" resultType="String">
+        SELECT CONCAT(SUBSTRING(mesurdy, 1, 4), '-', SUBSTRING(mesurdy, 5, 2)) AS MONTH
+        FROM discomfort_index
+        GROUP BY MONTH
+    </select>
+
+    <!-- 불쾌지수 페이지에서 한 달동안의 일일 평균 온도, 습도, di 조회를 위한 쿼리 -->
+    <select id="getTempRegDiAvg" resultMap="tempRegDiAvg">
+        SELECT MESURDY AS MONTH
+        , ROUND(AVG(TEMPER), 2) AS TEMPER_AVG
+        , ROUND(AVG(REH), 2) AS REH_AVG
+        , ROUND(AVG(DI), 2) AS DI_AVG
+        FROM discomfort_index
+        WHERE SUBSTRING(mesurdy, 1, 6) = #{month}
+        GROUP BY mesurdy
     </select>
 </mapper>
 
