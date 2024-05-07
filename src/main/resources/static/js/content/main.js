@@ -296,7 +296,7 @@ fetch('/charts/main', { //요청경로
                     label: "습도",
                     borderColor: "#c45850",
                     fill: false
-                },{
+                }, {
                     data: [data.avg.rehAvg],
                     label: "평균습도",
                     borderColor: "#c45850",
@@ -313,16 +313,33 @@ fetch('/charts/main', { //요청경로
                     title: {
                         display: true,
                         text: '습도 차트',
-                        size: 38
+                        size: 45
                     }
                 },
                 scales: {
 
                     y: {
 
-                        min: rehLow - 5,
-                        max: rehBest + 5
+                        min: Math.ceil(rehLow - 5),
+                        max: Math.floor(rehBest + 5)
 
+                        ,title: {
+                            display: true,
+                            text: "습도(%)",
+                            font: {
+                                size: 15,
+                            }
+                        }
+
+                    },
+                    x:{
+                        title:{
+                            display: true,
+                            text: "시간",
+                            font: {
+                                size: 15,
+                            }
+                        }
                     }
                 }
             }
@@ -347,15 +364,39 @@ fetch('/charts/main', { //요청경로
                     display: true,
                     text: 'World population per region (in millions)'
                 },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '온도 차트',
+                        size: 38
+                    }
+                },
                 scales: {
                     y: {
 
-                        min: temperLow - 5,
-                        max: temperBest + 5
+                        min: Math.floor(temperLow - 5), //4.5
+                        max: Math.ceil(temperBest + 5)
                         //fontSize : 14
 
+                        , title: {
+                            display: true,
+                            text: "온도(C °)",
+                            font: {
+                                size: 15,
+                            }
+                        }
+                    },
+                    x:{
+                        title:{
+                            display: true,
+                            text: "시간",
+                            font: {
+                                size: 15,
+                            }
+                        }
                     }
                 }
+
             }
         });
 
@@ -378,13 +419,36 @@ fetch('/charts/main', { //요청경로
                     display: true,
                     text: 'World population per region (in millions)'
                 },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '불쾌지수 차트',
+                        size: 38
+                    }
+                },
                 scales: {
                     y: {
 
-                        min: diLow - 5,
-                        max: diBest + 5
+                        min: Math.ceil(diLow - 5),
+                        max: Math.floor(diBest + 5)
                         // fontSize : 14
+                        , title: {
+                            display: true,
+                            text: "불쾌지수(C °)",
+                            font: {
+                                size: 15,
+                            }
+                        }
 
+                    }
+                    , x:{
+                        title:{
+                            display: true,
+                            text: "시간",
+                            font: {
+                                size: 15,
+                            }
+                        }
                     }
                 }
             }

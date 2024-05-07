@@ -10,7 +10,7 @@
 
 
 <th:block layout:fragment="contentFragment">
-  <div class="row">
+  <div class="row whole-div">
     <div class="col">
       <main class="px-md-4">
         <div
@@ -197,30 +197,30 @@
 
         </div>
         <div>
-          <div class="chart-big-tag g-3 mb-3 row">
-            <div class="col-xxl-6 col-md-6" id="temp-line-container">
-              평균 온습도 차트 구역
+          <div class="chart-big-tag g-3 mb-3 row mt-3">
+            <div class="col-xxl-5 col-md-6 border border-2 rounded avg-div" id="temp-line-container">
+              <!-- 평균 온습도 차트 구역 -->
               <canvas id="temp-line-chart" width="250px" height="150px"></canvas>
 
             </div>
-            <div class="col-xxl-6 col-md-6" id="reh-line-container">
-              평균 온습도 차트 구역
+            <div class="col-xxl-5 col-md-6 border border-2 rounded" id="reh-line-container">
+              <!-- 평균 온습도 차트 구역 -->
               <canvas id="reh-line-chart" width="250px" height="150px"></canvas>
 
             </div>
 
           </div>
 
-          <div class="g-3 mb-3 row">
-            <div class="col-xxl-6 col-md-6" id="di-line-container">
-              불쾌지수 차트
+          <div class="g-3 mb-3 row mt-3">
+            <div class="col-xxl-5 col-md-6 border border-2 rounded di-div" id="di-line-container">
+              <!-- 불쾌지수 차트 -->
               <canvas id="di-line-chart" width="250px" height="150px"></canvas>
 
             </div>
 
 
 
-            <div class="col-xxl-6 col-md-6">
+            <div class="col-xxl-5 col-md-6 border border-2 rounded">
               <!-- 표 데이터 구역 -->
               <h3>Section title</h3>
               <div class="tab-table-all">
