@@ -538,7 +538,7 @@ function infoChange() {
 
             //테이블 다시 그려주기
 
-            let
+      
 
 
 
