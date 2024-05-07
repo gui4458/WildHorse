@@ -52,22 +52,21 @@ public class ChartsController {
 
     @ResponseBody
     @PostMapping("/main")
-    public Map<String,Object> getTemp(HttpSession session,@RequestBody Map<String,String> toDay) {
+    public Map<String,Object> getTemp(HttpSession session,@RequestBody Map<String,Object> data) {
         System.out.println("post 시작~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println(toDay.get("toDay"));
-        Map<String,Object> data =new HashMap<String,Object>();
+        System.out.println(data.get("toDay"));
         List<TempRegAvgVO> regList = chartsService.selectReg();
         data.put("regList",regList);
-        TempRegAvgVO avg = chartsService.mainReh(toDay.get("toDay"));
+        TempRegAvgVO avg = chartsService.mainReh((String) data.get("toDay"));
         data.put("avg",avg);
-        List<DiVO> timeList=chartsService.selectTime(toDay.get("toDay"));
+        List<DiVO> timeList=chartsService.selectTime((String) data.get("toDay"));
         data.put("timeList",timeList);
         System.out.println(data.get("timeList"));
-        List<DiVO> diPerDay= chartsService.selectPerDay(toDay.get("toDay"));
+        List<DiVO> diPerDay= chartsService.selectPerDay((String) data.get("toDay"));
         data.put("diPerDay",diPerDay);
-        TempVO temps = chartsService.selectDailyTemp(toDay.get("toDay"));
+        TempVO temps = chartsService.selectDailyTemp((String) data.get("toDay"));
         data.put("temps",temps);
-        EfhVO efh = chartsService.mainEfh(toDay.get("toDay"));
+        EfhVO efh = chartsService.mainEfh((String) data.get("toDay"));
         data.put("efh",efh);
 
         session.setAttribute("data",data);
@@ -87,11 +86,10 @@ public class ChartsController {
 
     @ResponseBody
     @PostMapping("/efh")
-    public Map<String,Object> efhList(@RequestBody Map<String,Object> selectDay){
-        System.out.println("post실행~");
-        List<EfhVO> efhList = chartsService.detailEfhList((String)selectDay.get("selectDay"));
-        EfhVO toDayEfh = chartsService.mainEfh((String)selectDay.get("selectDay"));
-        Map<String,Object> efhData = new HashMap<String, Object>();
+    public Map<String,Object> efhList(@RequestBody Map<String,Object> efhData){
+        List<EfhVO> efhList = chartsService.detailEfhList((String)efhData.get("selectDay"));
+        EfhVO toDayEfh = chartsService.mainEfh((String)efhData.get("selectDay"));
+//        Map<String,Object> efhData = new HashMap<String, Object>();
         efhData.put("efhList",efhList);
         efhData.put("toDayEfh",toDayEfh);
         return efhData;
@@ -100,8 +98,10 @@ public class ChartsController {
     @ResponseBody
     @PostMapping("/selectChangeData")
     public Map<String,Object> selectChangeData(@RequestBody Map<String,Object> efhData){
-        List<EfhVO> efhList = chartsService.detailEfhList((String) efhData.get("selectDay"));
-        EfhVO toDayEfh = chartsService.mainEfh((String) efhData.get("selectDay"));
+        System.out.println("post실행~");
+        System.out.println(efhData);
+        List<EfhVO> efhList = chartsService.detailEfhList((String)efhData.get("selectDay"));
+        EfhVO toDayEfh = chartsService.mainEfh((String)efhData.get("selectDay"));
         efhData.put("efhList",efhList);
         efhData.put("toDayEfh",toDayEfh);
         System.out.println(efhData);

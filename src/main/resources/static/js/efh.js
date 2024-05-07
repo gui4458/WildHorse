@@ -168,7 +168,72 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(err);
         });
 });
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+
 function selectDayEfh(efhDate) {
+    console.log(efhDate)
+    fetch('/charts/selectChangeData', { //요청경로
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        //컨트롤러로 전달할 데이터
+        body: JSON.stringify({
+            // 데이터명 : 데이터값
+            selectDay: efhDate
+        })
+    })
+        .then((response) => {
+            return response.json(); //나머지 경우에 사용
+        })
+        //fetch 통신 후 실행 영역
+        .then((data) => {//data -> controller에서 리턴되는 데이터!
+            const todayDangerTag = document.querySelector('#show-today-danger')
+            let toDayDangerStr = ''
+            if(data.toDayEfh.efhDeg=='안전'){
+                toDayDangerStr=`
+                ${data.toDayEfh.efhDeg}
+                <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
+                `
+            }else if(data.toDayEfh.efhDeg=='주의'){
+                toDayDangerStr=`
+                ${data.toDayEfh.efhDeg}
+                <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
+                `
+                
+            }else{
+                toDayDangerStr=`
+                ${data.toDayEfh.efhDeg}
+                <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
+                `
+            }
+            
+            todayDangerTag.replaceChildren(todayDangerTag.textContent='')
+            todayDangerTag.insertAdjacentHTML('afterbegin',toDayDangerStr)
+            
+        
+
+
+        })
+        //fetch 통신 실패 시 실행 영역
+        .catch(err => {
+            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+            console.log(err);
+        });
+
+}
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+function selectDay(toDay) {
+    toDay = toDay.value;
+
     efhLabels = [];
     efhDates = [];
     efhDatas = [];
@@ -199,6 +264,7 @@ function selectDayEfh(efhDate) {
     dangerCanvas.setAttribute('style', 'width:50%;');
     document.getElementById('danger-pie-container').appendChild(dangerCanvas); // 새로운 캔버스 추가
 
+
     fetch('/charts/selectChangeData', { //요청경로
         method: 'POST',
         cache: 'no-cache',
@@ -208,7 +274,7 @@ function selectDayEfh(efhDate) {
         //컨트롤러로 전달할 데이터
         body: JSON.stringify({
             // 데이터명 : 데이터값
-            selectDay: efhDate
+            selectDay: toDay
         })
     })
         .then((response) => {
@@ -216,8 +282,32 @@ function selectDayEfh(efhDate) {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
+            let tbodyStr = ''
 
-            console.log(data)
+            const todayDangerTag = document.querySelector('#show-today-danger')
+            let toDayDangerStr = ''
+            if(data.toDayEfh.efhDeg=='안전'){
+                toDayDangerStr=`
+                ${data.toDayEfh.efhDeg}
+                <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
+                `
+            }else if(data.toDayEfh.efhDeg=='주의'){
+                toDayDangerStr=`
+                ${data.toDayEfh.efhDeg}
+                <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
+                `
+                
+            }else{
+                toDayDangerStr=`
+                ${data.toDayEfh.efhDeg}
+                <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
+                `
+            }
+            
+            todayDangerTag.replaceChildren(todayDangerTag.textContent='')
+            todayDangerTag.insertAdjacentHTML('afterbegin',toDayDangerStr)
+            
+            
             data.efhList.forEach(e => {
                 efhDates.push(e.efhDate)
                 efhDatas.push(e.efhData)
@@ -229,13 +319,25 @@ function selectDayEfh(efhDate) {
                 } else {
                     safety += 1;
                 }
+
+                tbodyStr += `
+                            <tr>
+                                <td onclick="selectDayEfh('${e.efhDate}')">
+                                    ${e.efhDate}
+                                </td>
+                                <td>
+                                    ${e.efhData}
+                                </td>
+                                <td>
+                                    ${e.efhDeg}
+                                </td>
+                            </tr>
+                `
             });
-            console.log(`efhDates=${efhDate}`)
-            console.log(`efhDatas=${efhDatas}`)
-            console.log(`efhDegs=${efhDegs}`)
-            console.log(`danger=${danger}`)
-            console.log(`caution=${caution}`)
-            console.log(`safety=${safety}`)
+            const efhTbody = document.querySelector('#efh-tbody');
+            efhTbody.replaceChildren(efhTbody.textContent = '');
+            efhTbody.insertAdjacentHTML('afterbegin', tbodyStr);
+
             let dangerStr = `
             <div class="row">
                 <div class="col">
@@ -248,8 +350,8 @@ function selectDayEfh(efhDate) {
             `
             const showDanger = document.querySelector('#show-danger');
             showDanger.replaceChildren(showDanger.textContent = '');
-            showDanger.insertAdjacentHTML('afterbegin', dangerStr)
-            new Chart(document.getElementById("efhChart"), {
+            showDanger.insertAdjacentHTML('afterbegin', dangerStr);
+            new Chart(document.getElementById("efh-line-chart"), {
                 data: {
                     datasets: [
                         {
@@ -355,42 +457,38 @@ function selectDayEfh(efhDate) {
                     }
                 }
             });
-
-
-
         })
         //fetch 통신 실패 시 실행 영역
         .catch(err => {
             alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
             console.log(err);
         });
-
 }
 
-function selectDay(toDay) {
-    fetch('/charts/selectChangeData', { //요청경로
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-            'Content-Type': 'application/json; charset=UTF-8'
-        },
-        //컨트롤러로 전달할 데이터
-        body: JSON.stringify({
-            // 데이터명 : 데이터값
-            'selectDay' : toDay
-        })
-    })
-        .then((response) => {
-            return response.json(); //나머지 경우에 사용
-        })
-        //fetch 통신 후 실행 영역
-        .then((data) => {//data -> controller에서 리턴되는 데이터!
-            console.log(data.toDayEfh)
-            alert(2)
-        })
-        //fetch 통신 실패 시 실행 영역
-        .catch(err => {
-            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
-            console.log(err);
-        });
+
+function dangerChange(){
+    let tbodyStr = ''
+            const todayDangerTag = document.querySelector('#show-today-danger')
+            
+            let toDayDangerStr = ''
+            if(data.toDayEfh.efhDeg=='안전'){
+                toDayDangerStr=`
+                ${data.toDayEfh.efhDeg}
+                <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
+                `
+            }else if(data.toDayEfh.efhDeg=='주의'){
+                toDayDangerStr=`
+                ${data.toDayEfh.efhDeg}
+                <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
+                `
+                
+            }else{
+                toDayDangerStr=`
+                ${data.toDayEfh.efhDeg}
+                <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
+                `
+            }
+            
+            todayDangerTag.replaceChildren(todayDangerTag.textContent='')
+            todayDangerTag.insertAdjacentHTML('afterbegin',toDayDangerStr)
 }
