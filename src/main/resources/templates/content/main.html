@@ -10,8 +10,8 @@
 
 
 <th:block layout:fragment="contentFragment">
-  
-  <div class="row">
+
+  <div class="row whole-div">
     <div class="col">
       <main class="px-md-4">
         <div
@@ -198,38 +198,40 @@
 
         </div>
         <div>
-          <div class="chart-big-tag g-3 mb-3 row">
-            <div class="col-xxl-6 col-md-6" id="temp-line-container">
-              평균 온습도 차트 구역
+          <div class="chart-big-tag g-3 mb-3 row mt-3">
+            <div class="col-xxl-5 col-md-6 border border-2 rounded avg-div" id="temp-line-container">
+              <!-- 평균 온습도 차트 구역 -->
               <canvas id="temp-line-chart" width="250px" height="150px"></canvas>
 
             </div>
-            <div class="col-xxl-6 col-md-6" id="reh-line-container">
-              평균 온습도 차트 구역
+            <div class="col-xxl-5 col-md-6 border border-2 rounded" id="reh-line-container">
+              <!-- 평균 온습도 차트 구역 -->
               <canvas id="reh-line-chart" width="250px" height="150px"></canvas>
 
             </div>
 
           </div>
 
-          <div class="g-3 mb-3 row">
-            <div class="col-xxl-6 col-md-6" id="di-line-container">
-              불쾌지수 차트
+          <div class="g-3 mb-3 row mt-3">
+            <div class="col-xxl-5 col-md-6 border border-2 rounded di-div" id="di-line-container">
+              <!-- 불쾌지수 차트 -->
               <canvas id="di-line-chart" width="250px" height="150px"></canvas>
 
             </div>
 
 
 
-            <div class="col-xxl-6 col-md-6">
+            <div class="col-xxl-5 col-md-6 border border-2 rounded">
               <!-- 표 데이터 구역 -->
               <h3>Section title</h3>
               <div class="tab-table-all">
                 <nav>
                   <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <span th:each="tab ,state: ${selectTab}">
-                      <button class="nav-link" th:classappend="${state.index == 0 ? 'active' : ''}" id="nav-home-tab" data-bs-toggle="tab" th:data-bs-target="${'#nav-' + state.index}" type="button" role="tab" aria-controls="nav-home" aria-selected="true" >[[${tab.type}]]</button>
-  
+                      <button class="nav-link" th:classappend="${state.index == 0 ? 'active' : ''}" id="nav-home-tab"
+                        data-bs-toggle="tab" th:data-bs-target="${'#nav-' + state.index}" type="button" role="tab"
+                        aria-controls="nav-home" aria-selected="true">[[${tab.type}]]</button>
+
                     </span>
                     <!-- <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
                     <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
@@ -237,7 +239,8 @@
                   </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
-                  <div class="tab-pane fade show active" id="nav-0" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                  <div class="tab-pane fade show active" id="nav-0" role="tabpanel" aria-labelledby="nav-home-tab"
+                    tabindex="0">
                     <table class="table table-striped table-sm text-center">
                       <thead>
                         <colgroup>
@@ -245,16 +248,16 @@
                           <col width="25%">
                           <col width="25%">
                           <col width="25%">
-      
+
                         </colgroup>
-      
+
                         <tr>
                           <td>시간</td>
                           <td>온도</td>
                           <td>습도</td>
                           <td>불쾌지수</td>
                         </tr>
-      
+
                       </thead>
                       <tbody>
                         <tr th:each="time : ${timeList}" th:if="${time.type == '새벽'}">
@@ -282,7 +285,7 @@
                           <td>[[${efh.efhDeg}]]</td>
                         </tr>
                       </tbody>
-      
+
                     </table>
                   </div>
                   <div class="tab-pane fade" id="nav-1" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
@@ -293,16 +296,16 @@
                           <col width="25%">
                           <col width="25%">
                           <col width="25%">
-      
+
                         </colgroup>
-      
+
                         <tr>
                           <td>시간</td>
                           <td>온도</td>
                           <td>습도</td>
                           <td>불쾌지수</td>
                         </tr>
-      
+
                       </thead>
                       <tbody>
                         <tr th:each="time : ${timeList}" th:if="${time.type == '오전'}">
@@ -330,7 +333,7 @@
                           <td>[[${efh.efhDeg}]]</td>
                         </tr>
                       </tbody>
-      
+
                     </table>
                   </div>
                   <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
@@ -341,51 +344,51 @@
                           <col width="25%">
                           <col width="25%">
                           <col width="25%">
-      
+
                         </colgroup>
-      
+
                         <tr>
                           <td>시간</td>
                           <td>온도</td>
                           <td>습도</td>
                           <td>불쾌지수</td>
                         </tr>
-      
+
                       </thead>
                       <tbody>
-                        
-                          
+
+
                         <tr th:each="time : ${timeList}" th:if="${time.type == '오후'}">
-                              <td>[[${time.mesurTime}]]시</td>
-                              <td>[[${time.temper}]]</td>
-                              <td>[[${time.reh}]]</td>
-                              <td>[[${time.di}]]</td>
-                            </tr>
-                            <tr>
-                              <td>최고온도</td>
-                              <td>[[${temps.maxTemp}]]</td>
-                              <td>최저온도</td>
-                              <td>[[${temps.minTemp}]]</td>
-                            </tr>
-                            <tr>
-                              <td>평균 온도</td>
-                              <td>[[${avg.tempAvg}]]</td>
-                              <td>평균 습도</td>
-                              <td>[[${avg.rehAvg}]]</td>
-                            </tr>
-                            <tr>
-                              <td>화재위험성 수치</td>
-                              <td>[[${efh.efhData}]]</td>
-                              <td>화재위험성</td>
-                              <td>[[${efh.efhDeg}]]</td>
-                            </tr>
-                  
-                        
+                          <td>[[${time.mesurTime}]]시</td>
+                          <td>[[${time.temper}]]</td>
+                          <td>[[${time.reh}]]</td>
+                          <td>[[${time.di}]]</td>
+                        </tr>
+                        <tr>
+                          <td>최고온도</td>
+                          <td>[[${temps.maxTemp}]]</td>
+                          <td>최저온도</td>
+                          <td>[[${temps.minTemp}]]</td>
+                        </tr>
+                        <tr>
+                          <td>평균 온도</td>
+                          <td>[[${avg.tempAvg}]]</td>
+                          <td>평균 습도</td>
+                          <td>[[${avg.rehAvg}]]</td>
+                        </tr>
+                        <tr>
+                          <td>화재위험성 수치</td>
+                          <td>[[${efh.efhData}]]</td>
+                          <td>화재위험성</td>
+                          <td>[[${efh.efhDeg}]]</td>
+                        </tr>
+
+
                       </tbody>
-      
+
                     </table>
                   </div>
-                
+
                   <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
                     <table class="table table-striped table-sm text-center">
                       <thead>
@@ -394,106 +397,106 @@
                           <col width="25%">
                           <col width="25%">
                           <col width="25%">
-      
+
                         </colgroup>
-      
+
                         <tr>
                           <td>시간</td>
                           <td>온도</td>
                           <td>습도</td>
                           <td>불쾌지수</td>
                         </tr>
-      
+
                       </thead>
                       <tbody>
-                        
-                          
+
+
                         <tr th:each="time : ${timeList}" th:if="${time.type == '야간'}">
-                              <td>[[${time.mesurTime}]]시</td>
-                              <td>[[${time.temper}]]</td>
-                              <td>[[${time.reh}]]</td>
-                              <td>[[${time.di}]]</td>
-                            </tr>
-                            <tr>
-                              <td>최고온도</td>
-                              <td>[[${temps.maxTemp}]]</td>
-                              <td>최저온도</td>
-                              <td>[[${temps.minTemp}]]</td>
-                            </tr>
-                            <tr>
-                              <td>평균 온도</td>
-                              <td>[[${avg.tempAvg}]]</td>
-                              <td>평균 습도</td>
-                              <td>[[${avg.rehAvg}]]</td>
-                            </tr>
-                            <tr>
-                              <td>화재위험성 수치</td>
-                              <td>[[${efh.efhData}]]</td>
-                              <td>화재위험성</td>
-                              <td>[[${efh.efhDeg}]]</td>
-                            </tr>
-                  
-                        
+                          <td>[[${time.mesurTime}]]시</td>
+                          <td>[[${time.temper}]]</td>
+                          <td>[[${time.reh}]]</td>
+                          <td>[[${time.di}]]</td>
+                        </tr>
+                        <tr>
+                          <td>최고온도</td>
+                          <td>[[${temps.maxTemp}]]</td>
+                          <td>최저온도</td>
+                          <td>[[${temps.minTemp}]]</td>
+                        </tr>
+                        <tr>
+                          <td>평균 온도</td>
+                          <td>[[${avg.tempAvg}]]</td>
+                          <td>평균 습도</td>
+                          <td>[[${avg.rehAvg}]]</td>
+                        </tr>
+                        <tr>
+                          <td>화재위험성 수치</td>
+                          <td>[[${efh.efhData}]]</td>
+                          <td>화재위험성</td>
+                          <td>[[${efh.efhDeg}]]</td>
+                        </tr>
+
+
                       </tbody>
-      
+
                     </table>
                   </div>
                 </div>
 
               </div>
 
-            
 
 
-            <div class="table-responsive small">
-              
+
+              <div class="table-responsive small">
+
+              </div>
             </div>
           </div>
+
+
         </div>
-
-
     </div>
-  </div>
-  <div class="g-3 mb-3 row">
-    <div class="col-xxl-6 col-md-6">
-      차트 구역 1
-      <article id="chart-slider">
-        <div class="chart-sliderWrap">
-          <canvas class="chart-slider chart-s1" id="bar-chart" style="width: 100%; margin: 0 auto;"></canvas>
-          <canvas class="chart-slider chart-s2" id="pie-chart" style="width: 100%; margin: 0 auto;"></canvas>
-          <canvas class="chart-slider chart-s3" id="radar-chart" style="width: 100%; margin: 0 auto;"></canvas>
-        </div>
-      </article>
+    <div class="g-3 mb-3 row">
+      <div class="col-xxl-6 col-md-6">
+        차트 구역 1
+        <article id="chart-slider">
+          <div class="chart-sliderWrap">
+            <canvas class="chart-slider chart-s1" id="bar-chart" style="width: 100%; margin: 0 auto;"></canvas>
+            <canvas class="chart-slider chart-s2" id="pie-chart" style="width: 100%; margin: 0 auto;"></canvas>
+            <canvas class="chart-slider chart-s3" id="radar-chart" style="width: 100%; margin: 0 auto;"></canvas>
+          </div>
+        </article>
 
-    </div>
-    <div class="col-xxl-6 col-md-6 allWrap">
-      차트 구역 2
-      <div class="">
-        <div class="wrap">
-          <div class="s1">
-            <img src="https://webstoryboy.github.io/webstoryboy/w_webd/slider/slider01.jpg" alt="이미지 설명">
-          </div>
-          <div class="s1">
-            <img src="https://webstoryboy.github.io/webstoryboy/w_webd/slider/slider02.jpg" alt="이미지 설명">
-          </div>
-          <div class="s1">
-            <img src="https://webstoryboy.github.io/webstoryboy/w_webd/slider/slider03.jpg" alt="이미지 설명">
-          </div>
+      </div>
+      <div class="col-xxl-6 col-md-6 allWrap">
+        차트 구역 2
+        <div class="">
+          <div class="wrap">
+            <div class="s1">
+              <img src="https://webstoryboy.github.io/webstoryboy/w_webd/slider/slider01.jpg" alt="이미지 설명">
+            </div>
+            <div class="s1">
+              <img src="https://webstoryboy.github.io/webstoryboy/w_webd/slider/slider02.jpg" alt="이미지 설명">
+            </div>
+            <div class="s1">
+              <img src="https://webstoryboy.github.io/webstoryboy/w_webd/slider/slider03.jpg" alt="이미지 설명">
+            </div>
 
+          </div>
         </div>
+
+
       </div>
 
+    </div>
+    <div>
+
 
     </div>
 
-  </div>
-  <div>
 
-
-  </div>
-
-
-  </main>
+    </main>
   </div>
   </div>
 
