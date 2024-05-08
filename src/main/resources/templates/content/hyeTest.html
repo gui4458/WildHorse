@@ -2,104 +2,288 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{fragment/layout}">
 
-    <th:block layout:fragment="content_css">
-        <link rel="stylesheet" href="/css/content/hyeTest.css">
-    </th:block>
+<th:block layout:fragment="content_css">
+    <link rel="stylesheet" href="/css/content/hyeTest.css">
+</th:block>
 
-    <th:block layout:fragment="contentFragment">
-        <div class="row pt-3 first-row">
-            <div class="col">
-                <div class="row">
-                    <div class="col-2">
-                        <select class="form-select" onchange="reDrawChart('detail-chart', this)">
-                            <option th:each="month : ${monthList}">[[${month}]]</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row mt-3 mb-3">
-                    <div class="col-8">
-                        <canvas id="detail-chart" width="100%"></canvas>
-                    </div>
-                    <div class="col-4">
-                        <div class="month-detail">
-                            월 상세 내역
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="row mt-4">
+<th:block layout:fragment="contentFragment">
+    <div class="row pt-3 first-row">
+        <div class="col">
+            <div class="row">
                 <div class="col-2">
-                    <select class="form-select"  onchange="reDrawChart('compare-chart1', this)">
-                        <option th:each="month : ${monthList}">[[${month}]]</option>
-                    </select>
-                </div>
-                <div class="offset-4 col-2">
-                    <select class="form-select"  onchange="reDrawChart('compare-chart2', this)">
+                    <select class="form-select" onchange="reDrawChart('detail-chart', this)">
                         <option th:each="month : ${monthList}">[[${month}]]</option>
                     </select>
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <canvas id="compare-chart1" width="95%"></canvas>
+            <!-- 월별 차트 -->
+            <div class="row mt-3 mb-3">
+                <div class="col-8">
+                    <canvas id="detail-chart" width="100%"></canvas>
                 </div>
-                <div class="col">
-                    <canvas id="compare-chart2" width="95%"></canvas>
+                <div class="col-4">
+                    <div class="row">
+                        <!-- 월별 온도 -->
+                        <div class="col-6">
+                            <div class="layer temper-layer">
+                                <span class="font-div-20">월별 온도</span>
+                                <span class="font-div-30 color-red-div">
+                                    <i class="bi bi-thermometer-high"></i>
+                                </span>
+                                <div class="col font-div-17">
+                                    <div class="row mt-4">
+                                        <div class="col-6 color-red-div">
+                                            최고온도
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="updateMaxT-div">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-6 color-blue-div">
+                                            최저온도
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="updateMinT-div">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-6">평균온도</div>
+                                        <div class="col-6">
+                                            <div class="updateAvgT-div">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 월별 습도 -->
+                        <div class="col-6">
+                            <div class="layer reh-layer">
+                                <span class="font-div-20">월별 습도</span>
+                                <span class="font-div-30 color-blue-div">
+                                    <i class="bi bi-droplet-half"></i>
+                                </span>
+                                <div class="row mt-4">
+                                    <div class="col font-div-17">
+                                        <div class="row mt-1">
+                                            <div class="col-6 color-red-div">
+                                                최고습도
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="updateMaxR-div">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-1">
+                                            <div class="col-6 color-blue-div">
+                                                최저습도
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="updateMinR-div">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-1">
+                                            <div class="col-6">
+                                                평균습도
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="updateAvgR-div">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 월별 불쾌지수 -->
+                    <div class="row mt-3">
+                        <div class="col text-center">
+                            <div class="layer di-layer">
+                                <span class="font-div-20">월별 불쾌지수</span>
+                                <span class="font-div-30">
+                                    <i class="bi bi-emoji-smile"></i>
+                                </span>
+                                <div class="row mt-4">
+                                    <div class="col font-div-17">
+                                        <div class="row">
+                                            <div class="col-6 text-end color-red-div">
+                                                <i class="bi bi-emoji-angry-fill"></i>
+                                                불쾌지수 높음
+                                            </div>
+                                            <div class="col-6 text-start">
+                                                <div class="updateMaxD-div">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-1">
+                                            <div class="col-6 text-end color-blue-div">
+                                                <i class="bi bi-emoji-laughing-fill"></i>
+                                                불쾌지수 낮음
+                                            </div>
+                                            <div class="col-6 text-start">
+                                                <div class="updateMinD-div">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row third-row">
-            <div class="col compare-detail">
-                <div class="row mb-2">
-                    <div class="col-5 text-end">
-                        <div class="row justify-content-end">
-                            <div class="left-bar-max-temper">1</div>
-                        </div>
-                    </div>
-                    <div class="col-2 text-center">최고온도</div>
-                    <div class="col-5 text-start">
-                        <div class="row justify-content-start">
-                            <div class="right-bar-max-temper">1</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-5 text-end">
-                        <div class="row justify-content-end">
-                            <div class="left-bar-min-temper">1</div>
-                        </div>
-                    </div>
-                    <div class="col-2 text-center">최저온도</div>
-                    <div class="col-5 text-start">
-                        <div class="row justify-content-start">
-                            <div class="right-bar-min-temper">1</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-5 text-end">
-                        <div class="row justify-content-end">
-                            <div class="left-bar-avg-temper">1</div>
-                        </div>
-                    </div>
-                    <div class="col-2 text-center">평균온도</div>
-                    <div class="col-5 text-start">
-                        <div class="row justify-content-start">
-                            <div class="right-bar-avg-temper">1</div>
-                        </div>
-                    </div>
-                </div>
+    </div>
+
+    <!-- 월별 셀렉트+ 차트-->
+    <div class="row">
+        <div class="row mt-4">
+            <div class="col-2">
+                <select class="form-select" onchange="reDrawChart('compare-chart1', this)">
+                    <option th:each="month : ${monthList}">[[${month}]]</option>
+                </select>
+            </div>
+            <div class="offset-4 col-2">
+                <select class="form-select" onchange="reDrawChart('compare-chart2', this)">
+                    <option th:each="month : ${monthList}">[[${month}]]</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <canvas id="compare-chart1" width="95%"></canvas>
             </div>
             <div class="col">
-
+                <canvas id="compare-chart2" width="95%"></canvas>
             </div>
         </div>
-    </th:block>
+    </div>
+    <!-- 월별 비교 온습도 불쾌지수-->
+    <div class="row third-row ">
+        <!-- 월별 비교 차트 온도 -->
+        <div class="col-4 compare-detail">
+            <div class="row mb-2">
+                <div class="col-5 text-end">
+                    <div class="row justify-content-end">
+                        <div class="left-bar-max-temper">1</div>
+                    </div>
+                </div>
+                <div class="col-2 text-center">최고온도</div>
+                <div class="col-5 text-start">
+                    <div class="row justify-content-start">
+                        <div class="right-bar-max-temper">1</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-5 text-end">
+                    <div class="row justify-content-end">
+                        <div class="left-bar-min-temper">1</div>
+                    </div>
+                </div>
+                <div class="col-2 text-center">최저온도</div>
+                <div class="col-5 text-start">
+                    <div class="row justify-content-start">
+                        <div class="right-bar-min-temper">1</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 text-end">
+                    <div class="row justify-content-end">
+                        <div class="left-bar-avg-temper">1</div>
+                    </div>
+                </div>
+                <div class="col-2 text-center">평균온도</div>
+                <div class="col-5 text-start">
+                    <div class="row justify-content-start">
+                        <div class="right-bar-avg-temper">1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 월별 비교 습도 -->
+        <div class="col-4 compare-detail">
+            <div class="row mb-2">
+                <div class="col-5 text-end">
+                    <div class="row justify-content-end">
+                        <div class="left-bar-max-reh">1</div>
+                    </div>
+                </div>
+                <div class="col-2 text-center">최고습도</div>
+                <div class="col-5 text-start">
+                    <div class="row justify-content-start">
+                        <div class="right-bar-max-reh">1</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-5 text-end">
+                    <div class="row justify-content-end">
+                        <div class="left-bar-min-reh">1</div>
+                    </div>
+                </div>
+                <div class="col-2 text-center">최저습도</div>
+                <div class="col-5 text-start">
+                    <div class="row justify-content-start">
+                        <div class="right-bar-min-reh">1</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 text-end">
+                    <div class="row justify-content-end">
+                        <div class="left-bar-avg-reh">1</div>
+                    </div>
+                </div>
+                <div class="col-2 text-center">평균습도</div>
+                <div class="col-5 text-start">
+                    <div class="row justify-content-start">
+                        <div class="right-bar-avg-reh">1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 월별 비교 불쾌지수 -->
+        <div class="col-4 compare-detail">
+            <div class="row mb-2">
+                <div class="col-4 text-end">
+                    <div class="row justify-content-end">
+                        <div class="left-bar-max-di">1</div>
+                    </div>
+                </div>
+                <div class="col-4 text-center">불쾌지수높음</div>
+                <div class="col-4 text-start">
+                    <div class="row justify-content-start">
+                        <div class="right-bar-max-di">1</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4 text-end">
+                    <div class="row justify-content-end">
+                        <div class="left-bar-min-di">1</div>
+                    </div>
+                </div>
+                <div class="col-4 text-center">불쾌지수낮음</div>
+                <div class="col-4 text-start">
+                    <div class="row justify-content-start">
+                        <div class="right-bar-min-di">1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <th:block layout:fragment="content_js">
-        <script src="/js/hyeTest.js"></script>
-    </th:block>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <script src="/js/hyeTest.js"></script>
+</th:block>
 
 </html>
