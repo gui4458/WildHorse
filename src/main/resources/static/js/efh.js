@@ -52,17 +52,15 @@ document.addEventListener('DOMContentLoaded', function () {
             showDanger.replaceChildren(showDanger.textContent = '');
             showDanger.insertAdjacentHTML('afterbegin', dangerStr)
             new Chart(document.getElementById("efh-line-chart"), {
+                type: 'line',
                 data: {
-                    datasets: [
-                        {
-                            type: 'line',
-                            label: 'EFH Percent',
-                            data: efhDatas,
-                            fill: false,
-                            borderColor: 'rgb(54, 162, 235)'
-                        }
-                    ],
-                    labels: efhDates
+                    labels: efhDates,
+                    datasets: [{
+                        label: 'EFH Percent',
+                        data: efhDatas,
+                        fill: false,
+                        borderColor: 'rgb(54, 162, 235)'
+                    }]
                 },
                 options: {
                     title: {
@@ -70,14 +68,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         text: '실효습도'
                     },
                     scales: {
-                        yAxes: [
-                            {
-                                ticks: {
-                                    beginAtZero: true,
-                                    max: 100
-                                }
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                max: 100
                             }
-                        ]
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontColor: 'red' // x 축 텍스트 색상을 빨간색으로 지정
+                            }
+                        }]
                     },
                     plugins: {
                         annotation: {
@@ -102,15 +103,14 @@ document.addEventListener('DOMContentLoaded', function () {
                                     scaleID: 'y-axis-0',
                                     value: 35,
                                     yMin: 35,
-                                    yMax: 35, // Adjust the y-value as needed
+                                    yMax: 35,
                                     borderColor: 'rgba(255, 76, 71, 0.6)',
                                     borderWidth: 2,
                                     label: {
                                         enabled: true,
                                         content: 'Under 35 Caution'
                                     }
-                                }
-                                ,
+                                },
                                 {
                                     type: 'label',
                                     xValue: 5,
@@ -120,9 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     font: {
                                         size: 18
                                     }
-
-                                }
-                                ,
+                                },
                                 {
                                     type: 'label',
                                     xValue: 5,
@@ -132,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                     font: {
                                         size: 18
                                     }
-
                                 }
                             ]
                         }
