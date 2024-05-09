@@ -50,7 +50,7 @@ function drawDetailChart(){
                 datasets: [{
                     data: diAvgList,
                     label: "불쾌지수",
-                    borderColor: "#c45850",
+                    borderColor: "#8a2be2",
                     fill: false
                 }, {
                     data: rehAvgList,
@@ -60,7 +60,7 @@ function drawDetailChart(){
                 }, {
                     data: temperAvgList,
                     label: "온도",
-                    borderColor: "#3e95cd",
+                    borderColor: "#ff0000",
                     fill: false
                 }
                 ]
@@ -131,7 +131,7 @@ function drawCompareChart1(){
                 datasets: [{
                     data: diAvgList,
                     label: "불쾌지수",
-                    borderColor: "#c45850",
+                    borderColor: "#8a2be2",
                     fill: false
                 }, {
                     data: rehAvgList,
@@ -141,7 +141,7 @@ function drawCompareChart1(){
                 }, {
                     data: temperAvgList,
                     label: "온도",
-                    borderColor: "#3e95cd",
+                    borderColor: "#ff0000",
                     fill: false
                 }
                 ]
@@ -211,7 +211,7 @@ function drawCompareChart2(){
                 datasets: [{
                     data: diAvgList,
                     label: "불쾌지수",
-                    borderColor: "#c45850",
+                    borderColor: "#8a2be2",
                     fill: false
                 }, {
                     data: rehAvgList,
@@ -221,7 +221,7 @@ function drawCompareChart2(){
                 }, {
                     data: temperAvgList,
                     label: "온도",
-                    borderColor: "#3e95cd",
+                    borderColor: "#ff0000",
                     fill: false
                 }
                 ]
@@ -294,20 +294,28 @@ function reDrawChart(canvasId, selectedTag){
             // }
         });
 
+        
+
         let dataList = [];
         dataList.push(diAvgList);
         dataList.push(rehAvgList);
         dataList.push(temperAvgList);
 
+        console.log(dataList);
+
+        // 차트 데이터
         switch(canvasId){
+            //월 상세
             case 'detail-chart':
                 updateChart(detailChart, monthList, dataList);
-                
+                updateShowData(dataList)
                 break;
+            //오른쪽 차트
             case 'compare-chart1':
                 updateChart(compareChart1, monthList, dataList);
                 updateCompareDiv(dataList, 'left');
                 break;
+            // 왼쪽 차트
             case 'compare-chart2':
                 updateChart(compareChart2, monthList, dataList);
                 updateCompareDiv(dataList, 'right');
@@ -333,6 +341,50 @@ function updateChart(chart, label, newData) {
     chart.update();
 }
 
+//월별 상세 내역
+function updateShowData(dataList){
+
+    const [diAvgList, rehAvgList, temperAvgList] = dataList;
+
+    const maxTemper = Math.max(...temperAvgList);
+    const minTemper = Math.min(...temperAvgList);
+    const avgTemper = Math.round(temperAvgList.reduce((a, b) => a + b) / temperAvgList.length);
+
+    const maxReh = Math.max(...rehAvgList);
+    const minReh = Math.min(...rehAvgList);
+    const avgReh = Math.round(rehAvgList.reduce((a, b) => a + b) / rehAvgList.length);
+
+    const maxDi = Math.max(...diAvgList);
+    const minDi = Math.min(...diAvgList);
+
+    //온도
+    document.querySelector('.updateMaxT-div').textContent = maxTemper;
+    document.querySelector('.updateMaxT-div').innerHTML = `<span>${maxTemper}℃</span>`;
+
+    document.querySelector('.updateMinT-div').textContent = minTemper;
+    document.querySelector('.updateMinT-div').innerHTML = `<span>${minTemper}℃</span>`;
+
+    document.querySelector('.updateAvgT-div').textContent = avgTemper;
+    document.querySelector('.updateAvgT-div').innerHTML = `<span>${avgTemper}℃</span>`;
+    //습도
+    document.querySelector('.updateMaxR-div').textContent = maxReh;
+    document.querySelector('.updateMaxR-div').innerHTML = `<span>${maxReh}%</span>`;
+
+    document.querySelector('.updateMinR-div').textContent = minReh;
+    document.querySelector('.updateMinR-div').innerHTML = `<span>${minReh}%</span>`;
+
+    document.querySelector('.updateAvgR-div').textContent = avgReh;
+    document.querySelector('.updateAvgR-div').innerHTML = `<span>${avgReh}%</span>`;
+    //불쾌지수
+    document.querySelector('.updateMaxD-div').textContent = maxDi;
+    document.querySelector('.updateMaxD-div').innerHTML = `<span>${maxDi}</span>`;
+
+    document.querySelector('.updateMinD-div').textContent = minDi;
+    document.querySelector('.updateMinD-div').innerHTML = `<span>${minDi}</span>`;
+
+    
+}
+
 function removeData(chart){
     chart.data.labels = [];
     chart.data.datasets.forEach((dataset) => {
@@ -340,7 +392,7 @@ function removeData(chart){
     });
     chart.update();
 }
-
+//월별 비교 내역
 function updateCompareDiv(dataList, pos){
     const [diAvgList, rehAvgList, temperAvgList] = dataList;
 
@@ -348,7 +400,14 @@ function updateCompareDiv(dataList, pos){
     const maxTemper = Math.max(...temperAvgList);
     const minTemper = Math.min(...temperAvgList);
     const avgTemper = Math.round(temperAvgList.reduce((a, b) => a + b) / temperAvgList.length);
+    
+    const maxReh = Math.max(...rehAvgList);
+    const minReh = Math.min(...rehAvgList);
+    const avgReh = Math.round(rehAvgList.reduce((a, b) => a + b) / rehAvgList.length);
 
+    const maxDi = Math.max(...diAvgList);
+    const minDi = Math.min(...diAvgList);
+    // 온도
     document.querySelector(`.${pos}-bar-max-temper`).style.width = (maxTemper * 7) + 'px';
     document.querySelector(`.${pos}-bar-max-temper`).innerHTML = `<span>${maxTemper}℃</span>`;
 
@@ -357,5 +416,20 @@ function updateCompareDiv(dataList, pos){
 
     document.querySelector(`.${pos}-bar-avg-temper`).style.width = (avgTemper * 7) + 'px';
     document.querySelector(`.${pos}-bar-avg-temper`).innerHTML = `<span>${avgTemper}℃</span>`;
+    // 습도
+    document.querySelector(`.${pos}-bar-max-reh`).style.width = (maxReh * 2) + 'px';
+    document.querySelector(`.${pos}-bar-max-reh`).innerHTML = `<span>${maxReh}%</span>`;
+
+    document.querySelector(`.${pos}-bar-min-reh`).style.width = (minReh * 2) + 'px';
+    document.querySelector(`.${pos}-bar-min-reh`).innerHTML = `<span>${minReh}%</span>`;
+
+    document.querySelector(`.${pos}-bar-avg-reh`).style.width = (avgReh * 2) + 'px';
+    document.querySelector(`.${pos}-bar-avg-reh`).innerHTML = `<span>${avgReh}%</span>`;
+    // 불쾌지수
+    document.querySelector(`.${pos}-bar-max-di`).style.width = (maxDi * 2) + 'px';
+    document.querySelector(`.${pos}-bar-max-di`).innerHTML = `<span>${maxDi}</span>`;
+
+    document.querySelector(`.${pos}-bar-min-di`).style.width = (minDi * 2) + 'px';
+    document.querySelector(`.${pos}-bar-min-di`).innerHTML = `<span>${minDi}</span>`;
 }
 
