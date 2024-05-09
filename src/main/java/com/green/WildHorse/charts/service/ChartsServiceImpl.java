@@ -60,6 +60,16 @@ public class ChartsServiceImpl implements ChartsService {
     public List<String> getMonthList() {
         return sqlSession.selectList("chartsMapper.getMonthList");
     }
+    // 불쾌지수 페이지 들어가자 마자 띄워줄 데이터
+    @Override
+    public MaxMinAvgAll getMaxMinAvgAll(String month) {
+        return sqlSession.selectOne("chartsMapper.getMaxMinAvgAll",month);
+    }
+    //202202 월데이터
+    @Override
+    public String month() {
+        return sqlSession.selectOne("chartsMapper.month");
+    }
 
     @Override
     public String maxDay() {
