@@ -120,10 +120,6 @@ public class ChartsController {
 
         //샐랙트 박스에 뿌려줄 월 데이터 조회
         model.addAttribute("monthList", chartsService.getMonthList());
-        String month =chartsService.month();
-        double temperMax=0.0;
-        double temperMin=0.0;
-        double temperAvg=0.0;
         //System.out.println(tempRegAvg.get(1));
 
 //        if (temperMax>tempRegAvg.get(1).getTemperAvg()){
@@ -140,7 +136,7 @@ public class ChartsController {
     @ResponseBody
     @PostMapping("/test")
     public Map<String, Object> hyeTest(@RequestParam(name = "detailMonth", required = false, defaultValue = "202202") String detailMonth
-            , @RequestParam(name = "compareMonth1", required = false, defaultValue = "202202") String compareMonth1
+            , @RequestParam(name = "compareMonth1", required = false, defaultValue = "202201") String compareMonth1
             , @RequestParam(name = "compareMonth2", required = false, defaultValue = "202202") String compareMonth2){
 
 
@@ -158,6 +154,8 @@ public class ChartsController {
         double minRehAvg=tempRegDiAvgList2.get(0).getRehAvg();
         double maxTemperAvg = 0;
         double minTemperAvg=tempRegDiAvgList2.get(0).getTemperAvg();
+        double sum1 =0;
+        double sum2 =0;
         for (TempRegDiAvgVO tempReg : tempRegDiAvgList2){
             if (maxDiAvg < tempReg.getDiAvg()){
                 maxDiAvg = tempReg.getDiAvg();
@@ -177,6 +175,7 @@ public class ChartsController {
             if (minTemperAvg > tempReg.getTemperAvg()){
                 minTemperAvg = tempReg.getTemperAvg();
             }
+
         }
         result.put("maxDiAvg",maxDiAvg);
         result.put("minDiAvg",minDiAvg);
