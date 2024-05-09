@@ -339,7 +339,7 @@ fetch('/charts/main', { //요청경로
 
                             font: {
                                 family: 'Times',
-                                size: 20,
+                                size: 15,
                                 style: 'normal',
                                 lineHeight: 1.2
                             },
@@ -355,11 +355,11 @@ fetch('/charts/main', { //요청경로
                             text: '시간',
                             color: 'black',
                             font: {
-                                family: 'Comic Sans MS',
-                                size: 20,
-                                weight: 'bold',
-                                lineHeight: 1.2,
-                            }
+                                family: 'Times',
+                                size: 15,
+                                style: 'normal',
+                                lineHeight: 1.2
+                            },
                         }
                     }
                 }
@@ -612,6 +612,11 @@ function infoChange() {
             // 새로운 차트 생성
             let rehCanvas = document.createElement('canvas');
             rehCanvas.id = 'reh-line-chart';
+            rehCanvas.style.width= 250 +'px';
+
+            rehCanvas.style.height= 150 +'px';
+
+
             document.getElementById('reh-line-container').appendChild(rehCanvas); // 새로운 캔버스 추가
 
 
@@ -621,6 +626,8 @@ function infoChange() {
             }
             let canvas = document.createElement('canvas');
             canvas.id = 'temp-line-chart';
+            canvas.style.width= 250 +'px';
+            canvas.style.height= 150 +'px';
             document.getElementById('temp-line-container').appendChild(canvas); // 새로운 캔버스 추가
 
 
@@ -632,14 +639,16 @@ function infoChange() {
             }
             let diCanvas = document.createElement('canvas');
             diCanvas.id = 'di-line-chart';
+            diCanvas.style.width= 250 +'px';
+            diCanvas.style.height= 150 +'px';
             document.getElementById('di-line-container').appendChild(diCanvas);
 
 
             //메인 타이틀
             const mainTitleStr=`
-            <h1 class="h1">
-                ${searchDate}
-            </h1>
+            <h2>실내 센서 종합 모니터링</h2>
+            <h4 class="h1" style="font-size: 17px; margin-left: 15px; margin-top: 10px;">  ${searchDate}</h4>
+            
             `
             mainTitleTag.replaceChildren(mainTitleTag.textContent='')
             mainTitleTag.insertAdjacentHTML('afterbegin',mainTitleStr)
@@ -776,7 +785,7 @@ function infoChange() {
             // 평균 온습도 
             let avgTag = document.querySelector('.avg-tag')
             let avgstr = `
-                        <h5 class="mb-1 text-700 fw-normal lh-1">
+                        <h5 class="mb-1 fw-normal lh-1 fs-6" style="color: gray;">
 
                             <div class="allWrap1">
                                 <div class="wrap1">
@@ -804,7 +813,7 @@ function infoChange() {
 
             let tempTag = document.querySelector('.temp-div')
             let tempStr = `
-                        <h5 class="mb-1 text-700 fw-normal lh-1">
+                        <h5 class="mb-1 fw-normal lh-1 fs-6" style="color: gray;">
 
                             <div class="allWrap2">
                                 <div class="wrap2">
@@ -835,7 +844,7 @@ function infoChange() {
             //실효습도
             let efhTag = document.querySelector('.efh-tag');
             let efhStr = `
-                        <h5 class="mb-1 text-700 fw-normal lh-1">
+                        <h5 class="mb-1 fw-normal lh-1 fs-6" style="color: gray;">
                             ${data.efh.efhData}
                         </h5>
                         `
@@ -850,7 +859,7 @@ function infoChange() {
 
             let diTag = document.querySelector('.di-tag');
             let diStr = `
-                        <h5 class="mb-1 fw-normal lh-1">
+                        <h5 class="mb-1 fw-normal lh-1 fs-6" style="color: gray;">
 
                             <div class="allWrap">
                                 <div class="wrap">
@@ -955,23 +964,74 @@ function infoChange() {
                         label: "습도",
                         borderColor: "#c45850",
                         fill: false
+                    }, {
+                        data: [78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78],
+                        label: "평균습도",
+                        borderColor: "rgba(0, 0, 0, 0.1)",
+                        fill: false,
+                        pointRadius: 0
+    
+    
                     }
                     ]
                 },
                 options: {
+    
+                    // elements: {
+                    //     point: {
+                    //         radius: 0
+                    //     }
+                    // }
+                    // ,
+                    
                     title: {
                         display: true,
                         text: 'World population per region (in millions)'
                     },
+                    plugins: {
+                        
+                        title: {
+                            display: true,
+                            text: '습도 차트',
+                            font: 50
+                        }
+                    },
                     scales: {
+    
                         y: {
-
-                            min: rehLow - 5,
-                            max: rehBest + 5
-                            //fontSize : 14
-
+                            min: Math.ceil(rehLow - 5),
+                            max: Math.floor(rehBest + 5)
+    
+                            , title: {
+                                display: true,
+    
+                                font: {
+                                    family: 'Times',
+                                    size: 15,
+                                    style: 'normal',
+                                    lineHeight: 1.2
+                                },
+    
+                                text: "습도(%)",
+                            }
+    
+    
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: '시간',
+                                color: 'black',
+                                font: {
+                                    family: 'Times',
+                                    size: 15,
+                                    style: 'normal',
+                                    lineHeight: 1.2
+                                },
+                            }
                         }
                     }
+    
                 }
             });
 
@@ -988,22 +1048,46 @@ function infoChange() {
                     ]
                 },
                 options: {
+    
                     title: {
                         display: true,
                         text: 'World population per region (in millions)'
                     },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '온도 차트',
+                            size: 38
+                        }
+                    },
                     scales: {
                         y: {
-
-                            min: temperLow - 5,
-                            max: temperBest + 5
+    
+                            min: Math.floor(temperLow - 5), //4.5
+                            max: Math.ceil(temperBest + 5)
                             //fontSize : 14
-
+    
+                            , title: {
+                                display: true,
+                                text: "온도(C °)",
+                                font: {
+                                    size: 15,
+                                }
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: "시간",
+                                font: {
+                                    size: 15,
+                                }
+                            }
                         }
                     }
+    
                 }
             });
-
             // 불쾌지수 라인차트
             new Chart(document.getElementById("di-line-chart"), {
                 type: 'line',
@@ -1022,13 +1106,36 @@ function infoChange() {
                         display: true,
                         text: 'World population per region (in millions)'
                     },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '불쾌지수 차트',
+                            size: 38
+                        }
+                    },
                     scales: {
                         y: {
-
-                            min: diLow - 5,
-                            max: diBest + 5
+    
+                            min: Math.ceil(diLow - 5),
+                            max: Math.floor(diBest + 5)
                             // fontSize : 14
-
+                            , title: {
+                                display: true,
+                                text: "불쾌지수(C °)",
+                                font: {
+                                    size: 15,
+                                }
+                            }
+    
+                        }
+                        , x: {
+                            title: {
+                                display: true,
+                                text: "시간",
+                                font: {
+                                    size: 15,
+                                }
+                            }
                         }
                     }
                 }
