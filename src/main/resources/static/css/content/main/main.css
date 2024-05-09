@@ -149,6 +149,7 @@ table tr td {
 .s2 {
     width: 300px;
 }
+
 .allWrap2 {
     width: 300px;
     overflow: hidden;
@@ -164,15 +165,109 @@ table tr td {
 }
 
 
-.avg-div{
+.avg-div {
     margin-left: 10px;
     margin-right: 40px;
 }
 
-.di-div{
+.di-div {
     margin-left: 10px;
     margin-right: 40px;
 }
+
 /* .whole-div{
     background-color:#d9d9d9
 } */
+
+.container-fluid {
+    width: 100%;
+    height: 100vh;
+
+    /* box-sizing: border-box; */
+}
+
+.header {
+    height: 9vh;
+}
+
+.body-row {
+    background-color: #eeeeee;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+.h3{
+    font-weight: bold;
+}
+.layer {
+    margin-bottom: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+    height: 50vh;
+    box-shadow: 0 7px 7px rgba(0, 0, 0, 0.116), 0 5px 5px rgba(0, 0, 0, 0.11);
+}
+
+.small-layer {
+    height: 10vh;
+    width: 20%;
+    margin-right: 50px;
+    background-color: rgba(255, 255, 255, 0.89);
+}
+
+.large-layer {
+    height: 50vh;
+    width: 665px;
+    margin-right: 50px;
+    
+    background-color: rgba(255, 255, 255, 0.89);
+
+
+}
+
+.odd-layer {
+    background-color: #fff;
+    height: 200%;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.432);
+    
+}
+
+input[type='date'] {
+    border: none;
+    position: relative;
+    width: 150px;
+    
+    padding: 10px;
+    background: url(../../../assets/Calendar.svg) no-repeat right 10px center / 35px auto;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    text-align: start;
+    font-size: 100%;
+    margin-bottom: 20px;
+}
+
+
+
+input[type='date']::-webkit-calendar-picker-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+}
+
+
+input[type='date']::before {
+    content: attr(placeholder);
+    width: 100%;
+    height: 100%;
+}
+
+
+input[type='date']:valid::before {
+    display: none;
+}

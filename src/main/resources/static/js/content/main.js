@@ -297,19 +297,31 @@ fetch('/charts/main', { //요청경로
                     borderColor: "#c45850",
                     fill: false
                 }, {
-                    data: [data.avg.rehAvg],
+                    data: [78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78],
                     label: "평균습도",
-                    borderColor: "#c45850",
-                    fill: false
+                    borderColor: "rgba(0, 0, 0, 0.1)",
+                    fill: false,
+                    pointRadius: 0
+
+
                 }
                 ]
             },
             options: {
+
+                // elements: {
+                //     point: {
+                //         radius: 0
+                //     }
+                // }
+                // ,
+                
                 title: {
                     display: true,
                     text: 'World population per region (in millions)'
                 },
                 plugins: {
+                    
                     title: {
                         display: true,
                         text: '습도 차트',
@@ -319,29 +331,39 @@ fetch('/charts/main', { //요청경로
                 scales: {
 
                     y: {
-
                         min: Math.ceil(rehLow - 5),
                         max: Math.floor(rehBest + 5)
 
-                        ,title: {
+                        , title: {
                             display: true,
-                            text: "습도(%)",
+
                             font: {
-                                size: 15,
-                            }
+                                family: 'Times',
+                                size: 20,
+                                style: 'normal',
+                                lineHeight: 1.2
+                            },
+
+                            text: "습도(%)",
                         }
 
+
                     },
-                    x:{
-                        title:{
+                    x: {
+                        title: {
                             display: true,
-                            text: "시간",
+                            text: '시간',
+                            color: 'black',
                             font: {
-                                size: 15,
+                                family: 'Comic Sans MS',
+                                size: 20,
+                                weight: 'bold',
+                                lineHeight: 1.2,
                             }
                         }
                     }
                 }
+
             }
         });
 
@@ -386,8 +408,8 @@ fetch('/charts/main', { //요청경로
                             }
                         }
                     },
-                    x:{
-                        title:{
+                    x: {
+                        title: {
                             display: true,
                             text: "시간",
                             font: {
@@ -441,8 +463,8 @@ fetch('/charts/main', { //요청경로
                         }
 
                     }
-                    , x:{
-                        title:{
+                    , x: {
+                        title: {
                             display: true,
                             text: "시간",
                             font: {
@@ -563,6 +585,7 @@ fetch('/charts/main', { //요청경로
 
 /////////////////////////////////////////////////////////
 function infoChange() {
+    let mainTitleTag = document.querySelector('.main-title')
     searchDate = document.querySelector('#search-date').value;
     fetch('/charts/main', { //요청경로
         method: 'POST',
@@ -610,6 +633,16 @@ function infoChange() {
             let diCanvas = document.createElement('canvas');
             diCanvas.id = 'di-line-chart';
             document.getElementById('di-line-container').appendChild(diCanvas);
+
+
+            //메인 타이틀
+            const mainTitleStr=`
+            <h1 class="h1">
+                ${searchDate}
+            </h1>
+            `
+            mainTitleTag.replaceChildren(mainTitleTag.textContent='')
+            mainTitleTag.insertAdjacentHTML('afterbegin',mainTitleStr)
 
 
 
@@ -743,25 +776,25 @@ function infoChange() {
             // 평균 온습도 
             let avgTag = document.querySelector('.avg-tag')
             let avgstr = `
-                <h3 class="mb-1 text-700 fw-normal lh-1">
+                        <h5 class="mb-1 text-700 fw-normal lh-1">
 
-                    <div class="allWrap1">
-                        <div class="wrap1">
-                            <div class="layer small-layer s2">
-                                <div>
-                                    평균온도  ${data.avg.tempAvg} C °
+                            <div class="allWrap1">
+                                <div class="wrap1">
+                                    <div class="s2">
+                                        <div>
+                                            평균온도  ${data.avg.tempAvg} C °
+                                        </div>
+                                    </div>
+                                    <div class="s2">
+                                        <div>
+                                            평균습도 ${data.avg.rehAvg} %
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="layer small-layer s2">
-                                <div>
-                                    평균습도 ${data.avg.rehAvg} %
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
+                            </div>
 
-                </h3>
+                        </h5>
                 `
             avgTag.replaceChildren(avgTag.textContent = '');
             avgTag.insertAdjacentHTML("afterbegin", avgstr);
@@ -771,27 +804,28 @@ function infoChange() {
 
             let tempTag = document.querySelector('.temp-div')
             let tempStr = `
-                <h3 class="mb-1 text-700 fw-normal lh-1">
+                        <h5 class="mb-1 text-700 fw-normal lh-1">
 
-                    <div class="allWrap2">
-                        <div class="wrap2">
-                            <div class="layer small-layer s3">
-                                <div>
-                                    최고기온 ${data.temps.maxTemp} C °
+                            <div class="allWrap2">
+                                <div class="wrap2">
+                                    <div class="s3">
+                                        <div>
+                                            최고기온 ${data.temps.maxTemp} C °
+                                        </div>
+                                    </div>
+                                    <div class="s3">
+                                        <div>
+                                            최저기온 ${data.temps.minTemp} C °
+                                        </div>
+                                    </div>
+
                                 </div>
-                            </div>
-                            <div class="layer small-layer s3">
-                                <div>
-                                    최저기온 ${data.temps.minTemp} C °
-                                </div>
+
                             </div>
 
-                        </div>
 
-                    </div>
-
-
-                </h3>`
+                        </h5>
+                        `
 
             tempTag.replaceChildren(tempTag.textContent = '');
             tempTag.insertAdjacentHTML("afterbegin", tempStr);
@@ -801,9 +835,10 @@ function infoChange() {
             //실효습도
             let efhTag = document.querySelector('.efh-tag');
             let efhStr = `
-                <h2 class="mb-1 text-700 fw-normal lh-1">
-                    ${data.efh.efhData}
-                </h2>`
+                        <h5 class="mb-1 text-700 fw-normal lh-1">
+                            ${data.efh.efhData}
+                        </h5>
+                        `
 
 
             efhTag.replaceChildren(efhTag.textContent = '');
@@ -815,43 +850,38 @@ function infoChange() {
 
             let diTag = document.querySelector('.di-tag');
             let diStr = `
-                <h3 class="mb-1 text-700 fw-normal lh-1">
+                        <h5 class="mb-1 fw-normal lh-1">
 
-                    <div class="allWrap">
-                        <div class="wrap">
-                            <div class="layer small-layer s1">
-                                <div>
-                                    ${data.diPerDay[0].type}
-                                    ${data.diPerDay[0].diLevel}
+                            <div class="allWrap">
+                                <div class="wrap">
+                                    <div class="s1">
+                                        <div>
+                                            ${data.diPerDay[0].type}
+                                            ${data.diPerDay[0].diLevel}
+                                        </div>
+                                    </div>
+                                    <div class="s1">
+                                        <div>
+                                            ${data.diPerDay[1].type}
+                                            ${data.diPerDay[1].diLevel}
+                                        </div>
+                                    </div>
+                                    <div class="s1">
+                                        <div>
+                                            ${data.diPerDay[2].type}
+                                            ${data.diPerDay[2].diLevel}
+                                        </div>
+                                    </div>
+                                    <div class="s1">
+                                        <div>
+                                            ${data.diPerDay[3].type}
+                                            ${data.diPerDay[3].diLevel}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="layer small-layer s1">
-                                <div>
-                                    ${data.diPerDay[1].type}
-                                    ${data.diPerDay[1].diLevel}
-                                </div>
-                            </div>
-                            <div class="layer small-layer s1">
-                                <div>
-                                    ${data.diPerDay[2].type}
-                                    ${data.diPerDay[2].diLevel}
-                                </div>
-                            </div>
-                            <div class="layer small-layer s1">
-                                <div>
-                                    ${data.diPerDay[3].type}
-                                    ${data.diPerDay[3].diLevel}
-                                </div>
-                            </div>
-
-
-
-                        </div>
-
-                    </div>
-
-                </h3>
-                `
+                        </h5>
+                        `
 
             diTag.replaceChildren(diTag.textContent = '');
             diTag.insertAdjacentHTML("afterbegin", diStr);

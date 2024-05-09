@@ -10,16 +10,17 @@
 body{
   background-color: #dae3f1c4;
 }
-@media (min-width: 768px) {
+
+/* @media (min-width: 768px) {
   .sidebar .offcanvas-lg {
     position: -webkit-sticky;
     position: sticky;
-    top: 48px;
+    top: 150px;
   }
   .navbar-search {
     display: block;
   }
-}
+} */
 
 .sidebar .nav-link {
   font-size: .875rem;
@@ -48,3 +49,4 @@ body{
 .navbar .form-control {
   padding: .75rem 1rem;
 }
+
