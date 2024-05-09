@@ -152,8 +152,38 @@ public class ChartsController {
         List<TempRegDiAvgVO> tempRegDiAvgList3 = chartsService.getTempRegDiAvg(compareMonth2);
 
         Map<String, Object> result = new HashMap<>();
-
-
+        double maxDiAvg = 0;
+        double minDiAvg=tempRegDiAvgList2.get(0).getDiAvg();
+        double maxRehAvg = 0;
+        double minRehAvg=tempRegDiAvgList2.get(0).getRehAvg();
+        double maxTemperAvg = 0;
+        double minTemperAvg=tempRegDiAvgList2.get(0).getTemperAvg();
+        for (TempRegDiAvgVO tempReg : tempRegDiAvgList2){
+            if (maxDiAvg < tempReg.getDiAvg()){
+                maxDiAvg = tempReg.getDiAvg();
+            }
+            if (maxRehAvg < tempReg.getRehAvg()){
+                maxRehAvg = tempReg.getRehAvg();
+            }
+            if (maxTemperAvg < tempReg.getTemperAvg()){
+                maxTemperAvg = tempReg.getTemperAvg();
+            }
+            if (minDiAvg > tempReg.getDiAvg()){
+                minDiAvg = tempReg.getDiAvg();
+            }
+            if (minRehAvg > tempReg.getRehAvg()){
+                minRehAvg =tempReg.getRehAvg();
+            }
+            if (minTemperAvg > tempReg.getTemperAvg()){
+                minTemperAvg = tempReg.getTemperAvg();
+            }
+        }
+        result.put("maxDiAvg",maxDiAvg);
+        result.put("minDiAvg",minDiAvg);
+        result.put("maxTemperAvg",maxTemperAvg);
+        result.put("minTemperAvg",minTemperAvg);
+        result.put("maxRehAvg",maxRehAvg);
+        result.put("minRehAvg",minRehAvg);
         result.put("detailList", tempRegDiAvgList1);
         result.put("compareList1", tempRegDiAvgList2);
         result.put("compareList2", tempRegDiAvgList3);

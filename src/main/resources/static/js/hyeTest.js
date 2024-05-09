@@ -26,7 +26,7 @@ function drawDetailChart(){
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-    
+        
         const monthList=[];
         var temperAvgList = [];
         var diAvgList=[];
@@ -107,7 +107,7 @@ function drawCompareChart1(){
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-    
+        
         const monthList=[];
         var temperAvgList = [];
         var diAvgList=[];
@@ -123,6 +123,12 @@ function drawCompareChart1(){
                 highest = e.reh
             }
         });
+        const temperMaxStr = `
+                            <span>${data.maxTemperAvg}</span>
+        `
+        const temperMax = document.querySelector('.left-bar-max-temper')
+        temperMax.replaceChildren(textContent='')
+        temperMax.insertAdjacentHTML('afterbegin',temperMaxStr)
         // 라인차트
         compareChart1 = new Chart(document.getElementById("compare-chart1"), {
             type: 'line',

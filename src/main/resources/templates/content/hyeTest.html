@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="updateMaxT-div">
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -146,12 +146,12 @@
         <div class="row mt-4">
             <div class="col-2">
                 <select class="form-select" onchange="reDrawChart('compare-chart1', this)">
-                    <option th:each="month : ${monthList}">[[${month}]]</option>
+                    <option th:each="month : ${monthList}" th:value="${month}">[[${month}]]</option>
                 </select>
             </div>
             <div class="offset-4 col-2">
                 <select class="form-select" onchange="reDrawChart('compare-chart2', this)">
-                    <option th:each="month : ${monthList}">[[${month}]]</option>
+                    <option th:each="month : ${monthList}" th:value="${month}">[[${month}]]</option>
                 </select>
             </div>
         </div>
@@ -165,7 +165,7 @@
         </div>
     </div>
     <!-- 월별 비교 온습도 불쾌지수-->
-    <div class="row third-row " >
+    <div class="row third-row ">
         <!-- 월별 비교 차트 온도 -->
         <div class="col-4 compare-detail">
             <div class="row mb-3">
@@ -173,19 +173,21 @@
                     온도
                 </div>
             </div>
-            
+
             <div class="row mb-2">
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
-                        <div class="left-bar-max-temper" >
-                            <span>1</span></div>
+                        <div class="left-bar-max-temper">
+                            <span>1</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-2 text-center">최고</div>
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-max-temper">
-                            <span>1</span></div>
+                            <span>1</span>
+                        </div>
                     </div>
                 </div>
             </div>
