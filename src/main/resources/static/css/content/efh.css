@@ -1,10 +1,17 @@
 table{
     width: 100%;
-
+    height: 20vh;
+    border: 1px solid rgba(0, 0, 0, 0.199);
+    border-collapse: collapse;
 }
 
 tr td{
-    width: 150px;
+    width: 180px;
+    border: 1px solid rgba(0, 0, 0, 0.199);
+}
+table td:first-child{
+    background-color: rgba(0, 0, 0, 0.164);
+    width: 180px;
 }
 
 .container-fluid {
@@ -30,6 +37,7 @@ tr td{
     background-color: white;
     padding: 10px;
     height: 50vh;
+    
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 .odd-layer {
@@ -39,7 +47,7 @@ tr td{
     
 }
 .info-layer{
-    height: 40vh;
+    height: 50vh;
 }
 .small-layer {
     height: 20vh;
@@ -66,7 +74,7 @@ input[type='date'] {
     width: 150px;
     
     padding: 10px;
-    background: url(../../../assets/Calendar.svg) no-repeat right 10px center / 35px auto;
+    background: url() no-repeat right 10px center / 35px auto;
     background-color: #ffffff;
     box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
     border-radius: 8px;

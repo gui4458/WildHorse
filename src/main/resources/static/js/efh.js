@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }]
                 },
                 options: {
+                    responsive: false,
                     title: {
                         display: true,
                         text: 'Predicted world population (millions) in 2050'
@@ -235,7 +236,7 @@ function selectDay(toDay) {
     // 새로운 차트 생성
     let efhCanvas = document.createElement('canvas');
     efhCanvas.id = 'efh-line-chart';
-    efhCanvas.setAttribute('style', 'width:100%;');
+    efhCanvas.style.width = 50 + '%';
     document.getElementById('efh-line-container').appendChild(efhCanvas); // 새로운 캔버스 추가
 
 
@@ -247,7 +248,10 @@ function selectDay(toDay) {
     // 새로운 차트 생성
     let dangerCanvas = document.createElement('canvas');
     dangerCanvas.id = 'danger-pie-chart';
-    dangerCanvas.setAttribute('style', 'width:50%;');
+    
+    // dangerCanvas.setAttribute('style', 'width:50%;');
+    dangerCanvas.style.width = 50 + '%';
+    dangerCanvas.style.margin = 'auto';
     document.getElementById('danger-pie-container').appendChild(dangerCanvas); // 새로운 캔버스 추가
 
 
@@ -355,15 +359,8 @@ function selectDay(toDay) {
                         display: true,
                         text: '실효습도'
                     },
-                    scales: {
-                        yAxes: [
-                            {
-                                ticks: {
-                                    beginAtZero: true,
-                                    max: 100
-                                }
-                            }
-                        ]
+                    y:{
+                        max:90
                     },
                     plugins: {
                         annotation: {
@@ -437,6 +434,7 @@ function selectDay(toDay) {
                     }]
                 },
                 options: {
+                    responsive: false,
                     title: {
                         display: true,
                         text: 'Predicted world population (millions) in 2050'
