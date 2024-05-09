@@ -62,6 +62,16 @@ public class ChartsServiceImpl implements ChartsService {
     }
 
     @Override
+    public String maxDay() {
+        return sqlSession.selectOne("chartsMapper.maxDay");
+    }
+
+    @Override
+    public String minDay() {
+        return sqlSession.selectOne("chartsMapper.minDay");
+    }
+
+    @Override
     public EfhVO mainEfh(String toDay) {
         return sqlSession.selectOne("chartsMapper.mainEfh",toDay);
     }

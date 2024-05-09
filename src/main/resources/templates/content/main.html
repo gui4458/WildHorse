@@ -21,7 +21,8 @@
 
         </div>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <input id="search-date" type="date" onchange="infoChange(this)" placeholder="날짜를 선택해주세요." th:value="${toDay}">
+          <input id="search-date" type="date" th:max="${session.maxDay}" th:min="${session.minDay}" onchange="infoChange(this)" placeholder="날짜를 선택해주세요." th:value="${toDay}">
+        [[${session.maxDay}]]
         </div>
       </div>
       <div>

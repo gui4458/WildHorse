@@ -154,6 +154,16 @@
         WHERE SUBSTRING(mesurdy, 1, 6) = #{month}
         GROUP BY mesurdy
     </select>
+
+    <select id="maxDay" resultType="string">
+        SELECT DATE_FORMAT(MAX(mesur_dy),'%Y-%m-%d')
+        FROM DAILY_TEMPS
+
+    </select><select id="minDay" resultType="string">
+        SELECT DATE_FORMAT(MIN(mesur_dy),'%Y-%m-%d')
+        FROM DAILY_TEMPS
+    </select>
+
 </mapper>
 
 

@@ -19,7 +19,7 @@ public class ChartsController {
     private ChartsService chartsService;
 
     @GetMapping("/main")
-    public String chartMain(Model model) {
+    public String chartMain(Model model,HttpSession session) {
         String toDay=chartsService.toDay();
         model.addAttribute("toDay",toDay);
 
@@ -44,6 +44,11 @@ public class ChartsController {
 
         List<DiVO> selectTab= chartsService.selectTab(toDay);
         model.addAttribute("selectTab",selectTab);
+
+        String maxDay = chartsService.maxDay();
+        session.setAttribute("maxDay",maxDay);
+        String minDay = chartsService.minDay();
+        session.setAttribute("minDay",minDay);
         return "content/main";
     }
 

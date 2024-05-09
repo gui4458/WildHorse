@@ -21,4 +21,7 @@ public interface ChartsService {
     List<TempRegDiAvgVO> getTempRegDiAvg(String month);
     //비디에 저장된 년월 조회 (셀렉트 박스 사용 용도)
     List<String> getMonthList();
+
+    String maxDay();
+    String minDay();
 }
