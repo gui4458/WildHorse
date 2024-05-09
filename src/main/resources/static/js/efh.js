@@ -68,17 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         text: '실효습도'
                     },
                     scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                max: 100
-                            }
-                        }],
-                        xAxes: [{
-                            ticks: {
-                                fontColor: 'red' // x 축 텍스트 색상을 빨간색으로 지정
-                            }
-                        }]
+                        
                     },
                     plugins: {
                         annotation: {
