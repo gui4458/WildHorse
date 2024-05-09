@@ -41,6 +41,19 @@
         <result column="REH_AVG" property="rehAvg"/>
         <result column="DI_AVG" property="diAvg"/>
     </resultMap>
+    <resultMap id="maxMinAvgAll" type="com.green.WildHorse.charts.vo.MaxMinAvgAll">
+        <id column="NO" property="no"/>
+        <result column="MONTH" property="month"/>
+        <result column="TEMPER_MAX" property="temperMax"/>
+        <result column="TEMPER_MIN" property="temperMin"/>
+        <result column="TEMPER_AVG" property="temperAvg"/>
+        <result column="REH_MAX" property="rehMax"/>
+        <result column="REH_MIN" property="rehMin"/>
+        <result column="REH_AVG" property="rehAvg"/>
+        <result column="DI_MAX" property="diMax"/>
+        <result column="DI_MIN" property="diMin"/>
+        <result column="DI_AVG" property="diAvg"/>
+    </resultMap>
 
     <select id="selectDailyTemp" resultMap="dailyTemp">
         SELECT DATE_FORMAT(MESUR_DY ,'%Y-%m-%d')MESUR_DY
@@ -102,6 +115,9 @@
     <select id="toDay" resultType="String">
         SELECT DATE_FORMAT(20211220,'%Y-%m-%d')
     </select>
+    <select id="month" resultType="String">
+        SELECT DATE_FORMAT(20220220,'%Y%m')
+    </select>
     <select id="detailEfhList" resultMap="efh">
         SELECT DATE_FORMAT(EFH_DATE ,'%m/%d')EFH_DATE
             ,efh_data
@@ -142,6 +158,7 @@
         SELECT CONCAT(SUBSTRING(mesurdy, 1, 4), '-', SUBSTRING(mesurdy, 5, 2)) AS MONTH
         FROM discomfort_index
         GROUP BY MONTH
+        ORDER BY MESURDY DESC
     </select>
 
     <!-- 불쾌지수 페이지에서 한 달동안의 일일 평균 온도, 습도, di 조회를 위한 쿼리 -->
@@ -155,6 +172,7 @@
         GROUP BY mesurdy
     </select>
 
+
     <select id="maxDay" resultType="string">
         SELECT DATE_FORMAT(MAX(mesur_dy),'%Y-%m-%d')
         FROM DAILY_TEMPS
@@ -163,6 +181,7 @@
         SELECT DATE_FORMAT(MIN(mesur_dy),'%Y-%m-%d')
         FROM DAILY_TEMPS
     </select>
+
 
 </mapper>
 

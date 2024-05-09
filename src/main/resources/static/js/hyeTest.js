@@ -301,7 +301,7 @@ function reDrawChart(canvasId, selectedTag){
         dataList.push(rehAvgList);
         dataList.push(temperAvgList);
 
-        console.log(dataList);
+        
 
         // 차트 데이터
         switch(canvasId){
@@ -412,7 +412,7 @@ function updateCompareDiv(dataList, pos){
     document.querySelector(`.${pos}-bar-max-temper`).innerHTML = `<span>${maxTemper}℃</span>`;
 
     document.querySelector(`.${pos}-bar-min-temper`).style.width = (minTemper * 7) + 'px';
-    document.querySelector(`.${pos}-bar-min-temper`).innerHTML = `<span>${minTemper}℃</span>`;
+    document.querySelector(`.${pos}-bar-min-temper`).innerHTML = `<span style="float: right;">${minTemper}℃</span>`;
 
     document.querySelector(`.${pos}-bar-avg-temper`).style.width = (avgTemper * 7) + 'px';
     document.querySelector(`.${pos}-bar-avg-temper`).innerHTML = `<span>${avgTemper}℃</span>`;

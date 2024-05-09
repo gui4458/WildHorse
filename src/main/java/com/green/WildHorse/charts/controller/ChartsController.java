@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,16 +117,33 @@ public class ChartsController {
 
     @GetMapping("/test")
     public String test(Model model){
-        //샐랙트 박스에 뿌려줄 월 데이;터 조회
+
+        //샐랙트 박스에 뿌려줄 월 데이터 조회
         model.addAttribute("monthList", chartsService.getMonthList());
+        String month =chartsService.month();
+        double temperMax=0.0;
+        double temperMin=0.0;
+        double temperAvg=0.0;
+        //System.out.println(tempRegAvg.get(1));
+
+//        if (temperMax>tempRegAvg.get(1).getTemperAvg()){
+//            temperMax = tempRegAvg.get(1).getTemperAvg();
+//            System.out.println(temperMax);
+//        }
+
+
+        // model.addAttribute("allData",chartsService.getMaxMinAvgAll(month));
+        //System.out.println("data : "+model.addAttribute("allData",chartsService.getMaxMinAvgAll(month)));
         return "content/hyeTest";
     }
 
     @ResponseBody
     @PostMapping("/test")
-    public Map<String, Object> hyeTest(@RequestParam(name = "detailMonth", required = false, defaultValue = "202109") String detailMonth
-            , @RequestParam(name = "compareMonth1", required = false, defaultValue = "202109") String compareMonth1
-            , @RequestParam(name = "compareMonth2", required = false, defaultValue = "202109") String compareMonth2){
+    public Map<String, Object> hyeTest(@RequestParam(name = "detailMonth", required = false, defaultValue = "202202") String detailMonth
+            , @RequestParam(name = "compareMonth1", required = false, defaultValue = "202202") String compareMonth1
+            , @RequestParam(name = "compareMonth2", required = false, defaultValue = "202202") String compareMonth2){
+
+
         //월별 일일 평균 온도,습도,di 조회
         //최초 조회 시 2021-09월 데이터 조회
         List<TempRegDiAvgVO> tempRegDiAvgList1 = chartsService.getTempRegDiAvg(detailMonth);
@@ -134,6 +152,8 @@ public class ChartsController {
         List<TempRegDiAvgVO> tempRegDiAvgList3 = chartsService.getTempRegDiAvg(compareMonth2);
 
         Map<String, Object> result = new HashMap<>();
+
+
         result.put("detailList", tempRegDiAvgList1);
         result.put("compareList1", tempRegDiAvgList2);
         result.put("compareList2", tempRegDiAvgList3);

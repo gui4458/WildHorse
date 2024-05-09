@@ -22,6 +22,15 @@ public interface ChartsService {
     //비디에 저장된 년월 조회 (셀렉트 박스 사용 용도)
     List<String> getMonthList();
 
+
     String maxDay();
     String minDay();
+
+    //불쾌지수 페이지 띄워줄 데이터
+    MaxMinAvgAll getMaxMinAvgAll(String month);
+    //202202 월데이터 불쾌지수 페이지 들어갈때 넣어줄 월
+    String month();
+
+
+
 }
