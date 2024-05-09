@@ -21,10 +21,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-2 sidebarBox">
+                <div class="col-auto sidebarBox" style="border-right: 1px solid rgba(128, 128, 128, 0.3);">
                     <th:block th:replace="~{fragment/side::sideFragment}"></th:block>
                 </div>
-                <div class="col-10">
+                <div class="col">
                     <th:block layout:fragment="contentFragment"></th:block>
                 </div>
             </div>
