@@ -146,7 +146,7 @@
         <div class="row mt-4">
             <div class="col-2">
                 <select class="form-select" onchange="reDrawChart('compare-chart1', this)">
-                    <option th:each="month : ${monthList}" th:value="${month}">[[${month}]]</option>
+                    <option th:each="month : ${monthList}" th:value="${month}"th:selected="${month=='2022-01'}">[[${month}]]</option>
                 </select>
             </div>
             <div class="offset-4 col-2">
@@ -178,7 +178,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-max-temper">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -186,7 +186,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-max-temper">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -203,7 +203,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-min-temper">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -212,7 +212,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-avg-temper">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-avg-temper">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -237,7 +237,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-max-reh">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -245,7 +245,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-max-reh">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -254,7 +254,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-min-reh">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -262,7 +262,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-min-reh">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -271,7 +271,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-avg-reh">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -279,7 +279,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-avg-reh">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -288,7 +288,7 @@
         <!-- 월별 비교 불쾌지수 -->
         <div class="col-4 compare-detail">
             <div class="row mb-3">
-                <div class="offset-5 col">
+                <div class="offset-5 col" style="color: blueviolet;">
                     불쾌지수
                 </div>
             </div>
@@ -296,7 +296,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-max-di">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -304,7 +304,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-max-di">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -313,7 +313,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-min-di">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>
@@ -321,7 +321,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-min-di">
-                            <span>1</span>
+                            
                         </div>
                     </div>
                 </div>

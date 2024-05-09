@@ -8,7 +8,7 @@ drawCompareChart1();
 drawCompareChart2();
 
 
-function drawDetailChart(){
+function drawDetailChart() {
     fetch('/charts/test', { //요청경로
         method: 'POST',
         cache: 'no-cache',
@@ -18,78 +18,85 @@ function drawDetailChart(){
         //컨트롤러로 전달할 데이터
         body: JSON.stringify({
             // 데이터명 : 데이터값
-            
+
         })
     })
-    .then((response) => {
-        return response.json(); //나머지 경우에 사용
-    })
-    //fetch 통신 후 실행 영역
-    .then((data) => {//data -> controller에서 리턴되는 데이터!
-        
-        const monthList=[];
-        var temperAvgList = [];
-        var diAvgList=[];
-        var rehAvgList = [];
-        let highest = 0;
-    
-        data.detailList.forEach(e => {
-            monthList.push(e.month);
-            diAvgList.push(e.diAvg);
-            rehAvgList.push(e.rehAvg);
-            temperAvgList.push(e.temperAvg);
-            if (highest < e.rehAvg) {
-                highest = e.reh
-            }
-        });
-        // 라인차트
-        detailChart = new Chart(document.getElementById("detail-chart"), {
-            type: 'line',
-            data: {
-                labels: monthList,
-                datasets: [{
-                    data: diAvgList,
-                    label: "불쾌지수",
-                    borderColor: "#8a2be2",
-                    fill: false
-                }, {
-                    data: rehAvgList,
-                    label: "습도",
-                    borderColor: "#3e95cd",
-                    fill: false
-                }, {
-                    data: temperAvgList,
-                    label: "온도",
-                    borderColor: "#ff0000",
-                    fill: false
+        .then((response) => {
+            return response.json(); //나머지 경우에 사용
+        })
+        //fetch 통신 후 실행 영역
+        .then((data) => {//data -> controller에서 리턴되는 데이터!
+
+            const monthList = [];
+            var temperAvgList = [];
+            var diAvgList = [];
+            var rehAvgList = [];
+            let highest = 0;
+
+            data.detailList.forEach(e => {
+                monthList.push(e.month);
+                diAvgList.push(e.diAvg);
+                rehAvgList.push(e.rehAvg);
+                temperAvgList.push(e.temperAvg);
+                if (highest < e.rehAvg) {
+                    highest = e.reh
                 }
-                ]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'World population per region (in millions)'
+
+                let dataList = [];
+                dataList.push(diAvgList);
+                dataList.push(rehAvgList);
+                dataList.push(temperAvgList);
+
+                updateShowData(dataList);
+            });
+            // 라인차트
+            detailChart = new Chart(document.getElementById("detail-chart"), {
+                type: 'line',
+                data: {
+                    labels: monthList,
+                    datasets: [{
+                        data: diAvgList,
+                        label: "불쾌지수",
+                        borderColor: "#8a2be2",
+                        fill: false
+                    }, {
+                        data: rehAvgList,
+                        label: "습도",
+                        borderColor: "#3e95cd",
+                        fill: false
+                    }, {
+                        data: temperAvgList,
+                        label: "온도",
+                        borderColor: "#ff0000",
+                        fill: false
+                    }
+                    ]
                 },
-                scales: {
-                    y: {
-                        min: 0,
-                        max: highest + 5
-                        //fontSize : 14
+                options: {
+                    title: {
+                        display: true,
+                        text: 'World population per region (in millions)'
+                    },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: highest + 5
+                            //fontSize : 14
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        console.log(detailChart);
-    })
-    //fetch 통신 실패 시 실행 영역
-    .catch(err => {
-        alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
-        console.log(err);
-    });
+            console.log(detailChart);
+        })
+        //fetch 통신 실패 시 실행 영역
+        .catch(err => {
+            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+            console.log(err);
+        });
 }
 
-function drawCompareChart1(){
+function drawCompareChart1() {
     fetch('/charts/test', { //요청경로
         method: 'POST',
         cache: 'no-cache',
@@ -99,83 +106,88 @@ function drawCompareChart1(){
         //컨트롤러로 전달할 데이터
         body: JSON.stringify({
             // 데이터명 : 데이터값
-            
+
         })
     })
-    .then((response) => {
-        return response.json(); //나머지 경우에 사용
-    })
-    //fetch 통신 후 실행 영역
-    .then((data) => {//data -> controller에서 리턴되는 데이터!
-        
-        const monthList=[];
-        var temperAvgList = [];
-        var diAvgList=[];
-        var rehAvgList = [];
-        let highest = 0;
-    
-        data.compareList1.forEach(e => {
-            monthList.push(e.month);
-            diAvgList.push(e.diAvg);
-            rehAvgList.push(e.rehAvg);
-            temperAvgList.push(e.temperAvg);
-            if (highest < e.rehAvg) {
-                highest = e.reh
-            }
-        });
-        const temperMaxStr = `
-                            <span>${data.maxTemperAvg}</span>
-        `
-        const temperMax = document.querySelector('.left-bar-max-temper')
-        temperMax.replaceChildren(textContent='')
-        temperMax.insertAdjacentHTML('afterbegin',temperMaxStr)
-        // 라인차트
-        compareChart1 = new Chart(document.getElementById("compare-chart1"), {
-            type: 'line',
-            data: {
-                labels: monthList,
-                datasets: [{
-                    data: diAvgList,
-                    label: "불쾌지수",
-                    borderColor: "#8a2be2",
-                    fill: false
-                }, {
-                    data: rehAvgList,
-                    label: "습도",
-                    borderColor: "#3e95cd",
-                    fill: false
-                }, {
-                    data: temperAvgList,
-                    label: "온도",
-                    borderColor: "#ff0000",
-                    fill: false
+        .then((response) => {
+            return response.json(); //나머지 경우에 사용
+        })
+        //fetch 통신 후 실행 영역
+        .then((data) => {//data -> controller에서 리턴되는 데이터!
+            const monthList = [];
+            var temperAvgList = [];
+            var diAvgList = [];
+            var rehAvgList = [];
+            let highest = 0;
+
+            data.compareList1.forEach(e => {
+                monthList.push(e.month);
+                diAvgList.push(e.diAvg);
+                rehAvgList.push(e.rehAvg);
+                temperAvgList.push(e.temperAvg);
+                if (highest < e.rehAvg) {
+                    highest = e.reh
                 }
-                ]
-            },
-            options: {
-    
-                title: {
-                    display: true,
-                    text: 'World population per region (in millions)'
+            });
+
+
+
+            let dataList = [];
+            dataList.push(diAvgList);
+            dataList.push(rehAvgList);
+            dataList.push(temperAvgList);
+
+            updateCompareDiv(dataList, 'left');
+
+
+
+            // 라인차트
+            compareChart1 = new Chart(document.getElementById("compare-chart1"), {
+                type: 'line',
+                data: {
+                    labels: monthList,
+                    datasets: [{
+                        data: diAvgList,
+                        label: "불쾌지수",
+                        borderColor: "#8a2be2",
+                        fill: false
+                    }, {
+                        data: rehAvgList,
+                        label: "습도",
+                        borderColor: "#3e95cd",
+                        fill: false
+                    }, {
+                        data: temperAvgList,
+                        label: "온도",
+                        borderColor: "#ff0000",
+                        fill: false
+                    }
+                    ]
                 },
-                scales: {
-                    y: {
-                        min: 0,
-                        max: highest + 5
-                        //fontSize : 14
+                options: {
+
+                    title: {
+                        display: true,
+                        text: 'World population per region (in millions)'
+                    },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: highest + 5
+                            //fontSize : 14
+                        }
                     }
                 }
-            }
+            });
+        })
+        //fetch 통신 실패 시 실행 영역
+        .catch(err => {
+            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+            console.log(err);
         });
-    })
-    //fetch 통신 실패 시 실행 영역
-    .catch(err => {
-        alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
-        console.log(err);
-    });
 }
 
-function drawCompareChart2(){
+function drawCompareChart2() {
     fetch('/charts/test', { //요청경로
         method: 'POST',
         cache: 'no-cache',
@@ -185,78 +197,86 @@ function drawCompareChart2(){
         //컨트롤러로 전달할 데이터
         body: JSON.stringify({
             // 데이터명 : 데이터값
-            
+
         })
     })
-    .then((response) => {
-        return response.json(); //나머지 경우에 사용
-    })
-    //fetch 통신 후 실행 영역
-    .then((data) => {//data -> controller에서 리턴되는 데이터!
-    
-        const monthList=[];
-        var temperAvgList = [];
-        var diAvgList=[];
-        var rehAvgList = [];
-        let highest = 0;
-    
-        data.compareList2.forEach(e => {
-            monthList.push(e.month);
-            diAvgList.push(e.diAvg);
-            rehAvgList.push(e.rehAvg);
-            temperAvgList.push(e.temperAvg);
-            if (highest < e.rehAvg) {
-                highest = e.reh
-            }
-        });
-        // 라인차트
-        compareChart2 = new Chart(document.getElementById("compare-chart2"), {
-            type: 'line',
-            data: {
-                labels: monthList,
-                datasets: [{
-                    data: diAvgList,
-                    label: "불쾌지수",
-                    borderColor: "#8a2be2",
-                    fill: false
-                }, {
-                    data: rehAvgList,
-                    label: "습도",
-                    borderColor: "#3e95cd",
-                    fill: false
-                }, {
-                    data: temperAvgList,
-                    label: "온도",
-                    borderColor: "#ff0000",
-                    fill: false
+        .then((response) => {
+            return response.json(); //나머지 경우에 사용
+        })
+        //fetch 통신 후 실행 영역
+        .then((data) => {//data -> controller에서 리턴되는 데이터!
+
+            const monthList = [];
+            var temperAvgList = [];
+            var diAvgList = [];
+            var rehAvgList = [];
+            let highest = 0;
+
+            data.compareList2.forEach(e => {
+                monthList.push(e.month);
+                diAvgList.push(e.diAvg);
+                rehAvgList.push(e.rehAvg);
+                temperAvgList.push(e.temperAvg);
+                if (highest < e.rehAvg) {
+                    highest = e.reh
                 }
-                ]
-            },
-            options: {
-    
-                title: {
-                    display: true,
-                    text: 'World population per region (in millions)'
+
+                let dataList = [];
+                dataList.push(diAvgList);
+                dataList.push(rehAvgList);
+                dataList.push(temperAvgList);
+
+                updateCompareDiv(dataList, 'right');
+
+            });
+            // 라인차트
+            compareChart2 = new Chart(document.getElementById("compare-chart2"), {
+                type: 'line',
+                data: {
+                    labels: monthList,
+                    datasets: [{
+                        data: diAvgList,
+                        label: "불쾌지수",
+                        borderColor: "#8a2be2",
+                        fill: false
+                    }, {
+                        data: rehAvgList,
+                        label: "습도",
+                        borderColor: "#3e95cd",
+                        fill: false
+                    }, {
+                        data: temperAvgList,
+                        label: "온도",
+                        borderColor: "#ff0000",
+                        fill: false
+                    }
+                    ]
                 },
-                scales: {
-                    y: {
-                        min: 0,
-                        max: highest + 5
-                        //fontSize : 14
+                options: {
+
+                    title: {
+                        display: true,
+                        text: 'World population per region (in millions)'
+                    },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: highest + 5
+                            //fontSize : 14
+                        }
                     }
                 }
-            }
+            });
+        })
+        //fetch 통신 실패 시 실행 영역
+        .catch(err => {
+            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+            console.log(err);
         });
-    })
-    //fetch 통신 실패 시 실행 영역
-    .catch(err => {
-        alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
-        console.log(err);
-    });
 }
 
 
-function reDrawChart(canvasId, selectedTag){
+function reDrawChart(canvasId, selectedTag) {
     // let oldChart = document.getElementById(canvasId);
     // if (oldChart) {
     //     oldChart.parentNode.removeChild(oldChart);
@@ -273,66 +293,66 @@ function reDrawChart(canvasId, selectedTag){
         //컨트롤러로 전달할 데이터
         body: new URLSearchParams({
             // 데이터명 : 데이터값
-            month : selectedTag.value
+            month: selectedTag.value
         })
     })
-    .then((response) => {
-        return response.json(); //나머지 경우에 사용
-    })
-    //fetch 통신 후 실행 영역
-    .then((data) => {//data -> controller에서 리턴되는 데이터!
+        .then((response) => {
+            return response.json(); //나머지 경우에 사용
+        })
+        //fetch 통신 후 실행 영역
+        .then((data) => {//data -> controller에서 리턴되는 데이터!
 
-        const monthList=[];
-        var temperAvgList = [];
-        var diAvgList=[];
-        var rehAvgList = [];
-        let highest = 0;
+            const monthList = [];
+            var temperAvgList = [];
+            var diAvgList = [];
+            var rehAvgList = [];
+            let highest = 0;
 
-        
-    
-        data.forEach(e => {
-            monthList.push(e.month);
-            diAvgList.push(e.diAvg);
-            rehAvgList.push(e.rehAvg);
-            temperAvgList.push(e.temperAvg);
-            // if (highest < e.rehAvg) {
-            //     highest = e.reh
-            // }
+
+
+            data.forEach(e => {
+                monthList.push(e.month);
+                diAvgList.push(e.diAvg);
+                rehAvgList.push(e.rehAvg);
+                temperAvgList.push(e.temperAvg);
+                // if (highest < e.rehAvg) {
+                //     highest = e.reh
+                // }
+            });
+
+
+
+            let dataList = [];
+            dataList.push(diAvgList);
+            dataList.push(rehAvgList);
+            dataList.push(temperAvgList);
+
+
+
+            // 차트 데이터
+            switch (canvasId) {
+                //월 상세
+                case 'detail-chart':
+                    updateChart(detailChart, monthList, dataList);
+                    updateShowData(dataList)
+                    break;
+                //오른쪽 차트
+                case 'compare-chart1':
+                    updateChart(compareChart1, monthList, dataList);
+                    updateCompareDiv(dataList, 'left');
+                    break;
+                // 왼쪽 차트
+                case 'compare-chart2':
+                    updateChart(compareChart2, monthList, dataList);
+                    updateCompareDiv(dataList, 'right');
+                    break;
+            }
+        })
+        //fetch 통신 실패 시 실행 영역
+        .catch(err => {
+            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+            console.log(err);
         });
-
-        
-
-        let dataList = [];
-        dataList.push(diAvgList);
-        dataList.push(rehAvgList);
-        dataList.push(temperAvgList);
-
-        
-
-        // 차트 데이터
-        switch(canvasId){
-            //월 상세
-            case 'detail-chart':
-                updateChart(detailChart, monthList, dataList);
-                updateShowData(dataList)
-                break;
-            //오른쪽 차트
-            case 'compare-chart1':
-                updateChart(compareChart1, monthList, dataList);
-                updateCompareDiv(dataList, 'left');
-                break;
-            // 왼쪽 차트
-            case 'compare-chart2':
-                updateChart(compareChart2, monthList, dataList);
-                updateCompareDiv(dataList, 'right');
-                break;
-        }
-    })
-    //fetch 통신 실패 시 실행 영역
-    .catch(err => {
-        alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
-        console.log(err);
-    });
 
 }
 
@@ -348,7 +368,7 @@ function updateChart(chart, label, newData) {
 }
 
 //월별 상세 내역
-function updateShowData(dataList){
+function updateShowData(dataList) {
 
     const [diAvgList, rehAvgList, temperAvgList] = dataList;
 
@@ -388,10 +408,10 @@ function updateShowData(dataList){
     document.querySelector('.updateMinD-div').textContent = minDi;
     document.querySelector('.updateMinD-div').innerHTML = `<span>${minDi}</span>`;
 
-    
+
 }
 
-function removeData(chart){
+function removeData(chart) {
     chart.data.labels = [];
     chart.data.datasets.forEach((dataset) => {
         dataset.data = [];
@@ -399,14 +419,14 @@ function removeData(chart){
     chart.update();
 }
 //월별 비교 내역
-function updateCompareDiv(dataList, pos){
+function updateCompareDiv(dataList, pos) {
     const [diAvgList, rehAvgList, temperAvgList] = dataList;
 
     //최고 width 300으로 제한 / 1도당 7px
     const maxTemper = Math.max(...temperAvgList);
     const minTemper = Math.min(...temperAvgList);
     const avgTemper = Math.round(temperAvgList.reduce((a, b) => a + b) / temperAvgList.length);
-    
+
     const maxReh = Math.max(...rehAvgList);
     const minReh = Math.min(...rehAvgList);
     const avgReh = Math.round(rehAvgList.reduce((a, b) => a + b) / rehAvgList.length);
@@ -418,7 +438,12 @@ function updateCompareDiv(dataList, pos){
     document.querySelector(`.${pos}-bar-max-temper`).innerHTML = `<span>${maxTemper}℃</span>`;
 
     document.querySelector(`.${pos}-bar-min-temper`).style.width = (minTemper * 7) + 'px';
-    document.querySelector(`.${pos}-bar-min-temper`).innerHTML = `<span style="float: right;">${minTemper}℃</span>`;
+    if (pos == 'left') {
+        document.querySelector(`.${pos}-bar-min-temper`).innerHTML = `<span style="float: right;">${minTemper}℃</span>`;
+    }
+    else {
+        document.querySelector(`.${pos}-bar-min-temper`).innerHTML = `<span">${minTemper}℃</span>`;
+    }
 
     document.querySelector(`.${pos}-bar-avg-temper`).style.width = (avgTemper * 7) + 'px';
     document.querySelector(`.${pos}-bar-avg-temper`).innerHTML = `<span>${avgTemper}℃</span>`;
