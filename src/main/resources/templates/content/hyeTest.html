@@ -7,54 +7,87 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
-    
-    <div class="row pt-3 first-row">
-        <div class="col">
-            <div class="row">
-                <div class="col">
-                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3"
-                    style="background-color: #00ced1; color: white;">
-                        <div class="ps-3" style="display: flex;">
-                            <h2>월 평균 온습도 불쾌지수 평균 상세차트</h2>
-                        </div>
-                    </div>
+
+    <div class="row first-row">
+        <div class="col" style="padding-left: 0.5px;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2"
+                style="background-color: #8e56ce; color: white; border-bottom: 2px solid #710786;">
+                <div class="main-title ps-3" style="display: flex;">
+                    <h2>월 평균 온습도 불쾌지수 평균 상세차트</h2>
+                    <h4 class="h1" style="font-size: 17px; margin-left: 15px; margin-top: 10px;"> [[${toDay}]]</h4>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-2">
-                    <select class="form-select" onchange="reDrawChart('detail-chart', this)">
-                        <option th:each="month : ${monthList}">[[${month}]]</option>
-                    </select>
+
                 </div>
             </div>
             <!-- 월별 차트 -->
 
-            <div class="row mt-3 mb-2">
-                <div class="col-8">
-                    <canvas id="detail-chart" width="100%"></canvas>
-                </div>
-                <div class="col-4 mt-5">
+            <div class="row">
+                <div class="col-8" style="position: relative;">
+                    <div class="row ps-3">
+                        <div class="col mb-1 pt-3">
+                            <span style="color: #10439F; font-size: 1.2rem; font-style: italic; font-weight: 500;">선택한
+                                월의 일일 평균 온도, 습도, 불쾌지수 정보를 확인할 수 있습니다.</span>
+
+                            <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
+                                aria-expanded="false" aria-controls="collapseWidthExample"
+                                style="color: #979797; font-size: 1.1rem; font-style: italic; font-weight: 400;">
+                                불쾌지수 <i class="bi bi-question-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div style="min-height: 120px; position: absolute; left: 692px; top: 14px;">
+                        <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                            <div class="card card-body" style="width: 450px; background-color: #FFF3CD;">
+                                <div>불쾌지수란 날씨에 따라 인간이 느끼는 불쾌감의 정도를 기온과 습도를 조합해 나타낸 수치를 말한다.</div>
+                                <div class="mt-2">불쾌지수(DI) = 0.72(기온+습구온도) + 40.6</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ps-3">
+                        <div class="col-2">
+                            <select class="form-select text-center" onchange="reDrawChart('detail-chart', this)">
+                                <option th:each="month : ${monthList}">[[${month}]]</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="row">
+                        <div class="col">
+                            <canvas id="detail-chart" width="100%"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-4 pt-5" style="background-color: white;">
+                    <div class="row justify-content-center">
                         <!-- 월별 온도 -->
-                        <div class="col-6">
-                            <div class="layer temper-layer">
-                                <span class="font-div-20">월별 온도</span>
-                                <span class="font-div-30 color-red-div">
-                                    <i class="bi bi-thermometer-high"></i>
-                                </span>
-                                <div class="col font-div-17">
+                        <div class="col-11">
+                            <div class="layer temper-layer" style="background-color: #C65BCF; padding-left: 30px; padding-right: 30px;">
+                                <div style="color: white;">
+                                    <span class="font-div-20">월별 온도</span>
+                                    <span class="font-div-30" style="display: inline-block; margin-left: 320px;">
+                                        <i class="bi bi-thermometer-high"></i>
+                                    </span>
+                                </div>
+                                <hr style="border: 1.5px solid #c411d4; border-radius: 6px; opacity: 1; margin-top: 6px; margin-bottom: 13px;">
+                                <div class="col font-div-17" style="color: #dddddd;">
                                     <div class="row mt-4">
-                                        <div class="col-6 color-red-div">
+                                        <div class="col-auto text-end" style="width: 90px; padding-right: 0px;">
                                             최고온도
                                         </div>
-                                        <div class="col-6">
-                                            <div class="updateMaxT-div">
+                                        <div class="col">
+                                            <div class="updateMaxT-div" style="display: flex;">
 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mt-1">
-                                        <div class="col-6 color-blue-div">
+                                        <div class="col-6">
                                             최저온도
                                         </div>
                                         <div class="col-6">
@@ -69,22 +102,25 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="row justify-content-center">
                         <!-- 월별 습도 -->
-                        <div class="col-6">
-                            <div class="layer reh-layer">
-                                <span class="font-div-20">월별 습도</span>
-                                <span class="font-div-30 color-blue-div">
-                                    <i class="bi bi-droplet-half"></i>
-                                </span>
+                        <div class="col-11">
+                            <div class="layer reh-layer" style="background-color: #9b69d3; padding-left: 30px; padding-right: 30px;">
+                                <div style="color: white;">
+                                    <span class="font-div-20">월별 습도</span>
+                                    <span class="font-div-30" style="display: inline-block; margin-left: 320px;">
+                                        <i class="bi bi-droplet-half"></i>
+                                    </span>
+                                </div>
+                                <hr style="border: 1.5px solid #8E56CE; border-radius: 6px; opacity: 1; margin-top: 6px; margin-bottom: 13px;">
                                 <div class="row mt-4">
-                                    <div class="col font-div-17">
+                                    <div class="col font-div-17" style="color: #dddddd;">
                                         <div class="row mt-1">
-                                            <div class="col-6 color-red-div">
+                                            <div class="col-6">
                                                 최고습도
                                             </div>
                                             <div class="col-6">
@@ -93,7 +129,7 @@
                                             </div>
                                         </div>
                                         <div class="row mt-1">
-                                            <div class="col-6 color-blue-div">
+                                            <div class="col-6">
                                                 최저습도
                                             </div>
                                             <div class="col-6">
@@ -116,17 +152,20 @@
                         </div>
                     </div>
                     <!-- 월별 불쾌지수 -->
-                    <div class="row mt-3">
-                        <div class="col text-center">
-                            <div class="layer di-layer">
-                                <span class="font-div-20">월별 불쾌지수</span>
-                                <span class="font-div-30">
-                                    <i class="bi bi-emoji-smile"></i>
-                                </span>
+                    <div class="row justify-content-center">
+                        <div class="col-11">
+                            <div class="layer di-layer" style="background-color: #f393c8; padding-left: 30px; padding-right: 30px;">
+                                <div style="color: white;">
+                                    <span class="font-div-20">월별 불쾌지수</span>
+                                    <span class="font-div-30" style="display: inline-block; margin-left: 280px;">
+                                        <i class="bi bi-emoji-smile"></i>
+                                    </span>
+                                </div>
+                                <hr style="border: 1.5px solid #F27BBD; border-radius: 6px; opacity: 1; margin-top: 6px; margin-bottom: 13px;">
                                 <div class="row mt-4">
-                                    <div class="col font-div-17">
+                                    <div class="col font-div-17" style="color: #dddddd;">
                                         <div class="row">
-                                            <div class="col-6 text-end color-red-div">
+                                            <div class="col-6 text-end">
                                                 <i class="bi bi-emoji-angry-fill"></i>
                                                 불쾌지수 최고
                                             </div>
@@ -136,7 +175,7 @@
                                             </div>
                                         </div>
                                         <div class="row mt-1">
-                                            <div class="col-6 text-end color-blue-div">
+                                            <div class="col-6 text-end">
                                                 <i class="bi bi-emoji-laughing-fill"></i>
                                                 불쾌지수 최저
                                             </div>

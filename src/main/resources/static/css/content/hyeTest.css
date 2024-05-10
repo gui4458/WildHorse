@@ -188,12 +188,12 @@
 
 .layer{
   margin-bottom: 20px;
-  border: 1px solid #dddddd;
+  /* border: 1px solid #dddddd; */
   border-radius: 10px;
   background-color: white;
   padding: 10px;
   height: 50vh;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
 }
 
 .temper-layer{
@@ -233,5 +233,15 @@
   background-color: white;
 }
 
-
+.detail-month-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color:red; 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
 

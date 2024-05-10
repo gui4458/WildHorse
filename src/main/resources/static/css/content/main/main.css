@@ -297,3 +297,7 @@ input[type='date']:valid::before {
     display: none;
 }
 
+.color-head{
+    --bs-table-bg: #BBE2EC;
+    --bs-table-color: white;
+}
