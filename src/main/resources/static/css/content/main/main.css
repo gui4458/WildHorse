@@ -229,8 +229,8 @@ table tr td {
     border-radius: 10px;
     background-color: white;
     padding: 10px;
-    height: 50vh;
-    box-shadow: 0 7px 7px rgba(0, 0, 0, 0.116), 0 5px 5px rgba(0, 0, 0, 0.11);
+    /* height: 50vh; */
+    /* box-shadow: 0 7px 7px rgba(0, 0, 0, 0.116), 0 5px 5px rgba(0, 0, 0, 0.11); */
 }
 
 .small-layer {
@@ -241,8 +241,8 @@ table tr td {
 }
 
 .large-layer {
-    height: 50vh;
-    width: 665px;
+    /* height: 50vh; */
+    width: 716px;
     margin-right: 50px;
     
     background-color: rgba(255, 255, 255, 0.89);
