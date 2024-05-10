@@ -168,7 +168,7 @@
                 <div class="d-flex justify-content-between align-items-end">
                   <div class="efh-tag">
                     <h5 class="mb-1 fw-normal lh-1 fs-6" style="color: gray;">
-                      [[${efh.efhData}]]
+                      [[${efh.efhData}]] %
                     </h5>
                   </div>
                 </div>
@@ -257,7 +257,7 @@
       </div>
       <!-- </div> -->
 
-      <div class="g-3 mb-3 row mt-3  justify-content-center pt-3"
+      <div class="g-3 mb-3 row mt-3 justify-content-center pt-3"
         style="margin-left: -2px; background-color: white; border-top: 1px solid rgba(128, 128, 128, 0.3); border-left: 1px solid rgba(128, 128, 128, 0.3);">
         <div style="padding-left: 68px; font-size: 1.2rem; font-weight: 600;">
           <div style="display: inline-block; width: 750px; padding-left: 6px;">일일 측정 시간별 불쾌지수</div>
@@ -267,7 +267,7 @@
 
         <div class="col-xxl-5 col-md-6 border border-2 rounded layer large-layer" id="di-line-container">
           <!-- 불쾌지수 차트 -->
-          <canvas id="di-line-chart" width="250px" height="150px"></canvas>
+          <canvas id="di-line-chart" class="mt-5" width="250px" height="150px"></canvas>
 
         </div>
 
@@ -276,7 +276,7 @@
         <div class="col-xxl-5 col-md-6 border border-2 rounded layer large-layer">
           <!-- 표 데이터 구역 -->
 
-          <div class="tab-table-all">
+          <div class="tab-table-all" style="height: 500px;">
             <nav>
               <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <span th:each="tab ,state: ${selectTab}">
@@ -312,9 +312,9 @@
                   <tbody>
                     <tr th:each="time : ${timeList}" th:if="${time.type == '새벽'}">
                       <td>[[${time.mesurTime}]]시</td>
-                      <td>[[${time.temper}]]</td>
-                      <td>[[${time.reh}]]</td>
-                      <td>[[${time.di}]]</td>
+                      <td>[[${time.temper}]] C °</td>
+                      <td>[[${time.reh}]] %</td>
+                      <td>[[${time.di}]] C °</td>
                     </tr>
                   </tbody>
                 </table>
@@ -331,19 +331,19 @@
                   <tbody>
                     <tr>
                       <td class="color-head">최고온도</td>
-                      <td>[[${temps.maxTemp}]]</td>
+                      <td>[[${temps.maxTemp}]] C °</td>
                       <td class="color-head">최저온도</td>
-                      <td>[[${temps.minTemp}]]</td>
+                      <td>[[${temps.minTemp}]] C °</td>
                     </tr>
                     <tr>
                       <td class="color-head">평균 온도</td>
-                      <td>[[${avg.tempAvg}]]</td>
+                      <td>[[${avg.tempAvg}]] C °</td>
                       <td class="color-head">평균 습도</td>
-                      <td>[[${avg.rehAvg}]]</td>
+                      <td>[[${avg.rehAvg}]] %</td>
                     </tr>
                     <tr>
                       <td class="color-head">화재위험성 수치</td>
-                      <td>[[${efh.efhData}]]</td>
+                      <td>[[${efh.efhData}]] % </td>
                       <td class="color-head">화재위험성</td>
                       <td>[[${efh.efhDeg}]]</td>
                     </tr>
@@ -371,9 +371,9 @@
                   <tbody>
                     <tr th:each="time : ${timeList}" th:if="${time.type == '오전'}">
                       <td>[[${time.mesurTime}]]시</td>
-                      <td>[[${time.temper}]]</td>
-                      <td>[[${time.reh}]]</td>
-                      <td>[[${time.di}]]</td>
+                      <td>[[${time.temper}]] C °</td>
+                      <td>[[${time.reh}]] %</td>
+                      <td>[[${time.di}]]  C °</td>
                     </tr>
                   </tbody>
                 </table>
@@ -390,19 +390,19 @@
                   <tbody>
                     <tr>
                       <td class="color-head">최고온도</td>
-                      <td>[[${temps.maxTemp}]]</td>
+                      <td>[[${temps.maxTemp}]] C °</td>
                       <td class="color-head">최저온도</td>
-                      <td>[[${temps.minTemp}]]</td>
+                      <td>[[${temps.minTemp}]] C °</td>
                     </tr>
                     <tr>
                       <td class="color-head">평균 온도</td>
-                      <td>[[${avg.tempAvg}]]</td>
+                      <td>[[${avg.tempAvg}]] C °</td>
                       <td class="color-head">평균 습도</td>
-                      <td>[[${avg.rehAvg}]]</td>
+                      <td>[[${avg.rehAvg}]] %</td>
                     </tr>
                     <tr>
                       <td class="color-head">화재위험성 수치</td>
-                      <td>[[${efh.efhData}]]</td>
+                      <td>[[${efh.efhData}]] %</td>
                       <td class="color-head">화재위험성</td>
                       <td>[[${efh.efhDeg}]]</td>
                     </tr>
@@ -430,9 +430,9 @@
                   <tbody>
                     <tr th:each="time : ${timeList}" th:if="${time.type == '오후'}">
                       <td>[[${time.mesurTime}]]시</td>
-                      <td>[[${time.temper}]]</td>
-                      <td>[[${time.reh}]]</td>
-                      <td>[[${time.di}]]</td>
+                      <td>[[${time.temper}]] C °</td>
+                      <td>[[${time.reh}]] %</td>
+                      <td>[[${time.di}]] C °</td>
                     </tr>
                   </tbody>
                 </table>
@@ -449,19 +449,19 @@
                   <tbody>
                     <tr>
                       <td class="color-head">최고온도</td>
-                      <td>[[${temps.maxTemp}]]</td>
+                      <td>[[${temps.maxTemp}]] C °</td>
                       <td class="color-head">최저온도</td>
-                      <td>[[${temps.minTemp}]]</td>
+                      <td>[[${temps.minTemp}]] C °</td>
                     </tr>
                     <tr>
                       <td class="color-head">평균 온도</td>
-                      <td>[[${avg.tempAvg}]]</td>
+                      <td>[[${avg.tempAvg}]] C °</td>
                       <td class="color-head">평균 습도</td>
-                      <td>[[${avg.rehAvg}]]</td>
+                      <td>[[${avg.rehAvg}]] %</td>
                     </tr>
                     <tr>
                       <td class="color-head">화재위험성 수치</td>
-                      <td>[[${efh.efhData}]]</td>
+                      <td>[[${efh.efhData}]] %</td>
                       <td class="color-head">화재위험성</td>
                       <td>[[${efh.efhDeg}]]</td>
                     </tr>
@@ -488,9 +488,9 @@
                   <tbody>
                     <tr th:each="time : ${timeList}" th:if="${time.type == '야간'}">
                       <td>[[${time.mesurTime}]]시</td>
-                      <td>[[${time.temper}]]</td>
-                      <td>[[${time.reh}]]</td>
-                      <td>[[${time.di}]]</td>
+                      <td>[[${time.temper}]] C °</td>
+                      <td>[[${time.reh}]] %</td>
+                      <td>[[${time.di}]] C °</td>
                     </tr>
                   </tbody>
                 </table>
@@ -507,19 +507,19 @@
                   <tbody>
                     <tr>
                       <td class="color-head">최고온도</td>
-                      <td>[[${temps.maxTemp}]]</td>
+                      <td>[[${temps.maxTemp}]] C °</td>
                       <td class="color-head">최저온도</td>
-                      <td>[[${temps.minTemp}]]</td>
+                      <td>[[${temps.minTemp}]] C °</td>
                     </tr>
                     <tr>
                       <td class="color-head">평균 온도</td>
-                      <td>[[${avg.tempAvg}]]</td>
+                      <td>[[${avg.tempAvg}]] C °</td>
                       <td class="color-head">평균 습도</td>
-                      <td>[[${avg.rehAvg}]]</td>
+                      <td>[[${avg.rehAvg}]] %</td>
                     </tr>
                     <tr>
                       <td class="color-head">화재위험성 수치</td>
-                      <td>[[${efh.efhData}]]</td>
+                      <td>[[${efh.efhData}]] %</td>
                       <td class="color-head">화재위험성</td>
                       <td>[[${efh.efhDeg}]]</td>
                     </tr>

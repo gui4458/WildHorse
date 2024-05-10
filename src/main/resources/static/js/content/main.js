@@ -226,8 +226,11 @@ let timeLabel = []
 let temperAvg = []
 let rehAvg = []
 let diList = []
-
-
+let dayRehAvgList = []
+let dayTemperAvgList = []
+let dayDiAvgList = []
+let dayDiAvg = 0
+let diSum = 0;
 
 let tempBest = 0
 fetch('/charts/main', { //요청경로
@@ -247,21 +250,31 @@ fetch('/charts/main', { //요청경로
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-        console.log(data.timeList);
+
         temperLow = data.timeList[0].temper
         rehLow = data.timeList[0].reh
         diLow = data.timeList[0].di
 
 
-
         //시간대별 온도 습도 조회
         console.log(data.timeList)
+        data.timeList.forEach(e => {
+            diSum += e.di;
+            dayDiAvg = diSum / data.timeList.length;
+        });
+
         data.timeList.forEach(e => {
             timeLabel.push(e.mesurTime)
             temperAvg.push(e.temper)
             rehAvg.push(e.reh)
             diList.push(e.di)
 
+
+
+
+            dayRehAvgList.push(data.avg.rehAvg)
+            dayTemperAvgList.push(data.avg.tempAvg)
+            dayDiAvgList.push(dayDiAvg)
             if (rehBest < e.reh) {
                 rehBest = e.reh
             }
@@ -284,7 +297,9 @@ fetch('/charts/main', { //요청경로
             }
 
         });
-
+        console.log(`dayRehAvgList=${dayRehAvgList}`)
+        console.log(`dayTemperAvgList=${dayTemperAvgList}`)
+        console.log(`dayDiAvgList=${dayDiAvgList}`)
         // 라인차트~~
         //습도 
         new Chart(document.getElementById("reh-line-chart"), {
@@ -297,8 +312,8 @@ fetch('/charts/main', { //요청경로
                     borderColor: "#59B4C3",
                     fill: false
                 }, {
-                    data: [78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78],
-                    label: "평균습도",
+                    data: dayRehAvgList,
+                    label: "평균",
                     borderColor: "rgba(0, 0, 0, 0.1)",
                     fill: false,
                     pointRadius: 0
@@ -315,13 +330,13 @@ fetch('/charts/main', { //요청경로
                 //     }
                 // }
                 // ,
-                
+
                 title: {
                     display: true,
                     text: 'World population per region (in millions)'
                 },
                 // plugins: {
-                    
+
                 //     title: {
                 //         display: true,
                 //         text: '습도 차트',
@@ -377,18 +392,27 @@ fetch('/charts/main', { //요청경로
                     label: "온도",
                     borderColor: "#FFAA80",
                     fill: false
-                }
-                // ,{
-                //     data: [78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78],
-                //     label: "평균습도",
-                //     borderColor: "rgba(0, 0, 0, 0.1)",
-                //     fill: false,
-                //     pointRadius: 0
+                },
+                {
+                    data: dayTemperAvgList,
+                    label: "평균",
+                    borderColor: "rgba(0, 0, 0, 0.1)",
+                    fill: false,
+                    pointRadius: 0
 
-                // }
-            ]
-                
-                
+
+                }
+                    // ,{
+                    //     data: [78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78],
+                    //     label: "평균습도",
+                    //     borderColor: "rgba(0, 0, 0, 0.1)",
+                    //     fill: false,
+                    //     pointRadius: 0
+
+                    // }
+                ]
+
+
             },
             options: {
 
@@ -443,6 +467,14 @@ fetch('/charts/main', { //요청경로
                     label: "불쾌지수",
                     borderColor: "#FF5580",
                     fill: false
+                }, {
+                    data: dayDiAvgList,
+                    label: "평균",
+                    borderColor: "rgba(0, 0, 0, 0.1)",
+                    fill: false,
+                    pointRadius: 0
+
+
                 }
                 ]
             },
@@ -529,7 +561,11 @@ fetch('/charts/main', { //요청경로
                 }
             }
         });
-        
+        dayRehAvgList = []
+        dayTemperAvgList = []
+        dayDiAvgList = []
+        dayDiAvg = 0
+        diSum = 0;
 
     })
     //fetch 통신 실패 시 실행 영역
@@ -571,9 +607,9 @@ function infoChange() {
             // 새로운 차트 생성
             let rehCanvas = document.createElement('canvas');
             rehCanvas.id = 'reh-line-chart';
-            rehCanvas.style.width= 250 +'px';
+            rehCanvas.style.width = 250 + 'px';
 
-            rehCanvas.style.height= 150 +'px';
+            rehCanvas.style.height = 150 + 'px';
 
 
             document.getElementById('reh-line-container').appendChild(rehCanvas); // 새로운 캔버스 추가
@@ -585,8 +621,8 @@ function infoChange() {
             }
             let canvas = document.createElement('canvas');
             canvas.id = 'temp-line-chart';
-            canvas.style.width= 250 +'px';
-            canvas.style.height= 150 +'px';
+            canvas.style.width = 250 + 'px';
+            canvas.style.height = 150 + 'px';
             document.getElementById('temp-line-container').appendChild(canvas); // 새로운 캔버스 추가
 
 
@@ -598,19 +634,20 @@ function infoChange() {
             }
             let diCanvas = document.createElement('canvas');
             diCanvas.id = 'di-line-chart';
-            diCanvas.style.width= 250 +'px';
-            diCanvas.style.height= 150 +'px';
+            diCanvas.style.width = 250 + 'px';
+            diCanvas.style.height = 150 + 'px';
+            diCanvas.className='mt-5';
             document.getElementById('di-line-container').appendChild(diCanvas);
 
 
             //메인 타이틀
-            const mainTitleStr=`
+            const mainTitleStr = `
             <h2>실내 센서 종합 모니터링</h2>
             <h4 class="h1" style="font-size: 17px; margin-left: 15px; margin-top: 10px;">  ${searchDate}</h4>
             
             `
-            mainTitleTag.replaceChildren(mainTitleTag.textContent='')
-            mainTitleTag.insertAdjacentHTML('afterbegin',mainTitleStr)
+            mainTitleTag.replaceChildren(mainTitleTag.textContent = '')
+            mainTitleTag.insertAdjacentHTML('afterbegin', mainTitleStr)
 
 
 
@@ -649,15 +686,15 @@ function infoChange() {
                 if (i == 0) {
                     tabStr += `
                                     <div class="tab-pane fade show active" id="nav-${i}" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                                        <table class="table table-striped table-sm text-center">
-                                            <thead>
-                                                <colgroup>
-                                                    <col width="25%">
-                                                    <col width="25%">
-                                                    <col width="25%">
-                                                    <col width="25%">
-                                
-                                                </colgroup>
+                                        <table class="table table-sm text-center">
+                                        <colgroup>
+                                            <col width="25%">
+                                            <col width="25%">
+                                            <col width="25%">
+                                            <col width="25%">
+                        
+                                        </colgroup>
+                                            <thead class="color-head">
                         
                                                 <tr>
                                                     <td>시간</td>
@@ -672,16 +709,16 @@ function infoChange() {
                 } else {
                     tabStr += `
                                     <div class="tab-pane fade" id="nav-${i}" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                                        <table class="table table-striped table-sm text-center">
-                                            <thead>
-                                                <colgroup>
-                                                    <col width="25%">
-                                                    <col width="25%">
-                                                    <col width="25%">
-                                                    <col width="25%">
-                                
-                                                </colgroup>
+                                        <table class="table table-sm text-center">
+                                        <colgroup>
+                                            <col width="25%">
+                                            <col width="25%">
+                                            <col width="25%">
+                                            <col width="25%">
                         
+                                        </colgroup>
+                
+                                            <thead class="color-head">
                                                 <tr>
                                                     <td>시간</td>
                                                     <td>온도</td>
@@ -699,30 +736,30 @@ function infoChange() {
                         tabStr += `
                                                 <tr>
                                                     <td>${e.mesurTime}시</td>
-                                                    <td>${e.temper}</td>
-                                                    <td>${e.reh}</td>
-                                                    <td>${e.di}</td>
+                                                    <td>${e.temper} C °</td>
+                                                    <td>${e.reh} %</td>
+                                                    <td>${e.di} C °</td>
                                                 </tr>
                             `
                     }
                 })
                 tabStr += `             
                                                 <tr>
-                                                    <td>최고온도</td>
-                                                    <td>${data.temps.maxTemp}</td>
-                                                    <td>최저온도</td>
-                                                    <td>${data.temps.minTemp}</td>
+                                                    <td class="color-head">최고온도</td>
+                                                    <td>${data.temps.maxTemp} C °</td>
+                                                    <td class="color-head">최저온도</td>
+                                                    <td>${data.temps.minTemp} C °</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>평균 온도</td>
-                                                    <td>${data.avg.tempAvg}</td>
-                                                    <td>평균 습도</td>
-                                                    <td>${data.avg.rehAvg}</td>
+                                                    <td class="color-head">평균 온도</td>
+                                                    <td>${data.avg.tempAvg} C °</td>
+                                                    <td class="color-head">평균 습도</td>
+                                                    <td>${data.avg.rehAvg} %</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>화재위험성 수치</td>
-                                                    <td>${data.efh.efhData}</td>
-                                                    <td>화재위험성</td>
+                                                    <td class="color-head">화재위험성 수치</td>
+                                                    <td>${data.efh.efhData} %</td>
+                                                    <td class="color-head">화재위험성</td>
                                                     <td>${data.efh.efhDeg}</td>
                                                 </tr>
                                             </tbody>
@@ -804,7 +841,7 @@ function infoChange() {
             let efhTag = document.querySelector('.efh-tag');
             let efhStr = `
                         <h5 class="mb-1 fw-normal lh-1 fs-6" style="color: gray;">
-                            ${data.efh.efhData}
+                            ${data.efh.efhData} %
                         </h5>
                         `
 
@@ -850,7 +887,7 @@ function infoChange() {
                             </div>
                         </h5>
                         `
-
+            
             diTag.replaceChildren(diTag.textContent = '');
             diTag.insertAdjacentHTML("afterbegin", diStr);
 
@@ -885,10 +922,22 @@ function infoChange() {
             //시간대별 온도 습도 조회
             console.log(data.timeList)
             data.timeList.forEach(e => {
+                diSum += e.di;
+                dayDiAvg = diSum / data.timeList.length;
+            });
+
+            data.timeList.forEach(e => {
                 timeLabel.push(e.mesurTime)
                 temperAvg.push(e.temper)
                 rehAvg.push(e.reh)
                 diList.push(e.di)
+
+
+
+
+                dayRehAvgList.push(data.avg.rehAvg)
+                dayTemperAvgList.push(data.avg.tempAvg)
+                dayDiAvgList.push(dayDiAvg)
 
 
 
@@ -921,60 +970,52 @@ function infoChange() {
                     datasets: [{
                         data: rehAvg,
                         label: "습도",
-                        borderColor: "#c45850",
+                        borderColor: "#59B4C3",
                         fill: false
                     }, {
-                        data: [78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78],
-                        label: "평균습도",
+                        data: dayRehAvgList,
+                        label: "평균",
                         borderColor: "rgba(0, 0, 0, 0.1)",
                         fill: false,
                         pointRadius: 0
-    
-    
+
+
                     }
                     ]
                 },
                 options: {
-    
+
                     // elements: {
                     //     point: {
                     //         radius: 0
                     //     }
                     // }
                     // ,
-                    
+
                     title: {
                         display: true,
                         text: 'World population per region (in millions)'
                     },
-                    plugins: {
-                        
-                        title: {
-                            display: true,
-                            text: '습도 차트',
-                            font: 50
-                        }
-                    },
                     scales: {
-    
+
                         y: {
                             min: Math.ceil(rehLow - 5),
                             max: Math.floor(rehBest + 5)
-    
+
                             , title: {
                                 display: true,
-    
+
                                 font: {
                                     family: 'Times',
                                     size: 15,
                                     style: 'normal',
                                     lineHeight: 1.2
                                 },
-    
+
                                 text: "습도(%)",
                             }
-    
-    
+
+
                         },
                         x: {
                             title: {
@@ -990,7 +1031,7 @@ function infoChange() {
                             }
                         }
                     }
-    
+
                 }
             });
 
@@ -1001,31 +1042,33 @@ function infoChange() {
                     datasets: [{
                         data: temperAvg,
                         label: "온도",
-                        borderColor: "#3e95cd",
+                        borderColor: "#FFAA80",
                         fill: false
+                    }, {
+                        data: dayTemperAvgList,
+                        label: "평균",
+                        borderColor: "rgba(0, 0, 0, 0.1)",
+                        fill: false,
+                        pointRadius: 0
+
+
                     }
                     ]
                 },
                 options: {
-    
+
                     title: {
                         display: true,
                         text: 'World population per region (in millions)'
                     },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: '온도 차트',
-                            size: 38
-                        }
-                    },
+                    
                     scales: {
                         y: {
-    
+
                             min: Math.floor(temperLow - 5), //4.5
                             max: Math.ceil(temperBest + 5)
                             //fontSize : 14
-    
+
                             , title: {
                                 display: true,
                                 text: "온도(C °)",
@@ -1044,7 +1087,7 @@ function infoChange() {
                             }
                         }
                     }
-    
+
                 }
             });
             // 불쾌지수 라인차트
@@ -1055,8 +1098,16 @@ function infoChange() {
                     datasets: [{
                         data: diList,
                         label: "불쾌지수",
-                        borderColor: "#3e95cd",
+                        borderColor: "#FF5580",
                         fill: false
+                    }, {
+                        data: dayDiAvgList,
+                        label: "평균",
+                        borderColor: "rgba(0, 0, 0, 0.1)",
+                        fill: false,
+                        pointRadius: 0
+
+
                     }
                     ]
                 },
@@ -1065,16 +1116,10 @@ function infoChange() {
                         display: true,
                         text: 'World population per region (in millions)'
                     },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: '불쾌지수 차트',
-                            size: 38
-                        }
-                    },
+                    
                     scales: {
                         y: {
-    
+
                             min: Math.ceil(diLow - 5),
                             max: Math.floor(diBest + 5)
                             // fontSize : 14
@@ -1085,7 +1130,7 @@ function infoChange() {
                                     size: 15,
                                 }
                             }
-    
+
                         }
                         , x: {
                             title: {
@@ -1244,7 +1289,11 @@ function infoChange() {
                 }, 2000)
             })
 
-
+            dayRehAvgList = []
+            dayTemperAvgList = []
+            dayDiAvgList = []
+            dayDiAvg = 0
+            diSum = 0;
         })
         //fetch 통신 실패 시 실행 영역
         .catch(err => {
