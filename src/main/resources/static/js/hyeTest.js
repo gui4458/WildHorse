@@ -393,30 +393,28 @@ function updateShowData(dataList) {
     const maxDi = Math.max(...diAvgList);
     const minDi = Math.min(...diAvgList);
 
-    //온도
-    document.querySelector('.updateMaxT-div').textContent = maxTemper;
-    document.querySelector('.updateMaxT-div').innerHTML = `<span>${maxTemper}℃</span>`;
+    //온도 270
+    // document.querySelector('.updateMaxT-div').textContent = maxTemper;
+    document.querySelector('.updateMaxT-div').innerHTML = `
+        <div class="detail-month-bar"></div>
+        <span style="display:inline-block;">${maxTemper}℃</span>
+    `;
 
-    document.querySelector('.updateMinT-div').textContent = minTemper;
+    document.querySelector(`.detail-month-bar`).style.width = (maxTemper * 7) + 'px';
+
     document.querySelector('.updateMinT-div').innerHTML = `<span>${minTemper}℃</span>`;
 
-    document.querySelector('.updateAvgT-div').textContent = avgTemper;
     document.querySelector('.updateAvgT-div').innerHTML = `<span>${avgTemper}℃</span>`;
     
     //습도
-    document.querySelector('.updateMaxR-div').textContent = maxReh;
     document.querySelector('.updateMaxR-div').innerHTML = `<span>${maxReh}%</span>`;
 
-    document.querySelector('.updateMinR-div').textContent = minReh;
     document.querySelector('.updateMinR-div').innerHTML = `<span>${minReh}%</span>`;
 
-    document.querySelector('.updateAvgR-div').textContent = avgReh;
     document.querySelector('.updateAvgR-div').innerHTML = `<span>${avgReh}%</span>`;
     //불쾌지수
-    document.querySelector('.updateMaxD-div').textContent = maxDi;
     document.querySelector('.updateMaxD-div').innerHTML = `<span>${maxDi}</span>`;
 
-    document.querySelector('.updateMinD-div').textContent = minDi;
     document.querySelector('.updateMinD-div').innerHTML = `<span>${minDi}</span>`;
 
 
