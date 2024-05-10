@@ -14,22 +14,26 @@
   <div class="row">
     <div class="col" style="padding-left: 0.5px;">
 
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-        <div class="main-title" style="display: flex;">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3"
+            style="background-color: #8e56ce; color: white; border-bottom: 2px solid #710786;">
+        <div class="main-title ps-3" style="display: flex;">
           <h2>실내 센서 종합 모니터링</h2>
           <h4 class="h1" style="font-size: 17px; margin-left: 15px; margin-top: 10px;"> [[${toDay}]]</h4>
-
         </div>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <input id="search-date" type="date" th:max="${session.maxDay}" th:min="${session.minDay}"
+          
+        <div class="btn-toolbar mb-2 mb-md-0" style="margin-right: 110px;">
+            <input class="text-center" id="search-date" type="date" th:max="${session.maxDay}" th:min="${session.minDay}" style="margin-top: 5px; margin-bottom: 15px;"
             onchange="infoChange(this)" placeholder="날짜를 선택해주세요." th:value="${toDay}">
         </div>
       </div>
-      <div>
+  
 
         <div class="g-3 mb-3 row justify-content-center">
-          <div>
+          <div style="padding-left: 68px; font-size: 1.2rem; font-weight: 600;">
             오늘의 요약 정보
+          </div>
+          <div style="padding-left: 68px; font-size: 0.9rem; font-style: italic; color: gray; margin-top: 4px;">
+            선택한 날짜의 온도, 습도, 불쾌지수에 대한 정보를 볼 수 있습니다.
           </div>
           <div class="col-xxl-3 col-md-6 layer small-layer ">
             <div class="row">
@@ -229,16 +233,17 @@
           </div>
         </div>
 
-      </div>
-      <div>
+      <!-- <div> -->
         <div class="chart-big-tag g-3 mb-3 row mt-3 justify-content-center">
           
-          
-            <div class="col-xxl-5 col-md-6 border border-2 rounded layer large-layer" id="temp-line-container">
-              <!-- 평균 온습도 차트 구역 -->
-              <canvas id="temp-line-chart" width="250px" height="150px"></canvas>
-
-            </div>
+          <div style="padding-left: 68px; font-size: 1.2rem; font-weight: 600;">
+            <div style="display: inline-block; width: 750px; padding-left: 6px;">일일 측정 시간별 온도</div>
+            <div style="display: inline-block; padding-left: 18px;">일일 측정 시간별 습도</div>
+          </div>
+          <div class="col-xxl-5 col-md-6 border border-2 rounded layer large-layer" id="temp-line-container">
+            <!-- 평균 온습도 차트 구역 -->
+            <canvas id="temp-line-chart" width="250px" height="150px"></canvas>
+          </div>
           
 
 
@@ -246,13 +251,18 @@
           <div class="col-xxl-5 col-md-6 border border-2 rounded layer large-layer" id="reh-line-container">
             <!-- 평균 온습도 차트 구역 -->
             <canvas id="reh-line-chart" width="250px" height="150px"></canvas>
-
           </div>
 
         </div>
-        </div>
+        <!-- </div> -->
 
-        <div class="g-3 mb-3 row mt-3  justify-content-center" style="margin-left: -2px; background-color: white; border-top: 1px solid rgba(128, 128, 128, 0.3); border-left: 1px solid rgba(128, 128, 128, 0.3);">
+        <div class="g-3 mb-3 row mt-3  justify-content-center pt-3" style="margin-left: -2px; background-color: white; border-top: 1px solid rgba(128, 128, 128, 0.3); border-left: 1px solid rgba(128, 128, 128, 0.3);">
+          <div style="padding-left: 68px; font-size: 1.2rem; font-weight: 600;">
+            <div style="display: inline-block; width: 750px; padding-left: 6px;">일일 측정 시간별 불쾌지수</div>
+            <div style="display: inline-block; padding-left: 18px;"></div>
+          </div>
+
+
           <div class="col-xxl-5 col-md-6 border border-2 rounded layer large-layer" id="di-line-container">
             <!-- 불쾌지수 차트 -->
             <canvas id="di-line-chart" width="250px" height="150px"></canvas>
@@ -263,7 +273,7 @@
 
           <div class="col-xxl-5 col-md-6 border border-2 rounded layer large-layer">
             <!-- 표 데이터 구역 -->
-            <h3>Section title</h3>
+           
             <div class="tab-table-all">
               <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">

@@ -320,14 +320,14 @@ fetch('/charts/main', { //요청경로
                     display: true,
                     text: 'World population per region (in millions)'
                 },
-                plugins: {
+                // plugins: {
                     
-                    title: {
-                        display: true,
-                        text: '습도 차트',
-                        font: 50
-                    }
-                },
+                //     title: {
+                //         display: true,
+                //         text: '습도 차트',
+                //         font: 50
+                //     }
+                // },
                 scales: {
 
                     y: {
@@ -386,13 +386,13 @@ fetch('/charts/main', { //요청경로
                     display: true,
                     text: 'World population per region (in millions)'
                 },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: '온도 차트',
-                        size: 38
-                    }
-                },
+                // plugins: {
+                //     title: {
+                //         display: true,
+                //         // text: '온도 차트',
+                //         size: 38
+                //     }
+                // },
                 scales: {
                     y: {
 
@@ -441,13 +441,13 @@ fetch('/charts/main', { //요청경로
                     display: true,
                     text: 'World population per region (in millions)'
                 },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: '불쾌지수 차트',
-                        size: 38
-                    }
-                },
+                // plugins: {
+                //     title: {
+                //         display: true,
+                //         // text: '불쾌지수 차트',
+                //         size: 38
+                //     }
+                // },
                 scales: {
                     y: {
 
@@ -519,58 +519,7 @@ fetch('/charts/main', { //요청경로
                 }
             }
         });
-        // Pie chart(가짜데이터)
-        new Chart(document.getElementById("pie-chart"), {
-            type: 'pie',
-            data: {
-                labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-                datasets: [{
-                    label: "Population (millions)",
-                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                    data: [2478, 5267, 734, 784, 433]
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Predicted world population (millions) in 2050'
-                }
-            }
-        });
-        //Radar chart(가짜)
-        new Chart(document.getElementById("radar-chart"), {
-            type: 'radar',
-            data: {
-                labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-                datasets: [
-                    {
-                        label: "1950",
-                        fill: true,
-                        backgroundColor: "rgba(179,181,198,0.2)",
-                        borderColor: "rgba(179,181,198,1)",
-                        pointBorderColor: "#fff",
-                        pointBackgroundColor: "rgba(179,181,198,1)",
-                        data: [8.77, 55.61, 21.69, 6.62, 6.82]
-                    }, {
-                        label: "2050",
-                        fill: true,
-                        backgroundColor: "rgba(255,99,132,0.2)",
-                        borderColor: "rgba(255,99,132,1)",
-                        pointBorderColor: "#fff",
-                        pointBackgroundColor: "rgba(255,99,132,1)",
-                        pointBorderColor: "#fff",
-                        data: [25.48, 54.16, 7.61, 8.06, 4.45]
-                    }
-                ]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Distribution in % of world population'
-                }
-            }
-        });
-
+        
 
     })
     //fetch 통신 실패 시 실행 영역
