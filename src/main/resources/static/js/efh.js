@@ -61,7 +61,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         label: 'EFH Percent',
                         data: efhDatas,
                         fill: false,
-                        borderColor: 'rgb(54, 162, 235)'
+                        borderColor: 'rgb(54, 162, 235)',
+                        backgroundColor: ['#C67ACE','#DFCCFB']
                     }]
                 },
                 options: {
@@ -316,15 +317,17 @@ function selectDay(toDay) {
     caution = 0;
     safety = 0;
     // 기존 차트 삭제
-    let oldEfhLineChart = document.getElementById('efh-line-chart');
+    let oldEfhLineChart = document.getElementById('efh-bar-chart');
     if (oldEfhLineChart) {
         oldEfhLineChart.parentNode.removeChild(oldEfhLineChart);
     }
     // 새로운 차트 생성
     let efhCanvas = document.createElement('canvas');
-    efhCanvas.id = 'efh-line-chart';
+    efhCanvas.id = 'efh-bar-chart';
     efhCanvas.style.width = 50 + '%';
-    document.getElementById('efh-line-container').appendChild(efhCanvas); // 새로운 캔버스 추가
+    efhCanvas.style.height = 70 + '%';
+    efhCanvas.className = 'my-4';
+    document.getElementById('efh-bar-container').appendChild(efhCanvas); // 새로운 캔버스 추가
 
 
     // 기존 차트 삭제
@@ -428,26 +431,29 @@ function selectDay(toDay) {
             const showDanger = document.querySelector('#show-danger');
             showDanger.replaceChildren(showDanger.textContent = '');
             showDanger.insertAdjacentHTML('afterbegin', dangerStr);
-            new Chart(document.getElementById("efh-line-chart"), {
+            new Chart(document.getElementById("efh-bar-chart"), {
+                type: 'bar',
                 data: {
-                    datasets: [
-                        {
-                            type: 'line',
-                            label: '실효습도',
-                            data: efhDatas,
-                            fill: false,
-                            borderColor: 'rgb(54, 162, 235)'
-                        }
-                    ],
-                    labels: efhDates
+                    labels: efhDates,
+                    datasets: [{
+                        label: 'EFH Percent',
+                        data: efhDatas,
+                        fill: false,
+                        borderColor: 'rgb(54, 162, 235)',
+                        backgroundColor: ['#C67ACE','#DFCCFB']
+                    }]
                 },
                 options: {
+                    indexAxis: 'y',
+                    legend: {
+                        display: false
+                    },
                     title: {
                         display: true,
                         text: '실효습도'
                     },
-                    y: {
-                        max: 90
+                    scales: {
+
                     },
                     plugins: {
                         annotation: {
@@ -472,15 +478,14 @@ function selectDay(toDay) {
                                     scaleID: 'y-axis-0',
                                     value: 35,
                                     yMin: 35,
-                                    yMax: 35, // Adjust the y-value as needed
+                                    yMax: 35,
                                     borderColor: 'rgba(255, 76, 71, 0.6)',
                                     borderWidth: 2,
                                     label: {
                                         enabled: true,
                                         content: 'Under 35 Caution'
                                     }
-                                }
-                                ,
+                                },
                                 {
                                     type: 'label',
                                     xValue: 5,
@@ -490,9 +495,7 @@ function selectDay(toDay) {
                                     font: {
                                         size: 18
                                     }
-
-                                }
-                                ,
+                                },
                                 {
                                     type: 'label',
                                     xValue: 5,
@@ -502,7 +505,6 @@ function selectDay(toDay) {
                                     font: {
                                         size: 18
                                     }
-
                                 }
                             ]
                         }

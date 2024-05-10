@@ -16,15 +16,14 @@
 
             <div class="col-12" style="margin-top: 20px;">
                 <div class="row justify-content-center">
-                    
+
                     <div class="col-6">
                         <div>
                             <div style="padding-left: 68px; font-size: 1.5rem; font-weight: 600;">'실효습도'란?</div>
                         </div>
-                        <div
-                            style="padding-left: 68px;  font-style: italic; color: gray; margin-top: 4px;">
-                            화재 예방의 목적으로 수일 전부터의 상대습도에 경과 시간에 따른 가중치를 주어서 산출한 목재 등의 건조도를 나타내는 지수를
-                            말합니다.
+                        <div style="padding-left: 68px;  font-style: italic; color: gray; margin-top: 4px;">
+                            화재 예방의 목적으로 수일 전부터의 상대습도에 경과 시간에 따른 가중치를 주어서 산출한<br>
+                            목재 등의 건조도를 나타내는 지수를 말합니다.
                         </div>
                         <!-- <div>
                             <div>
@@ -59,25 +58,31 @@
                         </div> -->
                     </div>
                     <div class="col-6 text-end" style="padding-right: 68px;">
-                        <input  type="date" th:max="${session.maxDay}" th:min="${session.minDay}" th:value="${toDay}"
-                            onchange="selectDay(this)">
+                        <input style="text-align: center;" type="date" th:max="${session.maxDay}"
+                            th:min="${session.minDay}" th:value="${toDay}" onchange="selectDay(this)">
                     </div>
 
                 </div>
             </div>
-            <div class="col-12" style="margin-top: 50px;">
 
+
+            <div class="col-12" style="margin-top: 90px; margin-bottom: 70px;">
                 <div class="row justify-content-center">
-                    <div class="col-10">
-                        <div class="row" style="margin-right:0; margin-left: 0;">
-                            <div class="col-5">
+                    <div class="col">
+                        <div class="row" style="padding-left: 8%;">
+                            <div style="padding-left: 40px; font-size: 1.2rem; font-weight: 500;">
+                                <div style="display: inline-block; width: 700px; margin-bottom: 5px;" >한 달의 화재 발생 위험도</div>
+                                <div style="display: inline-block; margin-bottom: 5px;">오늘의 화재 발생 위험도</div>
+                            </div>
+                            <div class="col-5" style="margin-right: 5%;">
+
                                 <div class="row layer small-layer">
 
-                                    <div class="col-12">
+                                    <!-- <div class="col-12">
                                         한달의 화재 발생 시 위험도
-                                    </div>
-                                    <div class="col-4">
-                                        <div id="show-danger">
+                                    </div> -->
+                                    <div class="col-4 ">
+                                        <div id="show-danger" style="text-align: end; padding-top: 50px; font-size: 20px;">
 
                                         </div>
 
@@ -92,15 +97,16 @@
 
                                 </div>
                             </div>
-                            <div class="col-5 offset-1 layer small-layer">
+
+                            <div class="col-5 layer small-layer">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <!-- <div class="col-12">
                                         오늘의 화재 발생시 위험도
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <div class="row" style="margin-top: 30px;">
-                                    <div class="offset-1 col-4">
-                                        <div id="show-today-danger" class="col">
+                                <div class="row" style="margin-top: 40px;">
+                                    <div class="col-4">
+                                        <div id="show-today-danger" class="col" style="text-align: center;">
                                             <th:block th:if="${toDayEfh.efhDeg=='안전'}">
                                                 <span style="font-size: 20px;">[[${toDayEfh.efhDeg}]]</span>
                                                 <span style="font-size: 50px;"><i
@@ -116,7 +122,7 @@
                                                 <span style="font-size: 50px;"><i class="bi bi-emoji-angry"></i></span>
                                             </th:block>
                                             <div>
-                                                실효습도 : [[${toDayEfh.efhData}]]
+                                                실효습도 : [[${toDayEfh.efhData}]] %
                                             </div>
                                         </div>
                                     </div>
@@ -137,40 +143,50 @@
                 </div>
             </div>
 
-            <div class="col-12">
-                <div class="row justify-content-center">
-                    <div class="col-10">
-                        <div class="row">
+            <div class="col-12 " style=" margin-left: -2px; background-color: white; border-top: 1px solid rgba(128, 128, 128, 0.3); border-left: 1px solid rgba(128, 128, 128, 0.3);">
+                <div class="row justify-content-center" style="margin-top: 40px;">
+                    <div class="col">
+
+                        <div class="row" style="padding-left: 8%; ">
+                            <div style="padding-left: 10px; font-size: 1.5rem; font-weight: 500; margin-bottom: 50px;" >
+                                <div style="display: inline-block; width: 750px; ">일별 실효습도</div>
+                                <!-- <div style="display: inline-block; ">일별 화재위험성 여부</div> -->
+                                <div style="padding-left: 15px; font-size: 1.2rem; font-style: italic; color: gray; margin-top: 4px;">
+                                    일별 실효습도 및 화재위험성 여부에 대한 정보입니다.
+                                </div>
+                            </div>
+                            <div class="col-5" style="margin-right: 5%;">
+                                <div class="layer large-layer">
+                                    <div
+                                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                        <!-- <h1 class="h2">EFH차트</h1> -->
+                                    </div>
+                                    <div id="efh-bar-container" style="width: 100%;">
+                                        <!-- <span style="color: red;"><canvas class="my-4" id="efh-line-chart" width="50%"
+                                                height=""></canvas></span> -->
+                                        <span style="color: red;"><canvas class="my-4" id="efh-bar-chart" width="50%"
+                                                height="60%"></canvas></span>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="col-5">
                                 <div class="layer large-layer">
                                     <div
                                         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                                        <h1 class="h2">EFH차트</h1>
-                                    </div>
-                                    <div id="efh-line-container" style="width: 100%; height: 500vh;">
-                                        <!-- <span style="color: red;"><canvas class="my-4" id="efh-line-chart" width="50%"
-                                                height=""></canvas></span> -->
-                                        <span style="color: red;"><canvas class="my-4" id="efh-bar-chart" width="50%"
-                                                height="70%"></canvas></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="offset-1 col-5">
-                                <div class="layer large-layer">
-                                    <div
-                                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                                        <h1 class="h2">bar차트</h1>
+                                        <!-- <h1 class="h2">bar차트</h1> -->
                                     </div>
                                     <div>
                                         <table style="text-align: center;">
-                                            <thead>
+                                            <thead style="background-color: rgba(196, 163, 240, 0.842); color:white;">
                                                 <tr>
                                                     <td>일자</td>
                                                     <td>실효습도</td>
                                                     <td>위험도</td>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="efh-tbody">
                                                 <tr th:each="efh : ${efhList}">
                                                     <td>[[${efh.efhDate}]]</td>
                                                     <td>[[${efh.efhData}]]</td>
