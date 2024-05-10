@@ -182,19 +182,21 @@ function selectDayEfh(efhDate) {
             let toDayDangerStr = ''
             if (data.toDayEfh.efhDeg == '안전') {
                 toDayDangerStr = `
-                                ${data.toDayEfh.efhDeg}
-                                <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
+                                <span>${data.toDayEfh.efhDeg}</span>
+                                
+                                <span style="font-size: 40px;"><i class="bi bi-emoji-laughing"></i></span>
                                 `
             } else if (data.toDayEfh.efhDeg == '주의') {
                 toDayDangerStr = `
-                                ${data.toDayEfh.efhDeg}
-                                <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
+                                <span>${data.toDayEfh.efhDeg}</span>
+                                <span style="font-size: 40px;"><i class="bi bi-emoji-neutral"></i></span>
                                 `
 
             } else {
                 toDayDangerStr = `
-                                ${data.toDayEfh.efhDeg}
-                                <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
+                                <span>${data.toDayEfh.efhDeg}</span>
+                                
+                                <span style="font-size: 40px;"><i class="bi bi-emoji-angry"></i></span>
                                 `
             }
 
@@ -279,18 +281,18 @@ function selectDay(toDay) {
             if (data.toDayEfh.efhDeg == '안전') {
                 toDayDangerStr = `
                                 ${data.toDayEfh.efhDeg}
-                                <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
+                                <span style="font-size: 40px;"><i class="bi bi-emoji-laughing"></i></span>
                                 `
             } else if (data.toDayEfh.efhDeg == '주의') {
                 toDayDangerStr = `
                                 ${data.toDayEfh.efhDeg}
-                                <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
+                                <span style="font-size: 40px;"><i class="bi bi-emoji-neutral"></i></span>
                                 `
 
             } else {
                 toDayDangerStr = `
                                 ${data.toDayEfh.efhDeg}
-                                <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
+                                <span style="font-size: 40px;"><i class="bi bi-emoji-angry"></i></span>
                                 `
             }
 
@@ -458,18 +460,18 @@ function dangerChange() {
     if (data.toDayEfh.efhDeg == '안전') {
         toDayDangerStr = `
                         ${data.toDayEfh.efhDeg}
-                        <span style="font-size: 30px;"><i class="bi bi-emoji-laughing"></i></span>
+                        <span style="font-size: 40px;"><i class="bi bi-emoji-laughing"></i></span>
                         `
     } else if (data.toDayEfh.efhDeg == '주의') {
         toDayDangerStr = `
                         ${data.toDayEfh.efhDeg}
-                        <span style="font-size: 30px;"><i class="bi bi-emoji-neutral"></i></span>
+                        <span style="font-size: 40px;"><i class="bi bi-emoji-neutral"></i></span>
                         `
 
     } else {
         toDayDangerStr = `
                         ${data.toDayEfh.efhDeg}
-                        <span style="font-size: 30px;"><i class="bi bi-emoji-angry"></i></span>
+                        <span style="font-size: 40px;"><i class="bi bi-emoji-angry"></i></span>
                         `
     }
 
