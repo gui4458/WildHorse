@@ -7,6 +7,11 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
+    <div class="row mt-3">
+        <div class="col">
+            <p>월 평균 온습도 불쾌지수 평균 상세차트</p>
+        </div>
+    </div>
     <div class="row pt-3 first-row">
         <div class="col">
             <div class="row">
@@ -17,11 +22,12 @@
                 </div>
             </div>
             <!-- 월별 차트 -->
-            <div class="row mt-3 mb-3">
+            
+            <div class="row mt-3 mb-2">
                 <div class="col-8">
                     <canvas id="detail-chart" width="100%"></canvas>
                 </div>
-                <div class="col-4">
+                <div class="col-4 mt-5">
                     <div class="row">
                         <!-- 월별 온도 -->
                         <div class="col-6">
@@ -57,9 +63,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
+
                         <!-- 월별 습도 -->
                         <div class="col-6">
                             <div class="layer reh-layer">
@@ -114,7 +122,7 @@
                                         <div class="row">
                                             <div class="col-6 text-end color-red-div">
                                                 <i class="bi bi-emoji-angry-fill"></i>
-                                                불쾌지수 높음
+                                                불쾌지수 최고
                                             </div>
                                             <div class="col-6 text-start">
                                                 <div class="updateMaxD-div">
@@ -124,7 +132,7 @@
                                         <div class="row mt-1">
                                             <div class="col-6 text-end color-blue-div">
                                                 <i class="bi bi-emoji-laughing-fill"></i>
-                                                불쾌지수 낮음
+                                                불쾌지수 최저
                                             </div>
                                             <div class="col-6 text-start">
                                                 <div class="updateMinD-div">
@@ -142,11 +150,17 @@
     </div>
 
     <!-- 월별 셀렉트+ 차트-->
-    <div class="row">
-        <div class="row mt-4">
+    <div class="row background-row">
+        <div class="row mt-3">
+            <div class="col">
+                <p>월 평균 온습도 불쾌지수 비교차트</p>
+            </div>
+        </div>
+        <div class="row mt-2">
             <div class="col-2">
                 <select class="form-select" onchange="reDrawChart('compare-chart1', this)">
-                    <option th:each="month : ${monthList}" th:value="${month}"th:selected="${month=='2022-01'}">[[${month}]]</option>
+                    <option th:each="month : ${monthList}" th:value="${month}" th:selected="${month=='2022-01'}">
+                        [[${month}]]</option>
                 </select>
             </div>
             <div class="offset-4 col-2">
@@ -178,7 +192,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-max-temper">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -186,7 +200,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-max-temper">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -203,7 +217,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-min-temper">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -212,7 +226,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-avg-temper">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -220,7 +234,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-avg-temper">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -237,7 +251,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-max-reh">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -245,7 +259,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-max-reh">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -254,7 +268,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-min-reh">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -262,7 +276,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-min-reh">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -271,7 +285,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-avg-reh">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -279,7 +293,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-avg-reh">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -296,7 +310,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-max-di">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -304,7 +318,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-max-di">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -313,7 +327,7 @@
                 <div class="col-5 text-end">
                     <div class="row justify-content-end">
                         <div class="left-bar-min-di">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -321,7 +335,7 @@
                 <div class="col-5 text-start">
                     <div class="row justify-content-start">
                         <div class="right-bar-min-di">
-                            
+
                         </div>
                     </div>
                 </div>
