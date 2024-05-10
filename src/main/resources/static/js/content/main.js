@@ -294,7 +294,7 @@ fetch('/charts/main', { //요청경로
                 datasets: [{
                     data: rehAvg,
                     label: "습도",
-                    borderColor: "#c45850",
+                    borderColor: "#59B4C3",
                     fill: false
                 }, {
                     data: [78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78],
@@ -375,10 +375,20 @@ fetch('/charts/main', { //요청경로
                 datasets: [{
                     data: temperAvg,
                     label: "온도",
-                    borderColor: "#3e95cd",
+                    borderColor: "#FFAA80",
                     fill: false
                 }
-                ]
+                // ,{
+                //     data: [78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78, 78],
+                //     label: "평균습도",
+                //     borderColor: "rgba(0, 0, 0, 0.1)",
+                //     fill: false,
+                //     pointRadius: 0
+
+                // }
+            ]
+                
+                
             },
             options: {
 
@@ -431,7 +441,7 @@ fetch('/charts/main', { //요청경로
                 datasets: [{
                     data: diList,
                     label: "불쾌지수",
-                    borderColor: "#3e95cd",
+                    borderColor: "#FF5580",
                     fill: false
                 }
                 ]
