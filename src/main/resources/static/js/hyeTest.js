@@ -48,6 +48,8 @@ function drawDetailChart() {
                 dataList.push(temperAvgList);
 
                 updateShowData(dataList);
+                
+
             });
             // 라인차트
             detailChart = new Chart(document.getElementById("detail-chart"), {
@@ -58,17 +60,20 @@ function drawDetailChart() {
                         data: diAvgList,
                         label: "불쾌지수",
                         borderColor: "#8a2be2",
-                        fill: false
+                        fill: true,
+                        backgroundColor: 'rgba(147,112,219,0.2)'
                     }, {
                         data: rehAvgList,
                         label: "습도",
                         borderColor: "#3e95cd",
-                        fill: false
+                        fill: true,
+                        backgroundColor: 'rgba(0,255,255,0.2)'
                     }, {
                         data: temperAvgList,
                         label: "온도",
                         borderColor: "#ff0000",
-                        fill: false
+                        fill: true,
+                        backgroundColor: 'rgba(255,0,0,0.2)'
                     }
                     ]
                 },
@@ -80,8 +85,13 @@ function drawDetailChart() {
                     scales: {
                         y: {
                             min: 0,
-                            max: highest + 5
+                            max: highest + 20
                             //fontSize : 14
+                        }
+                    },
+                    elements: {
+                        line: {
+                            tension: 0.4
                         }
                     }
                 }
@@ -392,6 +402,7 @@ function updateShowData(dataList) {
 
     document.querySelector('.updateAvgT-div').textContent = avgTemper;
     document.querySelector('.updateAvgT-div').innerHTML = `<span>${avgTemper}℃</span>`;
+    
     //습도
     document.querySelector('.updateMaxR-div').textContent = maxReh;
     document.querySelector('.updateMaxR-div').innerHTML = `<span>${maxReh}%</span>`;

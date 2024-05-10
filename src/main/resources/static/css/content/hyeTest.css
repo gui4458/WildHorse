@@ -224,3 +224,12 @@
 .color-blue-div{
   color: blue;
 }
+
+.background-row{
+  background-color: white;
+}
+
+p{
+  font-size: 30px;
+  font-weight: 700;
+}
