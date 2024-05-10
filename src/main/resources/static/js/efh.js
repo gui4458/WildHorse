@@ -51,6 +51,91 @@ document.addEventListener('DOMContentLoaded', function () {
             const showDanger = document.querySelector('#show-danger');
             showDanger.replaceChildren(showDanger.textContent = '');
             showDanger.insertAdjacentHTML('afterbegin', dangerStr)
+
+
+            new Chart(document.getElementById("efh-bar-chart"), {
+                type: 'bar',
+                data: {
+                    labels: efhDates,
+                    datasets: [{
+                        label: 'EFH Percent',
+                        data: efhDatas,
+                        fill: false,
+                        borderColor: 'rgb(54, 162, 235)'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: '실효습도'
+                    },
+                    scales: {
+
+                    },
+                    plugins: {
+                        annotation: {
+                            annotations: [
+                                {
+                                    type: 'line',
+                                    mode: 'horizontal',
+                                    scaleID: 'y-axis-0',
+                                    value: 50,
+                                    yMin: 50,
+                                    yMax: 50,
+                                    borderColor: 'rgba(255, 165, 0, 0.6)',
+                                    borderWidth: 2,
+                                    label: {
+                                        enabled: true,
+                                        content: 'Under 50 Warning'
+                                    }
+                                },
+                                {
+                                    type: 'line',
+                                    mode: 'horizontal',
+                                    scaleID: 'y-axis-0',
+                                    value: 35,
+                                    yMin: 35,
+                                    yMax: 35,
+                                    borderColor: 'rgba(255, 76, 71, 0.6)',
+                                    borderWidth: 2,
+                                    label: {
+                                        enabled: true,
+                                        content: 'Under 35 Caution'
+                                    }
+                                },
+                                {
+                                    type: 'label',
+                                    xValue: 5,
+                                    yValue: 42,
+                                    backgroundColor: 'rgba(255, 165, 0, 0.6)',
+                                    content: ['Under 50 조심단계'],
+                                    font: {
+                                        size: 18
+                                    }
+                                },
+                                {
+                                    type: 'label',
+                                    xValue: 5,
+                                    yValue: 22,
+                                    backgroundColor: 'rgba(255, 76, 71, 0.6)',
+                                    content: ['Under 50 경고단계'],
+                                    font: {
+                                        size: 18
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            });
+
+
+
+
             new Chart(document.getElementById("efh-line-chart"), {
                 type: 'line',
                 data: {
@@ -68,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         text: '실효습도'
                     },
                     scales: {
-                        
+
                     },
                     plugins: {
                         annotation: {
@@ -250,7 +335,7 @@ function selectDay(toDay) {
     // 새로운 차트 생성
     let dangerCanvas = document.createElement('canvas');
     dangerCanvas.id = 'danger-pie-chart';
-    
+
     // dangerCanvas.setAttribute('style', 'width:50%;');
     dangerCanvas.style.width = 50 + '%';
     dangerCanvas.style.margin = 'auto';
@@ -361,8 +446,8 @@ function selectDay(toDay) {
                         display: true,
                         text: '실효습도'
                     },
-                    y:{
-                        max:90
+                    y: {
+                        max: 90
                     },
                     plugins: {
                         annotation: {

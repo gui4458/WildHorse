@@ -51,11 +51,11 @@ table td:first-child{
     height: 50vh;
 }
 .small-layer {
-    height: 20vh;
+    height: 25vh;
 }
 
 .large-layer {
-    height:70vh;
+    height:150vh;
 }
 
 /* .carousel-control-prev-icon {

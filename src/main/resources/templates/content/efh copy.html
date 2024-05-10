@@ -14,116 +14,19 @@
     <div class="container-fluid">
         <div class="row body-row ">
 
-            <div class="col-12">
+            <div class="col-12" style="margin-top: 20px;">
                 <div class="row justify-content-center">
-                    <div class="col-8 text-end">
-                        <input type="date" th:max="${session.maxDay}" th:min="${session.minDay}" th:value="${toDay}"
-                            onchange="selectDay(this)">
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 odd-layer">
-
-                <div class="row justify-content-center">
-                    <div class="col-8">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="row layer small-layer">
-
-                                    <div class="col-12">
-                                        한달의 화재 발생 시 위험도
-                                    </div>
-                                    <div class="col-4">
-                                        <div id="show-danger">
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-8">
-                                        <div style="width: 100%;" id="danger-pie-container">
-                                            <canvas class="chart-slider chart-s2" id="danger-pie-chart"
-                                                style="width:50%; margin: 0 auto;"></canvas>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            <div class="offset-1 col-2">
-                                <div class="row layer small-layer">
-                                    <div class="col-12">
-                                        오늘의 실효습도
-                                    </div>
-                                    <div class="col-12">
-                                        [[${toDayEfh.efhData}]]
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="offset-1 col-2">
-                                <div class="row layer small-layer">
-                                    <div class="col-12">
-                                        오늘의 화재 발생시 위험도
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="show-today-danger" class="col">
-                                            <th:block th:if="${toDayEfh.efhDeg=='안전'}">
-                                                <span>[[${toDayEfh.efhDeg}]]</span>
-                                                <span style="font-size: 40px;"><i
-                                                        class="bi bi-emoji-laughing"></i></span>
-                                            </th:block>
-                                            <th:block th:if="${toDayEfh.efhDeg=='주의'}">
-                                                <span>[[${toDayEfh.efhDeg}]]</span>
-                                                <span style="font-size: 40px;"><i
-                                                        class="bi bi-emoji-neutral"></i></span>
-                                            </th:block>
-                                            <th:block th:if="${toDayEfh.efhDeg=='위험'}">
-                                                <span>[[${toDayEfh.efhDeg}]]</span>
-                                                <span style="font-size: 40px;"><i class="bi bi-emoji-angry"></i></span>
-                                            </th:block>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    
+                    <div class="col-6">
+                        <div>
+                            <div style="padding-left: 68px; font-size: 1.5rem; font-weight: 600;">'실효습도'란?</div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-12">
-
-                <div class="row justify-content-center">
-                    <div class="col-8">
-                        <div class="layer info-layer">
-                            <div>
-                                <h2>'실효습도'란?</h2>
-                            </div>
-                            <div>
-                                화재 예방의 목적으로 수일 전부터의 상대습도에 경과 시간에 따른 가중치를 주어서 산출한 목재 등의 건조도를 나타내는 지수를
-                                말합니다.
-                            </div>
-                            <div>
-                                일반적으로 실효습도가 50% 이하가 되면 인화되기 쉽고
-                            </div>
-                            <div>
-                                40% 이하에서는 불이 잘 꺼지지 않으며,
-
-                            </div>
-                            <div>
-                                30% 이하일 경우에는 자연발생적으로 불이 일어날 가능성이 커지게 된다.
-
-                            </div>
-                            <div>
-                                이와 관계하여 실효습도 35%이하가 2일 이상 지속될 것으로 예상될 때 건조주의보를,
-
-                            </div>
-                            <div>
-                                실효습도 25% 이하가 2일 이상 지속될 것으로 예상될 때 건조경보가 발표되고 있다.
-
-                            </div>
-
+                        <div
+                            style="padding-left: 68px;  font-style: italic; color: gray; margin-top: 4px;">
+                            화재 예방의 목적으로 수일 전부터의 상대습도에 경과 시간에 따른 가중치를 주어서 산출한 목재 등의 건조도를 나타내는 지수를
+                            말합니다.
+                        </div>
+                        <!-- <div>
                             <div>
                                 He = (1−r)×[H0dt + r H1dt + r2 H2dt+r3 H3dt + r4 H4dt ]r = 0.7
                             </div>
@@ -153,6 +56,82 @@
                             <div>
                                 H4d : 4일 전의 상대습도
                             </div>
+                        </div> -->
+                    </div>
+                    <div class="col-6 text-end" style="padding-right: 68px;">
+                        <input  type="date" th:max="${session.maxDay}" th:min="${session.minDay}" th:value="${toDay}"
+                            onchange="selectDay(this)">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12" style="margin-top: 50px;">
+
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <div class="row" style="margin-right:0; margin-left: 0;">
+                            <div class="col-6">
+                                <div class="row layer small-layer">
+
+                                    <div class="col-12">
+                                        한달의 화재 발생 시 위험도
+                                    </div>
+                                    <div class="col-4">
+                                        <div id="show-danger">
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-8">
+                                        <div style="width: 100%;" id="danger-pie-container">
+                                            <canvas class="chart-slider chart-s2" id="danger-pie-chart"
+                                                style="width:50%; margin: 0 auto;"></canvas>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-6 layer small-layer">
+                                <div class="row">
+                                    <div class="col-12">
+                                        오늘의 화재 발생시 위험도
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 30px;">
+                                    <div class="offset-1 col-4">
+                                        <div id="show-today-danger" class="col">
+                                            <th:block th:if="${toDayEfh.efhDeg=='안전'}">
+                                                <span style="font-size: 20px;">[[${toDayEfh.efhDeg}]]</span>
+                                                <span style="font-size: 50px;"><i
+                                                        class="bi bi-emoji-laughing"></i></span>
+                                            </th:block>
+                                            <th:block th:if="${toDayEfh.efhDeg=='주의'}">
+                                                <span>[[${toDayEfh.efhDeg}]]</span>
+                                                <span style="font-size: 50px;"><i
+                                                        class="bi bi-emoji-neutral"></i></span>
+                                            </th:block>
+                                            <th:block th:if="${toDayEfh.efhDeg=='위험'}">
+                                                <span>[[${toDayEfh.efhDeg}]]</span>
+                                                <span style="font-size: 50px;"><i class="bi bi-emoji-angry"></i></span>
+                                            </th:block>
+                                            <div>
+                                                실효습도 : [[${toDayEfh.efhData}]]
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-7"
+                                        style=" font-size: 0.9rem; font-style: italic; color: gray; margin-top: 4px;">
+                                        <div>실효습도 50% 이하 - 화재위험성(낮음)</div>
+                                        <div>실효습도 30% 이하 - 화재위험성(높음)</div>
+                                        <div>실효습도 35% 이하 건조주의보</div>
+                                        <div>실효습도 25% 이하 건조경보</div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -162,15 +141,43 @@
                 <div class="row justify-content-center">
                     <div class="col-8">
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-6">
                                 <div class="layer large-layer">
                                     <div
                                         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                                         <h1 class="h2">EFH차트</h1>
                                     </div>
-                                    <div id="efh-line-container" style="width: 1000px; height: 50vh;">
-                                        <span style="color: red;"><canvas class="my-4" id="efh-line-chart" width="50%"
-                                                height=""></canvas></span>
+                                    <div id="efh-line-container" style="width: 100%; height: 500vh;">
+                                        <!-- <span style="color: red;"><canvas class="my-4" id="efh-line-chart" width="50%"
+                                                height=""></canvas></span> -->
+                                        <span style="color: red;"><canvas class="my-4" id="efh-bar-chart" width="50%"
+                                                height="70%"></canvas></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="layer large-layer">
+                                    <div
+                                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                        <h1 class="h2">bar차트</h1>
+                                    </div>
+                                    <div>
+                                        <table style="text-align: center;">
+                                            <thead>
+                                                <tr>
+                                                    <td>일자</td>
+                                                    <td>실효습도</td>
+                                                    <td>위험도</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="efh : ${efhList}">
+                                                    <td>[[${efh.efhDate}]]</td>
+                                                    <td>[[${efh.efhData}]]</td>
+                                                    <td>[[${efh.efhDeg}]]</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -187,71 +194,13 @@
                                     <div class="pt-3 pb-2 mb-3 border-bottom">
 
                                         <div>
-                                            <table>
-                                                <div th:with="startIndex=0, endIndex=13">
-                                                    <tbody id="efh-tbody">
-                                                        <tr>
-                                                            <td>일자</td>
-                                                            <td th:each="efh, iterStat : ${efhList}"
-                                                                th:if="${iterStat.index >= startIndex and iterStat.index &lt;= endIndex}"
-                                                                th:onclick="selectDayEfh([[${efh.efhDate}]])"
-                                                                th:text="${efh.efhDate}"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>실효습도</td>
-                                                            <td th:each="efh, iterStat : ${efhList}"
-                                                                th:if="${iterStat.index >= startIndex and iterStat.index &lt;= endIndex}"
-                                                                th:text="${efh.efhData}">Data</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>위험도</td>
-                                                            <td th:each="efh, iterStat : ${efhList}"
-                                                                th:if="${iterStat.index >= startIndex and iterStat.index &lt;= endIndex}"
-                                                                th:text="${efh.efhDeg}">Degree</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </div>
-                                            </table>
+                                            
+                                            
                                         </div>
                                     </div>
                                     <div class="pt-3 pb-2 mb-3 border-bottom">
                                         <div>
-                                            <table>
-                                                <div th:with="startIndex=14, endIndex=${efhList.size()-1}">
-                                                    <tbody id="efh-tbody">
-                                                        <tr>
-                                                            <td>일자</td>
-                                                            <td th:each="efh, iterStat : ${efhList}"
-                                                                th:if="${iterStat.index >= startIndex and iterStat.index &lt;= endIndex}"
-                                                                th:onclick="selectDayEfh([[${efh.efhDate}]])"
-                                                                th:text="${efh.efhDate}"
-                                                                th:classappend="${(efhList.size-1) == iterStat.index and (efhList.size-1 - startIndex) &lt;= startIndex} ? 'colspan=' + (${startIndex - ((efhList.size-1) - startIndex)}) : ''">
-                                                            </td>
-                                                            <td th:if="(efhList.size-1-startindex) &lt; startIndex"
-                                                                th:each="item,state : ${startIndex - ((efhList.size-1)- startIndex)}">
-                                                                [[${state.index}]]
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>실효습도</td>
-                                                            <td th:each="efh, iterStat : ${efhList}"
-                                                                th:if="${iterStat.index >= startIndex and iterStat.index &lt;= endIndex}"
-                                                                th:text="${efh.efhData}"
-                                                                th:classappend="${(efhList.size-1) == iterStat.index and (efhList.size-1 - startIndex) &lt;= startIndex} ? 'colspan=' + (${startIndex - ((efhList.size-1) - startIndex)}) : ''">
-                                                                Data</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>위험도</td>
-                                                            <td th:each="efh, iterStat : ${efhList}"
-                                                                th:if="${iterStat.index >= startIndex and iterStat.index &lt;= endIndex}"
-                                                                th:text="${efh.efhDeg}"
-                                                                th:classappend="${(efhList.size-1) == iterStat.index and (efhList.size-1 - startIndex) &lt;= startIndex} ? 'colspan=' + (${startIndex - ((efhList.size-1) - startIndex)}) : ''">
-                                                                Degree</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </div>
-
-                                            </table>
+                                            
                                         </div>
                                     </div>
                                 </div>
