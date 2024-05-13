@@ -238,7 +238,91 @@
   width:100px; 
   border-top-right-radius:6px; 
   border-bottom-right-radius:6px; 
-  background-color:red; 
+  background-color: rgba(255,0,0,0.7); 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-temper-min-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color:rgba(255,0,0,0.7);
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-temper-avg-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color:rgba(255,0,0,0.7); 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-reh-max-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color:rgba(0,0,205,0.6); 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-reh-min-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color:rgba(0,0,205,0.6); 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-reh-avg-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color:rgba(0,0,205,0.6); 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-di-max-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color: rgba(138,43,226,0.7); 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-di-min-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color: rgba(138,43,226,0.7);
   height:16px; 
   margin-top:4px; 
   margin-right:8px;

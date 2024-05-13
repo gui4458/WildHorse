@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <!-- 월별 상세 셀렉트 박스 -->
                     <div class="row ps-3">
                         <div class="col-2">
                             <select class="form-select text-center" onchange="reDrawChart('detail-chart', this)">
@@ -76,7 +76,7 @@
                                 </div>
                                 <hr style="border: 1.5px solid #c411d4; border-radius: 6px; opacity: 1; margin-top: 6px; margin-bottom: 13px;">
                                 <div class="col font-div-17" style="color: #dddddd;">
-                                    <div class="row mt-4">
+                                    <div class="row mt-2">
                                         <div class="col-auto text-end" style="width: 90px; padding-right: 0px;">
                                             최고온도
                                         </div>
@@ -87,18 +87,19 @@
                                         </div>
                                     </div>
                                     <div class="row mt-1">
-                                        <div class="col-6">
+                                        <div class="col-auto text-end" style="width: 90px; padding-right: 0px;">
                                             최저온도
                                         </div>
-                                        <div class="col-6">
-                                            <div class="updateMinT-div">
+                                        <div class="col">
+                                            <div class="updateMinT-div" style="display: flex;">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mt-1">
-                                        <div class="col-6">평균온도</div>
-                                        <div class="col-6">
-                                            <div class="updateAvgT-div">
+                                        <div class="col-auto text-end" style="width: 90px; padding-right: 0px;">
+                                            평균온도</div>
+                                        <div class="col">
+                                            <div class="updateAvgT-div" style="display: flex;">
                                             </div>
                                         </div>
                                     </div>
@@ -117,32 +118,32 @@
                                     </span>
                                 </div>
                                 <hr style="border: 1.5px solid #8E56CE; border-radius: 6px; opacity: 1; margin-top: 6px; margin-bottom: 13px;">
-                                <div class="row mt-4">
+                                <div class="row mt-2">
                                     <div class="col font-div-17" style="color: #dddddd;">
                                         <div class="row mt-1">
-                                            <div class="col-6">
+                                            <div class="col-auto text-end" style="width: 90px; padding-right: 0px;">
                                                 최고습도
                                             </div>
-                                            <div class="col-6">
-                                                <div class="updateMaxR-div">
+                                            <div class="col">
+                                                <div class="updateMaxR-div" style="display: flex;">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mt-1">
-                                            <div class="col-6">
+                                            <div class="col-auto text-end" style="width: 90px; padding-right: 0px;">
                                                 최저습도
                                             </div>
-                                            <div class="col-6">
-                                                <div class="updateMinR-div">
+                                            <div class="col">
+                                                <div class="updateMinR-div" style="display: flex;">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mt-1">
-                                            <div class="col-6">
+                                            <div class="col-auto text-end" style="width: 90px; padding-right: 0px;">
                                                 평균습도
                                             </div>
-                                            <div class="col-6">
-                                                <div class="updateAvgR-div">
+                                            <div class="col">
+                                                <div class="updateAvgR-div" style="display: flex;">
                                                 </div>
                                             </div>
                                         </div>
@@ -162,25 +163,23 @@
                                     </span>
                                 </div>
                                 <hr style="border: 1.5px solid #F27BBD; border-radius: 6px; opacity: 1; margin-top: 6px; margin-bottom: 13px;">
-                                <div class="row mt-4">
+                                <div class="row mt-2">
                                     <div class="col font-div-17" style="color: #dddddd;">
                                         <div class="row">
-                                            <div class="col-6 text-end">
-                                                <i class="bi bi-emoji-angry-fill"></i>
+                                            <div class="col-auto text-end" style="width: 120px; padding-right: 0px;">
                                                 불쾌지수 최고
                                             </div>
-                                            <div class="col-6 text-start">
-                                                <div class="updateMaxD-div">
+                                            <div class="col">
+                                                <div class="updateMaxD-div" style="display: flex;">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mt-1">
-                                            <div class="col-6 text-end">
-                                                <i class="bi bi-emoji-laughing-fill"></i>
+                                            <div class="col-auto text-end" style="width: 120px; padding-right: 0px;">
                                                 불쾌지수 최저
                                             </div>
-                                            <div class="col-6 text-start">
-                                                <div class="updateMinD-div">
+                                            <div class="col">
+                                                <div class="updateMinD-div" style="display: flex;">
                                                 </div>
                                             </div>
                                         </div>
@@ -201,15 +200,15 @@
                 <h2>월 평균 온습도 불쾌지수 비교차트</h2>
             </div>
         </div>
-        <div class="row mt-2">
+        <div class="row mt-2 ps-3">
             <div class="col-2">
-                <select class="form-select" onchange="reDrawChart('compare-chart1', this)">
+                <select class="form-select text-center" onchange="reDrawChart('compare-chart1', this)">
                     <option th:each="month : ${monthList}" th:value="${month}" th:selected="${month=='2022-01'}">
                         [[${month}]]</option>
                 </select>
             </div>
             <div class="offset-4 col-2">
-                <select class="form-select" onchange="reDrawChart('compare-chart2', this)">
+                <select class="form-select text-center" onchange="reDrawChart('compare-chart2', this)">
                     <option th:each="month : ${monthList}" th:value="${month}">[[${month}]]</option>
                 </select>
             </div>
