@@ -97,7 +97,7 @@ function drawDetailChart() {
                 }
             });
 
-            console.log(detailChart);
+            //console.log(detailChart);
         })
         //fetch 통신 실패 시 실행 영역
         .catch(err => {
@@ -399,46 +399,49 @@ function updateShowData(dataList) {
         <div class="detail-month-bar"></div>
         <span style="display:inline-block;">${maxTemper}℃</span>
     `;
-    document.querySelector(`.detail-month-bar`).style.width = (maxTemper * 7) + 'px';
 
     document.querySelector('.updateMinT-div').innerHTML = `
     <div class="detail-temper-min-bar"></div>
-    <span style="display:inline-block;">${minTemper}℃</span>`;
+    <span >${minTemper}℃</span>`;
     
-    document.querySelector(`.detail-temper-min-bar`).style.width = (maxTemper * 7) + 'px';
-
     document.querySelector('.updateAvgT-div').innerHTML = `
     <div class="detail-temper-avg-bar"></div>
-    <span style="display:inline-block; >${avgTemper}℃</span>`;
+    <span >${avgTemper}℃</span>`;
     
-    document.querySelector(`.detail-temper-avg-bar`).style.width = (avgTemper * 7) + 'px';
     
     //습도
     document.querySelector('.updateMaxR-div').innerHTML = `
     <div class="detail-reh-max-bar"></div>
     <span>${maxReh}%</span>`;
-    document.querySelector(`.detail-reh-max-bar`).style.width = (maxReh * 2) + 'px';
 
     document.querySelector('.updateMinR-div').innerHTML = `
     <div class="detail-reh-min-bar"></div>
     <span>${minReh}%</span>`;
-    document.querySelector(`.detail-reh-min-bar`).style.width = (minReh * 2) + 'px';
+    
 
     document.querySelector('.updateAvgR-div').innerHTML = `
     <div class="detail-reh-avg-bar"></div>
     <span>${avgReh}%</span>`;
-    document.querySelector(`.detail-reh-avg-bar`).style.width = (minReh * 2) + 'px';
 
     //불쾌지수
     document.querySelector('.updateMaxD-div').innerHTML = `
     <div class="detail-di-max-bar"></div>
     <span>${maxDi}</span>`;
-    document.querySelector(`.detail-di-max-bar`).style.width = (maxDi * 2) + 'px';
 
     document.querySelector('.updateMinD-div').innerHTML = `
     <div class="detail-di-min-bar"></div>
     <span>${minDi}</span>`;
-
+    
+    setTimeout(() => {
+        document.querySelector(`.detail-month-bar`).style.width = (maxTemper * 7) + 'px';
+        document.querySelector(`.detail-temper-min-bar`).style.width = (minTemper * 7) + 'px';
+        document.querySelector(`.detail-temper-avg-bar`).style.width = (avgTemper * 7) + 'px';
+        document.querySelector(`.detail-reh-max-bar`).style.width = (maxReh * 3) + 'px';
+        document.querySelector(`.detail-reh-min-bar`).style.width = (minReh * 3) + 'px';
+        document.querySelector(`.detail-reh-avg-bar`).style.width = (avgReh * 3) + 'px';
+        document.querySelector(`.detail-di-max-bar`).style.width = (maxDi * 3.5) + 'px';
+        document.querySelector(`.detail-di-min-bar`).style.width = (minDi * 3.5) + 'px';
+    }, 100);
 
 }
 
