@@ -13,54 +13,80 @@
     <input type="hidden" id="d-day" th:value="${toDay}">
     <div class="container-fluid">
         <div class="row body-row ">
+            <div class="col-12 d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-1 mb-2"
+                style="background-color: #8e56ce; color: white; border-bottom: 2px solid #710786;">
+                <div class="main-title ps-3" style="display: flex;">
+                    <h2>월 평균 실효습도 상세차트</h2>
+                    <h4 class="h1" style="font-size: 17px; margin-left: 15px; margin-top: 10px;"> [[${toDay}]]
+                    </h4>
+                </div>
 
+                <div class="btn-toolbar mb-2 mb-md-0" style="margin-right: 110px;">
+                    <input class="text-center" id="search-date" type="date" th:max="${session.maxDay}"
+                        th:min="${session.minDay}" style="margin-top: 5px; margin-bottom: 15px;"
+                        onchange="selectDay(this)" placeholder="날짜를 선택해주세요." th:value="${toDay}">
+                </div>
+            </div>
             <div class="col-12" style="margin-top: 20px;">
                 <div class="row justify-content-center">
 
-                    <div class="col-6">
-                        <div>
-                            <div style="padding-left: 68px; font-size: 1.5rem; font-weight: 600;">'실효습도'란?</div>
+
+                    <div class="col-12">
+                        <div style="position: relative;">
+                            <div style="padding-left: 68px; font-size: 1.5rem; font-weight: 600;">'실효습도'란?
+                                <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
+                                    aria-expanded="false" aria-controls="collapseWidthExample"
+                                    style="color: #979797; font-size: 1.1rem; font-style: italic; font-weight: 400;">
+                                    공식 <i class="bi bi-question-circle"></i>
+                                </span>
+                            </div>
+                            <div style="min-height: 120px; position: absolute; left: 270px; top: 14px;">
+                                <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                                    <div class="card card-body" style="width: 550px; background-color: #FFF3CD;">
+                                        <div>
+                                            <div>
+                                                He = (1−r)×[H0dt + r H1dt + r2 H2dt+r3 H3dt + r4 H4dt ]r = 0.7
+                                            </div>
+                                            <div>
+                                                * 실효습도(He) = (1−r)×[H0dt + r H1dt + r2 H2dt+r3 H3dt + r4H4dt]
+                                            </div>
+                                            <div>
+                                                r = 0.7
+                                            </div>
+                                            <div>
+                                            </div>
+                                            <div>
+                                                He : 실효습도
+                                            </div>
+                                            <div>
+                                                H0d : 당일의 상대습도
+                                            </div>
+                                            <div>
+                                                H1d : 1일 전의 상대습도
+                                            </div>
+                                            <div>
+                                                H2d : 2일 전의 상대습도
+                                            </div>
+                                            <div>
+                                                H3d : 3일 전의 상대습도
+                                            </div>
+                                            <div>
+                                                H4d : 4일 전의 상대습도
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
                         <div style="padding-left: 68px;  font-style: italic; color: gray; margin-top: 4px;">
                             화재 예방의 목적으로 수일 전부터의 상대습도에 경과 시간에 따른 가중치를 주어서 산출한<br>
                             목재 등의 건조도를 나타내는 지수를 말합니다.
                         </div>
-                        <!-- <div>
-                            <div>
-                                He = (1−r)×[H0dt + r H1dt + r2 H2dt+r3 H3dt + r4 H4dt ]r = 0.7
-                            </div>
-                            <div>
-                                * 실효습도(He) = (1−r)×[H0dt + r H1dt + r2 H2dt+r3 H3dt + r4H4dt]
-                            </div>
-                            <div>
-                                r = 0.7
-                            </div>
-                            <div>
-                            </div>
-                            <div>
-                                He : 실효습도
-                            </div>
-                            <div>
-                                H0d : 당일의 상대습도
-                            </div>
-                            <div>
-                                H1d : 1일 전의 상대습도
-                            </div>
-                            <div>
-                                H2d : 2일 전의 상대습도
-                            </div>
-                            <div>
-                                H3d : 3일 전의 상대습도
-                            </div>
-                            <div>
-                                H4d : 4일 전의 상대습도
-                            </div>
-                        </div> -->
+
                     </div>
-                    <div class="col-6 text-end" style="padding-right: 68px;">
-                        <input style="text-align: center;" type="date" th:max="${session.maxDay}"
-                            th:min="${session.minDay}" th:value="${toDay}" onchange="selectDay(this)">
-                    </div>
+
 
                 </div>
             </div>
@@ -71,7 +97,8 @@
                     <div class="col">
                         <div class="row" style="padding-left: 8%;">
                             <div style="padding-left: 40px; font-size: 1.2rem; font-weight: 500;">
-                                <div style="display: inline-block; width: 700px; margin-bottom: 5px;" >한 달의 화재 발생 위험도</div>
+                                <div style="display: inline-block; width: 700px; margin-bottom: 5px;">한 달의 화재 발생 위험도
+                                </div>
                                 <div style="display: inline-block; margin-bottom: 5px;">오늘의 화재 발생 위험도</div>
                             </div>
                             <div class="col-5" style="margin-right: 5%;">
@@ -82,7 +109,8 @@
                                         한달의 화재 발생 시 위험도
                                     </div> -->
                                     <div class="col-4 ">
-                                        <div id="show-danger" style="text-align: end; padding-top: 50px; font-size: 20px;">
+                                        <div class="mt-3" id="show-danger"
+                                            style="text-align: end; padding-top: 50px; font-size: 20px;">
 
                                         </div>
 
@@ -104,7 +132,7 @@
                                         오늘의 화재 발생시 위험도
                                     </div> -->
                                 </div>
-                                <div class="row" style="margin-top: 40px;">
+                                <div class="row" style="margin-top: 50px;">
                                     <div class="col-4">
                                         <div id="show-today-danger" class="col" style="text-align: center;">
                                             <th:block th:if="${toDayEfh.efhDeg=='안전'}">
@@ -125,8 +153,11 @@
                                                 실효습도 : [[${toDayEfh.efhData}]] %
                                             </div>
                                         </div>
+                                        <div>
+
+                                        </div>
                                     </div>
-                                    <div class="col-7"
+                                    <div class="col-7 mt-3"
                                         style=" font-size: 0.9rem; font-style: italic; color: gray; margin-top: 4px;">
                                         <div>실효습도 50% 이하 - 화재위험성(낮음)</div>
                                         <div>실효습도 30% 이하 - 화재위험성(높음)</div>
@@ -143,15 +174,17 @@
                 </div>
             </div>
 
-            <div class="col-12 " style=" margin-left: -2px; background-color: white; border-top: 1px solid rgba(128, 128, 128, 0.3); border-left: 1px solid rgba(128, 128, 128, 0.3);">
+            <div class="col-12 "
+                style=" margin-left: -2px; background-color: white; border-top: 1px solid rgba(128, 128, 128, 0.3); border-left: 1px solid rgba(128, 128, 128, 0.3);">
                 <div class="row justify-content-center" style="margin-top: 40px;">
                     <div class="col">
 
                         <div class="row" style="padding-left: 8%; ">
-                            <div style="padding-left: 10px; font-size: 1.5rem; font-weight: 500; margin-bottom: 50px;" >
+                            <div style="padding-left: 10px; font-size: 1.5rem; font-weight: 500; margin-bottom: 50px;">
                                 <div style="display: inline-block; width: 750px; ">일별 실효습도</div>
                                 <!-- <div style="display: inline-block; ">일별 화재위험성 여부</div> -->
-                                <div style="padding-left: 15px; font-size: 1.2rem; font-style: italic; color: gray; margin-top: 4px;">
+                                <div
+                                    style="padding-left: 15px; font-size: 1.2rem; font-style: italic; color: gray; margin-top: 4px;">
                                     일별 실효습도 및 화재위험성 여부에 대한 정보입니다.
                                 </div>
                             </div>
@@ -164,8 +197,8 @@
                                     <div id="efh-bar-container" style="width: 100%;">
                                         <!-- <span style="color: red;"><canvas class="my-4" id="efh-line-chart" width="50%"
                                                 height=""></canvas></span> -->
-                                        <span style="color: red;"><canvas class="my-4" id="efh-bar-chart" width="50%"
-                                                height="60%"></canvas></span>
+                                        <span style="color: red;"><canvas class="my-4" id="efh-bar-chart" width="500px"
+                                                height="800px"></canvas></span>
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +222,7 @@
                                             <tbody id="efh-tbody">
                                                 <tr th:each="efh : ${efhList}">
                                                     <td>[[${efh.efhDate}]]</td>
-                                                    <td>[[${efh.efhData}]]</td>
+                                                    <td>[[${efh.efhData}]] %</td>
                                                     <td>[[${efh.efhDeg}]]</td>
                                                 </tr>
                                             </tbody>

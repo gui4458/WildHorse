@@ -62,10 +62,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         data: efhDatas,
                         fill: false,
                         borderColor: 'rgb(54, 162, 235)',
-                        backgroundColor: ['#C67ACE','#DFCCFB']
+                        backgroundColor: ['#C67ACE', '#DFCCFB']
                     }]
                 },
                 options: {
+                    responsive: false,
                     indexAxis: 'y',
                     legend: {
                         display: false
@@ -149,6 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }]
                 },
                 options: {
+                    responsive: false,
                     title: {
                         display: true,
                         text: '실효습도'
@@ -307,6 +309,7 @@ function selectDayEfh(efhDate) {
 
 ////////////////////////////////////////////////////////////////////////////////////////
 function selectDay(toDay) {
+    
     toDay = toDay.value;
 
     efhLabels = [];
@@ -324,8 +327,8 @@ function selectDay(toDay) {
     // 새로운 차트 생성
     let efhCanvas = document.createElement('canvas');
     efhCanvas.id = 'efh-bar-chart';
-    efhCanvas.style.width = 50 + '%';
-    efhCanvas.style.height = 70 + '%';
+    efhCanvas.style.width = 500 + 'px';
+    efhCanvas.style.height = 800 + 'px';
     efhCanvas.className = 'my-4';
     document.getElementById('efh-bar-container').appendChild(efhCanvas); // 새로운 캔버스 추가
 
@@ -362,25 +365,39 @@ function selectDay(toDay) {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
+            if(data.efhList == null || data.toDayEfh == null){
+                alert('정보없음');
+                return;
+            }
             let tbodyStr = ''
 
             const todayDangerTag = document.querySelector('#show-today-danger')
             let toDayDangerStr = ''
             if (data.toDayEfh.efhDeg == '안전') {
                 toDayDangerStr = `
-                                ${data.toDayEfh.efhDeg}
-                                <span style="font-size: 40px;"><i class="bi bi-emoji-laughing"></i></span>
+                                <span style="font-size: 20px;">${data.toDayEfh.efhDeg}</span>
+                                <span style="font-size: 50px;"><i
+                                        class="bi bi-emoji-laughing"></i></span>
+                                <div>
+                                    실효습도 : ${data.toDayEfh.efhData} %
+                                </div>
                                 `
             } else if (data.toDayEfh.efhDeg == '주의') {
                 toDayDangerStr = `
-                                ${data.toDayEfh.efhDeg}
-                                <span style="font-size: 40px;"><i class="bi bi-emoji-neutral"></i></span>
+                                <span style="font-size: 20px;">${data.toDayEfh.efhDeg}</span>
+                                <span style="font-size: 50px;"><i class="bi bi-emoji-neutral"></i></span>
+                                <div>
+                                    실효습도 : ${data.toDayEfh.efhData} %
+                                </div>
                                 `
 
             } else {
                 toDayDangerStr = `
-                                ${data.toDayEfh.efhDeg}
-                                <span style="font-size: 40px;"><i class="bi bi-emoji-angry"></i></span>
+                                <span style="font-size: 20px;">${data.toDayEfh.efhDeg}</span>
+                                <span style="font-size: 50px;"><i class="bi bi-emoji-angry"></i></span>
+                                <div>
+                                    실효습도 : ${data.toDayEfh.efhData} %
+                                </div>
                                 `
             }
 
@@ -406,7 +423,7 @@ function selectDay(toDay) {
                                     ${e.efhDate}
                                 </td>
                                 <td>
-                                    ${e.efhData}
+                                    ${e.efhData} %
                                 </td>
                                 <td>
                                     ${e.efhDeg}
@@ -440,10 +457,11 @@ function selectDay(toDay) {
                         data: efhDatas,
                         fill: false,
                         borderColor: 'rgb(54, 162, 235)',
-                        backgroundColor: ['#C67ACE','#DFCCFB']
+                        backgroundColor: ['#C67ACE', '#DFCCFB']
                     }]
                 },
                 options: {
+                    responsive: false,
                     indexAxis: 'y',
                     legend: {
                         display: false
