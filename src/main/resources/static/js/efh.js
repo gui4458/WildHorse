@@ -367,6 +367,7 @@ function selectDay(toDay) {
         .then((data) => {//data -> controller에서 리턴되는 데이터!
             if(data.efhList == null || data.toDayEfh == null){
                 alert('정보없음');
+                window.history.go(-1);
                 return;
             }
             let tbodyStr = ''

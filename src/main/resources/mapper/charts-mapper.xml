@@ -113,7 +113,7 @@
         WHERE DATE_FORMAT(TR_DATE ,'%Y-%m-%d') = #{toDay}
     </select>
     <select id="toDay" resultType="String">
-        SELECT DATE_FORMAT(20211220,'%Y-%m-%d')
+        SELECT DATE_FORMAT(20220224,'%Y-%m-%d')
     </select>
     <select id="month" resultType="String">
         SELECT DATE_FORMAT(20220220,'%Y%m')
