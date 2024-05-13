@@ -757,7 +757,7 @@ function infoChange() {
                                                     <td>${data.avg.rehAvg} %</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="color-head">화재위험성 수치</td>
+                                                    <td class="color-head">실효습도</td>
                                                     <td>${data.efh.efhData} %</td>
                                                     <td class="color-head">화재위험성</td>
                                                     <td>${data.efh.efhDeg}</td>
