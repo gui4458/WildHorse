@@ -245,3 +245,87 @@
   transition: all 2s;
 }
 
+.detail-temper-min-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color:red; 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-temper-avg-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color:red; 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-reh-max-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color:blue; 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-reh-min-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color:blue; 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-reh-avg-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color:blue; 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-di-max-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color: purple; 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
+.detail-di-min-bar{
+  display:inline-block; 
+  width:100px; 
+  border-top-right-radius:6px; 
+  border-bottom-right-radius:6px; 
+  background-color: purple; 
+  height:16px; 
+  margin-top:4px; 
+  margin-right:8px;
+  transition: all 2s;
+}
+
