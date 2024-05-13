@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }]
                 },
                 options: {
+                    responsive: false,
                     indexAxis: 'y',
                     legend: {
                         display: false
@@ -149,6 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }]
                 },
                 options: {
+                    responsive: false,
                     title: {
                         display: true,
                         text: '실효습도'
@@ -307,6 +309,7 @@ function selectDayEfh(efhDate) {
 
 ////////////////////////////////////////////////////////////////////////////////////////
 function selectDay(toDay) {
+    
     toDay = toDay.value;
 
     efhLabels = [];
@@ -324,8 +327,8 @@ function selectDay(toDay) {
     // 새로운 차트 생성
     let efhCanvas = document.createElement('canvas');
     efhCanvas.id = 'efh-bar-chart';
-    efhCanvas.style.width = 50 + '%';
-    efhCanvas.style.height = 70 + '%';
+    efhCanvas.style.width = 500 + 'px';
+    efhCanvas.style.height = 800 + 'px';
     efhCanvas.className = 'my-4';
     document.getElementById('efh-bar-container').appendChild(efhCanvas); // 새로운 캔버스 추가
 
@@ -362,6 +365,10 @@ function selectDay(toDay) {
         })
         //fetch 통신 후 실행 영역
         .then((data) => {//data -> controller에서 리턴되는 데이터!
+            if(data.efhList == null || data.toDayEfh == null){
+                alert('정보없음');
+                return;
+            }
             let tbodyStr = ''
 
             const todayDangerTag = document.querySelector('#show-today-danger')
@@ -378,8 +385,7 @@ function selectDay(toDay) {
             } else if (data.toDayEfh.efhDeg == '주의') {
                 toDayDangerStr = `
                                 <span style="font-size: 20px;">${data.toDayEfh.efhDeg}</span>
-                                <span style="font-size: 50px;"><i
-                                        class="bi bi-emoji-laughing"></i></span>
+                                <span style="font-size: 50px;"><i class="bi bi-emoji-neutral"></i></span>
                                 <div>
                                     실효습도 : ${data.toDayEfh.efhData} %
                                 </div>
@@ -388,8 +394,7 @@ function selectDay(toDay) {
             } else {
                 toDayDangerStr = `
                                 <span style="font-size: 20px;">${data.toDayEfh.efhDeg}</span>
-                                <span style="font-size: 50px;"><i
-                                        class="bi bi-emoji-laughing"></i></span>
+                                <span style="font-size: 50px;"><i class="bi bi-emoji-angry"></i></span>
                                 <div>
                                     실효습도 : ${data.toDayEfh.efhData} %
                                 </div>
@@ -456,6 +461,7 @@ function selectDay(toDay) {
                     }]
                 },
                 options: {
+                    responsive: false,
                     indexAxis: 'y',
                     legend: {
                         display: false

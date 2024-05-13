@@ -32,46 +32,61 @@
 
 
                     <div class="col-12">
-                        <div>
-                            <div style="padding-left: 68px; font-size: 1.5rem; font-weight: 600;">'실효습도'란?</div>
+                        <div style="position: relative;">
+                            <div style="padding-left: 68px; font-size: 1.5rem; font-weight: 600;">'실효습도'란?
+                                <span type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
+                                    aria-expanded="false" aria-controls="collapseWidthExample"
+                                    style="color: #979797; font-size: 1.1rem; font-style: italic; font-weight: 400;">
+                                    공식 <i class="bi bi-question-circle"></i>
+                                </span>
+                            </div>
+                            <div style="min-height: 120px; position: absolute; left: 270px; top: 14px;">
+                                <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                                    <div class="card card-body" style="width: 550px; background-color: #FFF3CD;">
+                                        <div>
+                                            <div>
+                                                He = (1−r)×[H0dt + r H1dt + r2 H2dt+r3 H3dt + r4 H4dt ]r = 0.7
+                                            </div>
+                                            <div>
+                                                * 실효습도(He) = (1−r)×[H0dt + r H1dt + r2 H2dt+r3 H3dt + r4H4dt]
+                                            </div>
+                                            <div>
+                                                r = 0.7
+                                            </div>
+                                            <div>
+                                            </div>
+                                            <div>
+                                                He : 실효습도
+                                            </div>
+                                            <div>
+                                                H0d : 당일의 상대습도
+                                            </div>
+                                            <div>
+                                                H1d : 1일 전의 상대습도
+                                            </div>
+                                            <div>
+                                                H2d : 2일 전의 상대습도
+                                            </div>
+                                            <div>
+                                                H3d : 3일 전의 상대습도
+                                            </div>
+                                            <div>
+                                                H4d : 4일 전의 상대습도
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
                         <div style="padding-left: 68px;  font-style: italic; color: gray; margin-top: 4px;">
                             화재 예방의 목적으로 수일 전부터의 상대습도에 경과 시간에 따른 가중치를 주어서 산출한<br>
                             목재 등의 건조도를 나타내는 지수를 말합니다.
                         </div>
-                        <!-- <div>
-                            <div>
-                                He = (1−r)×[H0dt + r H1dt + r2 H2dt+r3 H3dt + r4 H4dt ]r = 0.7
-                            </div>
-                            <div>
-                                * 실효습도(He) = (1−r)×[H0dt + r H1dt + r2 H2dt+r3 H3dt + r4H4dt]
-                            </div>
-                            <div>
-                                r = 0.7
-                            </div>
-                            <div>
-                            </div>
-                            <div>
-                                He : 실효습도
-                            </div>
-                            <div>
-                                H0d : 당일의 상대습도
-                            </div>
-                            <div>
-                                H1d : 1일 전의 상대습도
-                            </div>
-                            <div>
-                                H2d : 2일 전의 상대습도
-                            </div>
-                            <div>
-                                H3d : 3일 전의 상대습도
-                            </div>
-                            <div>
-                                H4d : 4일 전의 상대습도
-                            </div>
-                        </div> -->
+
                     </div>
-                    
+
 
                 </div>
             </div>
@@ -179,11 +194,11 @@
                                         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                                         <!-- <h1 class="h2">EFH차트</h1> -->
                                     </div>
-                                    <div id="efh-bar-container">
+                                    <div id="efh-bar-container" style="width: 100%;">
                                         <!-- <span style="color: red;"><canvas class="my-4" id="efh-line-chart" width="50%"
                                                 height=""></canvas></span> -->
-                                        <span style="color: red;"><canvas class="my-4" id="efh-bar-chart" width="50%"
-                                                height="60%"></canvas></span>
+                                        <span style="color: red;"><canvas class="my-4" id="efh-bar-chart" width="500px"
+                                                height="800px"></canvas></span>
                                     </div>
                                 </div>
                             </div>
