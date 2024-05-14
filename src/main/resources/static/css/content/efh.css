@@ -39,7 +39,7 @@ tr td{
 }
 .odd-layer {
     background-color: #fff;
-    height: 200%;
+    height: 100%;
     border-bottom: 1.5px solid rgba(0, 0, 0, 0.432);
     
 }
@@ -53,7 +53,7 @@ tr td{
 
 .large-layer {
     
-    height:105vh;
+    height:85vh;
 }
 
 /* .carousel-control-prev-icon {

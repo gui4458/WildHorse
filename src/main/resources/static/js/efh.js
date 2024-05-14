@@ -327,6 +327,7 @@ function selectDay(toDay) {
     // 새로운 차트 생성
     let efhCanvas = document.createElement('canvas');
     efhCanvas.id = 'efh-bar-chart';
+    efhCanvas.style.margin= "auto";
     efhCanvas.style.width = 500 + 'px';
     efhCanvas.style.height = 800 + 'px';
     efhCanvas.className = 'my-4';

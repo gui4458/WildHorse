@@ -314,7 +314,7 @@ fetch('/charts/main', { //요청경로
                 }, {
                     data: dayRehAvgList,
                     label: "평균",
-                    borderColor: "rgba(0, 0, 0, 0.1)",
+                    borderColor: "rgba(1, 1, 1,0.55)",
                     fill: false,
                     pointRadius: 0
 
@@ -396,7 +396,7 @@ fetch('/charts/main', { //요청경로
                 {
                     data: dayTemperAvgList,
                     label: "평균",
-                    borderColor: "rgba(0, 0, 0, 0.1)",
+                    borderColor: "rgba(1, 1, 1,0.55)",
                     fill: false,
                     pointRadius: 0
 
@@ -470,7 +470,7 @@ fetch('/charts/main', { //요청경로
                 }, {
                     data: dayDiAvgList,
                     label: "평균",
-                    borderColor: "rgba(0, 0, 0, 0.1)",
+                    borderColor: "rgba(1, 1, 1,0.55)",
                     fill: false,
                     pointRadius: 0
 
@@ -975,7 +975,7 @@ function infoChange() {
                     }, {
                         data: dayRehAvgList,
                         label: "평균",
-                        borderColor: "rgba(0, 0, 0, 0.1)",
+                        borderColor: "rgba(1, 1, 1,0.55)",
                         fill: false,
                         pointRadius: 0
 
@@ -1047,7 +1047,7 @@ function infoChange() {
                     }, {
                         data: dayTemperAvgList,
                         label: "평균",
-                        borderColor: "rgba(0, 0, 0, 0.1)",
+                        borderColor: "rgba(1, 1, 1,0.55)",
                         fill: false,
                         pointRadius: 0
 
@@ -1103,7 +1103,7 @@ function infoChange() {
                     }, {
                         data: dayDiAvgList,
                         label: "평균",
-                        borderColor: "rgba(0, 0, 0, 0.1)",
+                        borderColor: "rgba(1, 1, 1,0.55)",
                         fill: false,
                         pointRadius: 0
 
